@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 import ModernHero from './components/Hero/ModernHero';
-import ModernLedger from './components/FormLedger/ModernLedger';
+import SimpleModernLedger from './components/FormLedger/SimpleModernLedger';
 
 export default function Home() {
   const formRef = useRef<HTMLDivElement>(null);
@@ -38,7 +38,7 @@ export default function Home() {
       {/* Registration Form Section */}
       {showForm && (
         <section ref={formRef} id="registration">
-          <ModernLedger />
+          <SimpleModernLedger />
         </section>
       )}
     </main>

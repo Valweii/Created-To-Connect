@@ -1,19 +1,29 @@
 import { NextResponse } from 'next/server';
 import QRCode from 'qrcode';
-import { nanoid } from 'nanoid';
+import { insertRegistration } from '@/lib/supabase';
 
 export async function POST(request: Request) {
   try {
     const data = await request.json();
     
-    // Generate unique ticket ID
-    const ticketId = `C2C-${nanoid(10).toUpperCase()}`;
+    // Generate unique ticket ID with random 9-digit number
+    const randomNumber = Math.floor(100000000 + Math.random() * 900000000);
+    const ticketId = `C2C-${randomNumber}`;
+    
+    // Ensure instagram starts with @ for consistency
+    const instagramUsername = data.instagram.startsWith('@') 
+      ? data.instagram 
+      : `@${data.instagram}`;
     
     // Generate QR code
     const qrData = JSON.stringify({
       ticketId,
-      name: data.fullName,
-      email: data.email,
+      name: data.name,
+      instagram: instagramUsername,
+      phone: data.phonenumber,
+      cgMember: data.isCGMember,
+      cgNumber: data.cgNumber,
+      heardFrom: data.heardFrom,
       event: 'Created 2 Connect - Youth Camp 2025',
     });
     
@@ -21,16 +31,40 @@ export async function POST(request: Request) {
       width: 400,
       margin: 2,
       color: {
-        dark: '#3d2817',
-        light: '#f4e8d0',
+        dark: '#1f1f1f', // midnight color from your design
+        light: '#fdfbf1', // cream color from your design
       },
     });
     
-    // In production, save to database (Supabase, etc.)
-    // await saveToDatabase({ ...data, ticketId });
-    
-    // For now, just log it
-    console.log('Registration received:', { ...data, ticketId });
+    // Save to Supabase
+    try {
+      await insertRegistration({
+        ticketid: ticketId,
+        name: data.name,
+        instagram: instagramUsername,
+        phonenumber: data.phonenumber,
+        is_cg_member: data.isCGMember,
+        cg_number: data.isCGMember ? data.cgNumber : undefined,
+        heard_from: !data.isCGMember ? data.heardFrom : undefined,
+      });
+      
+      console.log('✅ Registration saved to Supabase:', ticketId);
+      console.log('📊 Data:', {
+        name: data.name,
+        instagram: instagramUsername,
+        phone: data.phonenumber,
+        isCG: data.isCGMember,
+        cgNumber: data.cgNumber,
+        heardFrom: data.heardFrom,
+      });
+    } catch (dbError) {
+      console.error('❌ Supabase save failed:', dbError);
+      // Return error if DB save fails (since it's critical now)
+      return NextResponse.json(
+        { success: false, error: 'Database save failed. Please try again.' },
+        { status: 500 }
+      );
+    }
     
     return NextResponse.json({
       success: true,
@@ -45,5 +79,3 @@ export async function POST(request: Request) {
     );
   }
 }
-
-

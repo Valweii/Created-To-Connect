@@ -41,3 +41,4 @@ import { Text } from '@react-three/drei';
 Remove 3D text entirely and use CSS text over the scene with a wooden texture background.
 
 
+
