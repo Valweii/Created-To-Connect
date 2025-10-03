@@ -33,7 +33,7 @@ export default function SimpleModernLedger() {
   const validateStep = async (step: number) => {
     const fields: (keyof RegistrationFormData)[][] = [
       ['name', 'instagram', 'phonenumber'],
-      isCGMember ? ['isCGMember', 'cgNumber', 'consent'] : ['isCGMember', 'heardFrom', 'consent'],
+      isCGMember ? ['isCGMember', 'cgNumber'] : ['isCGMember', 'heardFrom'],
     ];
     
     return await trigger(fields[step - 1]);

@@ -11,8 +11,6 @@ export const registrationSchema = z.object({
   cgNumber: z.string().optional(),
   heardFrom: z.string().optional(),
   
-  // Consent
-  consent: z.boolean().refine(val => val === true, 'You must consent to continue'),
 }).refine(
   (data) => {
     // If CG member, must select a CG number
