@@ -53,7 +53,7 @@ export default function ModernConfirmation({ ticketId, qrUrl }: ModernConfirmati
             </motion.div>
             
             <h1 className="font-bebas text-6xl md:text-8xl text-midnight mb-4 leading-none">
-              YOU'RE IN!
+              YOU&apos;RE IN!
             </h1>
             <p className="font-inter text-xl text-midnight/70">
               Welcome to <span className="font-bold text-electric">Created 2 Connect</span>

@@ -179,8 +179,11 @@ export default function SubmitBlackHole({
 
   // Cleanup videos and page transforms on unmount
   useEffect(() => {
+    const videos = videoRefs.current;
+    const pageContent = pageContentRef.current;
+    
     return () => {
-      videoRefs.current.forEach(video => {
+      videos.forEach(video => {
         if (video) {
           video.pause();
           video.src = '';
@@ -188,11 +191,11 @@ export default function SubmitBlackHole({
       });
       
       // Reset page content
-      if (pageContentRef.current) {
-        pageContentRef.current.style.transform = '';
-        pageContentRef.current.style.opacity = '';
-        pageContentRef.current.style.transition = '';
-        pageContentRef.current.style.willChange = '';
+      if (pageContent) {
+        pageContent.style.transform = '';
+        pageContent.style.opacity = '';
+        pageContent.style.transition = '';
+        pageContent.style.willChange = '';
       }
     };
   }, []);

@@ -29,7 +29,7 @@ export default function ModernStepMembership({ register, errors, isMember }: Mod
             className="w-6 h-6 md:w-8 md:h-8 text-electric bg-cream border-2 md:border-3 border-midnight rounded focus:ring-2 md:focus:ring-4 focus:ring-electric/20 cursor-pointer"
           />
           <label htmlFor="isMember" className="text-midnight font-inter font-semibold text-sm md:text-lg cursor-pointer">
-            I'm already a member of the community
+            I&apos;m already a member of the community
           </label>
         </div>
       </div>

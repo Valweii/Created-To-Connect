@@ -43,7 +43,7 @@ export default function ConfirmationTicket({ ticketId, qrUrl }: ConfirmationTick
             </motion.div>
             
             <h2 className="text-3xl font-barlow font-bold text-lodgeWood uppercase tracking-wider glow-gold">
-              You're Registered!
+              You&apos;re Registered!
             </h2>
             <p className="text-lodgeWood/80 font-barlow mt-2">
               Welcome to Created 2 Connect
