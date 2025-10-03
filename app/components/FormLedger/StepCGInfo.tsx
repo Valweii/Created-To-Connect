@@ -23,24 +23,43 @@ export default function StepCGInfo({ register, errors, watch, setValue }: StepCG
       className="space-y-4 md:space-y-6"
     >
       {/* CG Member Checkbox */}
-      <div className="bg-electric/10 border-2 md:border-3 border-electric p-4 md:p-6">
+      <div className="bg-electric/10 border-3 md:border-4 border-electric p-4 md:p-6 shadow-[4px_4px_0px_0px_rgba(242,187,5,1)] hover:shadow-[6px_6px_0px_0px_rgba(242,187,5,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all">
         <div className="flex items-start gap-3 md:gap-4">
-          <input
-            id="isCGMember"
-            type="checkbox"
-            {...register('isCGMember')}
-            onChange={(e) => {
-              setValue('isCGMember', e.target.checked);
-              // Clear the opposite field when toggling
-              if (e.target.checked) {
-                setValue('heardFrom', undefined);
-              } else {
-                setValue('cgNumber', undefined);
-              }
-            }}
-            className="w-6 h-6 md:w-8 md:h-8 mt-1 text-electric bg-cream border-2 md:border-3 border-midnight rounded focus:ring-2 md:focus:ring-4 focus:ring-electric/20 cursor-pointer"
-          />
-          <label htmlFor="isCGMember" className="text-midnight font-inter font-semibold text-sm md:text-lg cursor-pointer">
+          <div className="relative flex-shrink-0">
+            <input
+              id="isCGMember"
+              type="checkbox"
+              {...register('isCGMember')}
+              onChange={(e) => {
+                setValue('isCGMember', e.target.checked);
+                // Clear the opposite field when toggling
+                if (e.target.checked) {
+                  setValue('heardFrom', undefined);
+                } else {
+                  setValue('cgNumber', undefined);
+                }
+              }}
+              className="peer sr-only"
+            />
+            <label 
+              htmlFor="isCGMember" 
+              className="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 bg-cream border-3 md:border-4 border-midnight cursor-pointer transition-all duration-200 shadow-[3px_3px_0px_0px_rgba(31,31,31,1)] hover:shadow-[4px_4px_0px_0px_rgba(31,31,31,1)] hover:translate-x-[-1px] hover:translate-y-[-1px] active:shadow-[2px_2px_0px_0px_rgba(31,31,31,1)] active:translate-x-[1px] active:translate-y-[1px] peer-checked:bg-electric peer-checked:border-electric peer-focus-visible:ring-4 peer-focus-visible:ring-electric/40 rounded-sm"
+            >
+              <svg 
+                className="w-5 h-5 md:w-6 md:h-6 text-cream transition-all duration-200"
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="4" 
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                viewBox="0 0 24 24"
+                style={{ opacity: isCGMember ? 1 : 0, transform: isCGMember ? 'scale(1.1)' : 'scale(1)' }}
+              >
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </label>
+          </div>
+          <label htmlFor="isCGMember" className="text-midnight font-inter font-bold text-sm md:text-lg cursor-pointer uppercase tracking-wide pt-1">
             I&apos;m a part of a Connect Group (CG)
           </label>
         </div>
@@ -63,7 +82,7 @@ export default function StepCGInfo({ register, errors, watch, setValue }: StepCG
             <select
               id="cgNumber"
               {...register('cgNumber')}
-              className="w-full px-4 py-3 md:px-6 md:py-4 border-2 md:border-3 border-midnight bg-cream text-midnight font-inter text-base md:text-lg focus:outline-none focus:border-sunshine focus:ring-2 md:focus:ring-4 focus:ring-sunshine/20 transition-all cursor-pointer"
+              className="w-full px-4 py-3 md:px-6 md:py-4 border-3 md:border-4 border-midnight bg-cream text-midnight font-inter font-bold text-base md:text-lg focus:outline-none focus:border-electric focus:ring-4 md:focus:ring-6 focus:ring-electric/30 transition-all cursor-pointer hover:bg-electric/5 hover:border-electric shadow-[4px_4px_0px_0px_rgba(31,31,31,1)] hover:shadow-[6px_6px_0px_0px_rgba(242,187,5,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%231f1f1f%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:24px_24px] bg-[right_1rem_center] bg-no-repeat pr-12"
               aria-describedby={errors.cgNumber ? 'cgNumber-error' : undefined}
             >
               <option value="">-- Select CG Number --</option>
@@ -99,7 +118,7 @@ export default function StepCGInfo({ register, errors, watch, setValue }: StepCG
             <select
               id="heardFrom"
               {...register('heardFrom')}
-              className="w-full px-4 py-3 md:px-6 md:py-4 border-2 md:border-3 border-midnight bg-cream text-midnight font-inter text-base md:text-lg focus:outline-none focus:border-sunshine focus:ring-2 md:focus:ring-4 focus:ring-sunshine/20 transition-all cursor-pointer"
+              className="w-full px-4 py-3 md:px-6 md:py-4 border-3 md:border-4 border-midnight bg-cream text-midnight font-inter font-bold text-base md:text-lg focus:outline-none focus:border-electric focus:ring-4 md:focus:ring-6 focus:ring-electric/30 transition-all cursor-pointer hover:bg-electric/5 hover:border-electric shadow-[4px_4px_0px_0px_rgba(31,31,31,1)] hover:shadow-[6px_6px_0px_0px_rgba(242,187,5,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%231f1f1f%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:24px_24px] bg-[right_1rem_center] bg-no-repeat pr-12"
               aria-describedby={errors.heardFrom ? 'heardFrom-error' : undefined}
             >
               <option value="">-- Select an option --</option>
@@ -122,33 +141,6 @@ export default function StepCGInfo({ register, errors, watch, setValue }: StepCG
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Consent */}
-      <div className="bg-flame/10 border-2 md:border-3 border-flame p-4 md:p-6">
-        <div className="flex items-start gap-3 md:gap-4">
-          <input
-            id="consent"
-            type="checkbox"
-            {...register('consent')}
-            className="w-6 h-6 md:w-8 md:h-8 mt-1 text-electric bg-cream border-2 md:border-3 border-midnight rounded focus:ring-2 md:focus:ring-4 focus:ring-electric/20 cursor-pointer"
-            aria-describedby={errors.consent ? 'consent-error' : undefined}
-          />
-          <label htmlFor="consent" className="text-midnight font-inter text-sm md:text-lg cursor-pointer flex-1">
-            I consent to receive event updates and agree to follow camp guidelines *
-          </label>
-        </div>
-        {errors.consent && (
-          <motion.p
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            id="consent-error"
-            className="mt-3 text-sm text-flame font-inter font-medium ml-10 md:ml-12"
-          >
-            {errors.consent.message}
-          </motion.p>
-        )}
-      </div>
     </motion.div>
   );
 }
-

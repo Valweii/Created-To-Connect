@@ -58,7 +58,7 @@ interface SubmitBlackHoleProps {
 // Animation timing constants (tune these for different feel)
 const SUCK_DURATION = 800; // ms - black-hole suck animation (reduced for smoother performance)
 const REVEAL_DURATION = 600; // ms - video montage reveal
-const CLIP_DURATION = 4000; // ms - time per video clip
+const CLIP_DURATION = 3000; // ms - time per video clip
 const CROSSFADE_DURATION = 600; // ms - crossfade between clips
 
 export default function SubmitBlackHole({

@@ -168,12 +168,12 @@ export default function SimpleModernLedger() {
               <div className={`inline-block px-4 py-1 md:px-6 md:py-2 ${stepBg} mb-2 md:mb-4`}>
                 <h2 className="font-bebas text-2xl md:text-4xl text-midnight tracking-wider">
                   {currentStep === 1 && 'YOUR INFO'}
-                  {currentStep === 2 && 'CG & CONSENT'}
+                  {currentStep === 2 && 'EXTRAS'}
                 </h2>
               </div>
               <p className="font-inter text-sm md:text-base text-midnight/60">
                 {currentStep === 1 && 'Tell us who you are'}
-                {currentStep === 2 && 'Connect Group membership and consent'}
+                {currentStep === 2 && 'Connect Group membership'}
               </p>
             </motion.div>
 
