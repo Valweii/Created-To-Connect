@@ -19,6 +19,16 @@ if (!supabaseUrl || !supabaseAnonKey) {
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 /**
+ * Helper function to get current time in Jakarta timezone (UTC+7)
+ */
+function getJakartaTime(): string {
+  const now = new Date();
+  // Convert to Jakarta time (UTC+7)
+  const jakartaTime = new Date(now.getTime() + (7 * 60 * 60 * 1000));
+  return jakartaTime.toISOString();
+}
+
+/**
  * Database Types
  */
 export interface Registration {
@@ -60,6 +70,7 @@ export async function insertRegistration(data: {
         is_cg_member: data.is_cg_member,
         cg_number: data.cg_number || null,
         heard_from: data.heard_from || null,
+        dateregistered: getJakartaTime(), // Explicitly set Jakarta time (UTC+7)
         reregistered: false, // Default to false on first registration
         datereregistered: null,
       },
@@ -100,7 +111,7 @@ export async function markAsReregistered(ticketid: string) {
     .from('registrations')
     .update({
       reregistered: true,
-      datereregistered: new Date().toISOString(),
+      datereregistered: getJakartaTime(), // Use Jakarta time (UTC+7)
     })
     .eq('ticketid', ticketid)
     .select()
@@ -130,7 +141,7 @@ export async function getAllRegistrations() {
 }
 
 /**
- * Format date as dd/mm/yyyy, HH:MM
+ * Format date as dd/mm/yyyy, HH:MM (assumes date is already in Jakarta timezone)
  */
 export function formatRegistrationDate(isoDate: string): string {
   const date = new Date(isoDate);
@@ -141,6 +152,6 @@ export function formatRegistrationDate(isoDate: string): string {
   const hours = String(date.getHours()).padStart(2, '0');
   const minutes = String(date.getMinutes()).padStart(2, '0');
   
-  return `${day}/${month}/${year}, ${hours}:${minutes}`;
+  return `${day}/${month}/${year}, ${hours}:${minutes} WIB`;
 }
 

@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
@@ -17,6 +18,16 @@ export default function ConfirmationTicket({ ticketId, qrUrl }: ConfirmationTick
     link.click();
     document.body.removeChild(link);
   };
+
+  // Automatically download QR code when component mounts
+  useEffect(() => {
+    // Small delay to ensure smooth UX
+    const timer = setTimeout(() => {
+      downloadTicket();
+    }, 500);
+    
+    return () => clearTimeout(timer);
+  }, [qrUrl, ticketId]);
 
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 relative">
