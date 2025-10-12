@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import html2canvas from 'html2canvas';
 
 interface ModernConfirmationProps {
   ticketId: string;
@@ -10,38 +11,47 @@ interface ModernConfirmationProps {
 }
 
 export default function ModernConfirmation({ ticketId, qrUrl }: ModernConfirmationProps) {
-  const downloadTicket = () => {
-    const link = document.createElement('a');
-    link.href = qrUrl;
-    link.download = `ticket-${ticketId}.png`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const ticketRef = useRef<HTMLDivElement>(null);
+
+  const downloadTicket = async () => {
+    if (!ticketRef.current) return;
+    
+    try {
+      const canvas = await html2canvas(ticketRef.current, {
+        backgroundColor: '#F5F5DC', // cream color
+        logging: false,
+        useCORS: true,
+        allowTaint: true,
+        width: ticketRef.current.scrollWidth,
+        height: ticketRef.current.scrollHeight,
+      } as any);
+      
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = `ticket-${ticketId}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Error downloading ticket:', error);
+    }
   };
 
-  // Automatically download QR code when component mounts
+  // Automatically download ticket when component mounts
   useEffect(() => {
-    // Small delay to ensure smooth UX
+    // Small delay to ensure DOM is fully rendered
     const timer = setTimeout(() => {
       downloadTicket();
-    }, 500);
+    }, 1000);
     
     return () => clearTimeout(timer);
-  }, [qrUrl, ticketId]);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-electric flex items-center justify-center py-12 px-4 relative overflow-hidden">
-      {/* Animated background */}
-      <motion.div
-        animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
-        transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-        className="absolute top-0 right-0 w-96 h-96 bg-sunshine/20 rounded-full blur-3xl"
-      />
-      <motion.div
-        animate={{ scale: [1, 1.3, 1], rotate: [0, -180, -360] }}
-        transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-        className="absolute bottom-0 left-0 w-96 h-96 bg-flame/20 rounded-full blur-3xl"
-      />
+    <div 
+      className="min-h-screen flex items-center justify-center py-12 px-4 relative overflow-hidden bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: 'url(/assets/BAGROUND.png)' }}
+    >
 
       <motion.div
         initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -49,7 +59,7 @@ export default function ModernConfirmation({ ticketId, qrUrl }: ModernConfirmati
         transition={{ duration: 0.6 }}
         className="relative z-10 max-w-2xl w-full"
       >
-        <div className="bg-cream border-4 border-midnight neo-shadow p-8 md:p-12">
+        <div ref={ticketRef} className="bg-cream border-4 border-midnight neo-shadow p-8 md:p-12">
           {/* Success header */}
           <div className="text-center mb-8">
             <motion.div
@@ -58,8 +68,27 @@ export default function ModernConfirmation({ ticketId, qrUrl }: ModernConfirmati
               transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
               className="inline-block mb-6"
             >
-              <div className="w-24 h-24 bg-electric rounded-full flex items-center justify-center neo-shadow">
-                <span className="text-6xl">✓</span>
+              <div 
+                className="w-24 h-24 bg-electric rounded-full flex items-center justify-center relative"
+                style={{
+                  boxShadow: '4px 4px 0px rgba(0, 0, 0, 1)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <span 
+                  className="text-6xl"
+                  style={{
+                    lineHeight: '1',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    paddingTop: '4px'
+                  }}
+                >
+                  ✓
+                </span>
               </div>
             </motion.div>
             
@@ -108,7 +137,7 @@ export default function ModernConfirmation({ ticketId, qrUrl }: ModernConfirmati
               whileTap={{ scale: 0.98 }}
               className="w-full px-8 py-5 bg-midnight text-cream font-bebas text-2xl tracking-wider neo-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
             >
-              DOWNLOAD TICKET
+              SAVED TO GALLERY
             </motion.button>
 
             <button
