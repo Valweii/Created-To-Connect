@@ -31,49 +31,108 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
       {/* Brush stroke decorations centered */}
       <div className="absolute inset-0 pointer-events-none z-[1] flex items-center justify-center">
         {/* BRUSH NOISE BIRU */}
-        <div className="absolute">
+        <motion.div 
+          className="absolute"
+          animate={{ 
+            y: [0, -8, 0],
+            rotate: [0, 1, 0]
+          }}
+          transition={{ 
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
           <img
             src="/assets/BRUSH NOISE BIRU.png"
             alt="Brush stroke"
             className="opacity-80"
           />
-        </div>
+        </motion.div>
 
         {/* BRUSH NOISE ORANGE */}
-        <div className="absolute">
+        <motion.div 
+          className="absolute"
+          animate={{ 
+            y: [0, 10, 0],
+            rotate: [0, -1, 0]
+          }}
+          transition={{ 
+            duration: 7,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5
+          }}
+        >
           <img
             src="/assets/BRUSH NOISE ORANGE.png"
             alt="Brush stroke"
             className="opacity-80"
           />
-        </div>
+        </motion.div>
 
         {/* BRUSH NOISE YELLOW */}
-        <div className="absolute">
+        <motion.div 
+          className="absolute"
+          animate={{ 
+            y: [0, -6, 0],
+            x: [0, 3, 0]
+          }}
+          transition={{ 
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        >
           <img
             src="/assets/BRUSH NOISE YELLOW.png"
             alt="Brush stroke"
             className="opacity-80"
           />
-        </div>
+        </motion.div>
 
         {/* BRUSH NOISE BIRU MUDA 1 */}
-        <div className="absolute">
+        <motion.div 
+          className="absolute"
+          animate={{ 
+            y: [0, 7, 0],
+            x: [0, -4, 0]
+          }}
+          transition={{ 
+            duration: 9,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.3
+          }}
+        >
           <img
             src="/assets/BRUSH NOISE BIRU MUDA 1.png"
             alt="Brush stroke"
             className="opacity-80"
           />
-        </div>
+        </motion.div>
 
         {/* BRUSH NOISE BIRU MUDA 2 */}
-        <div className="absolute">
+        <motion.div 
+          className="absolute"
+          animate={{ 
+            y: [0, -9, 0],
+            rotate: [0, 0.5, 0]
+          }}
+          transition={{ 
+            duration: 7.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1.5
+          }}
+        >
           <img
             src="/assets/BRUSH NOISE BIRU MUDA 2.png"
             alt="Brush stroke"
             className="opacity-70"
           />
-        </div>
+        </motion.div>
 
         {/* CREATED ATAS */}
         <div className="absolute top-0">
@@ -100,60 +159,141 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         </div>
 
         {/* ELEMENT 2 */}
-        <div className="absolute">
+        <motion.div 
+          className="absolute"
+          animate={{ 
+            rotate: [0, 2, -2, 0],
+            scale: [1, 1.02, 1]
+          }}
+          transition={{ 
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
           <img
             src="/assets/ELEMENT 2.png"
             alt="Element 2"
           />
-        </div>
+        </motion.div>
 
         {/* ELEMENT 3 */}
-        <div className="absolute">
+        <motion.div 
+          className="absolute"
+          animate={{ 
+            rotate: [0, -2, 2, 0],
+            scale: [1, 1.03, 1]
+          }}
+          transition={{ 
+            duration: 11,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.7
+          }}
+        >
           <img
             src="/assets/ELEMENT 3.png"
             alt="Element 3"
           />
-        </div>
+        </motion.div>
 
         {/* ELEMENT DOODLE 1 */}
-        <div className="absolute">
+        <motion.div 
+          className="absolute"
+          animate={{ 
+            rotate: [0, 1.5, -1.5, 0],
+            y: [0, -5, 0]
+          }}
+          transition={{ 
+            duration: 8.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1.2
+          }}
+        >
           <img
             src="/assets/ELEMENT DOODLE 1.png"
             alt="Element Doodle 1"
           />
-        </div>
+        </motion.div>
 
         {/* SHAPE OREN */}
-        <div className="absolute">
+        <motion.div 
+          className="absolute"
+          animate={{ 
+            scale: [1, 1.05, 1],
+            opacity: [0.8, 1, 0.8]
+          }}
+          transition={{ 
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
           <img
             src="/assets/SHAPE OREN.png"
             alt="Shape Oren"
           />
-        </div>
+        </motion.div>
 
         {/* SHAPE BIRU TUA */}
-        <div className="absolute">
+        <motion.div 
+          className="absolute"
+          animate={{ 
+            scale: [1, 1.04, 1],
+            opacity: [0.9, 1, 0.9]
+          }}
+          transition={{ 
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.8
+          }}
+        >
           <img
             src="/assets/SHAPE BIRU TUA.png"
             alt="Shape Biru Tua"
           />
-        </div>
+        </motion.div>
 
         {/* SHAPE BIRU GRAD */}
-        <div className="absolute">
+        <motion.div 
+          className="absolute"
+          animate={{ 
+            scale: [1, 1.06, 1],
+            opacity: [0.85, 1, 0.85]
+          }}
+          transition={{ 
+            duration: 7,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1.5
+          }}
+        >
           <img
             src="/assets/SHAPE BIRU GRAD.png"
             alt="Shape Biru Grad"
           />
-        </div>
+        </motion.div>
 
         {/* OVERLAY AUDIO */}
-        <div className="absolute z-[2]">
+        <motion.div 
+          className="absolute z-[2]"
+          animate={{ 
+            scale: [1, 1.08, 1],
+            rotate: [0, 3, -3, 0]
+          }}
+          transition={{ 
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
           <img
             src="/assets/OVERLAY AUDIO.png"
             alt="Overlay Audio"
           />
-        </div>
+        </motion.div>
 
         {/* INFO 1 DETAIL elements - In front of all other elements except logo */}
         {/* TRANSPARANT HITAM 2 */}
@@ -214,12 +354,22 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
 
         {/* INFO 2 DETAIL elements - In front of all other elements except logo */}
         {/* YELLOW */}
-        <div className="absolute z-[6]">
+        <motion.div 
+          className="absolute z-[6]"
+          animate={{ 
+            scale: [1, 1.03, 1]
+          }}
+          transition={{ 
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
           <img
             src="/assets/INFO 2 DETAIL/YELLOW.png"
             alt="Yellow"
           />
-        </div>
+        </motion.div>
 
         {/* TRANSPARAN HITAM */}
         <div className="absolute z-[4]">
@@ -230,28 +380,60 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         </div>
 
         {/* ORANGE */}
-        <div className="absolute z-[6]">
+        <motion.div 
+          className="absolute z-[6]"
+          animate={{ 
+            scale: [1, 1.03, 1]
+          }}
+          transition={{ 
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5
+          }}
+        >
           <img
             src="/assets/INFO 2 DETAIL/ORANGE.png"
             alt="Orange"
           />
-        </div>
+        </motion.div>
 
         {/* DRESSCCODE */}
-        <div className="absolute z-[5]">
+        <motion.div 
+          className="absolute z-[5]"
+          animate={{ 
+            y: [0, -3, 0]
+          }}
+          transition={{ 
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
           <img
             src="/assets/INFO 2 DETAIL/DRESSCCODE.png"
             alt="Dresscode"
           />
-        </div>
+        </motion.div>
 
         {/* BLUE */}
-        <div className="absolute z-[6]">
+        <motion.div 
+          className="absolute z-[6]"
+          animate={{ 
+            scale: [1, 1.03, 1]
+          }}
+          transition={{ 
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        >
           <img
             src="/assets/INFO 2 DETAIL/BLUE.png"
             alt="Blue"
           />
-        </div>
+        </motion.div>
 
         {/* JESUS with complex visual effects */}
         <div className="absolute -z-10 opacity-30">
@@ -312,26 +494,57 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
       {/* Main content - logo and register button */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 py-4 max-w-7xl mx-auto">
         {/* Logo */}
-        <div className="flex justify-center flex-shrink-0 mb-4">
+        <motion.div 
+          className="flex justify-center flex-shrink-0 mb-4"
+          animate={{ 
+            y: [0, -10, 0],
+            scale: [1, 1.02, 1]
+          }}
+          transition={{ 
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
           <img
             src="/assets/LOGO.png"
             alt="Logo"
           />
-        </div>
+        </motion.div>
       </div>
 
       {/* Register Button - Sticky to bottom */}
       <div className="absolute bottom-0 left-0 right-0 z-10 flex justify-center pb-20 pt-4">
-        <button
+        <motion.button
           onClick={onRegisterClick}
           className="group relative w-full max-w-xs py-2 bg-sunshine text-midnight font-bebas text-sm tracking-wider neo-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200 overflow-hidden"
+          animate={{ 
+            scale: [1, 1.03, 1]
+          }}
+          transition={{ 
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.98 }}
         >
           <span className="relative z-10 flex items-center justify-center gap-1">
             REGISTER NOW
-            <span className="inline-block">→</span>
+            <motion.span 
+              className="inline-block"
+              animate={{ x: [0, 3, 0] }}
+              transition={{ 
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              →
+            </motion.span>
           </span>
           <div className="absolute inset-0 bg-flame opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        </button>
+        </motion.button>
       </div>
       </div>
     </div>
