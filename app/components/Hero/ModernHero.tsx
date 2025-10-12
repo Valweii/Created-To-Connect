@@ -18,376 +18,241 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
 
   return (
     <div 
-      className="relative h-screen max-h-screen overflow-hidden bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: 'url(/assets/BAGROUND.png)' }}
+      className="relative overflow-hidden bg-cover bg-center bg-no-repeat"
+      style={{ 
+        backgroundImage: 'url(/assets/BAGROUND.png)',
+        height: '100dvh',
+        minHeight: '100vh',
+        maxHeight: '100dvh'
+      }}
     >
       {/* Brush stroke decorations centered */}
       <div className="absolute inset-0 pointer-events-none z-[1] flex items-center justify-center">
         {/* BRUSH NOISE BIRU */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="absolute"
-        >
+        <div className="absolute">
           <img
             src="/assets/BRUSH NOISE BIRU.png"
             alt="Brush stroke"
             className="opacity-80"
           />
-        </motion.div>
+        </div>
 
         {/* BRUSH NOISE ORANGE */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, rotate: 10 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ duration: 1, delay: 0.4 }}
-          className="absolute"
-        >
+        <div className="absolute">
           <img
             src="/assets/BRUSH NOISE ORANGE.png"
             alt="Brush stroke"
             className="opacity-80"
           />
-        </motion.div>
+        </div>
 
         {/* BRUSH NOISE YELLOW */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, rotate: 10 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="absolute"
-        >
+        <div className="absolute">
           <img
             src="/assets/BRUSH NOISE YELLOW.png"
             alt="Brush stroke"
             className="opacity-80"
           />
-        </motion.div>
+        </div>
 
         {/* BRUSH NOISE BIRU MUDA 1 */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
-          className="absolute"
-        >
+        <div className="absolute">
           <img
             src="/assets/BRUSH NOISE BIRU MUDA 1.png"
             alt="Brush stroke"
             className="opacity-80"
           />
-        </motion.div>
+        </div>
 
         {/* BRUSH NOISE BIRU MUDA 2 */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ duration: 1, delay: 0.7 }}
-          className="absolute"
-        >
+        <div className="absolute">
           <img
             src="/assets/BRUSH NOISE BIRU MUDA 2.png"
             alt="Brush stroke"
             className="opacity-70"
           />
-        </motion.div>
+        </div>
 
         {/* CREATED ATAS - Top of screen */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="absolute top-0"
-        >
+        <div className="absolute top-0">
           <img
             src="/assets/CREATED ATAS.png"
             alt="Created Atas"
           />
-        </motion.div>
+        </div>
 
         {/* CG - Top of screen */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 1.3 }}
-          className="absolute top-0"
-        >
+        <div className="absolute top-0">
           <img
             src="/assets/CG.png"
             alt="CG"
           />
-        </motion.div>
+        </div>
 
         {/* CREATED BAWAH - Bottom of screen */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.9 }}
-          className="absolute bottom-0"
-        >
+        <div className="absolute bottom-0">
           <img
             src="/assets/CREATED BAWAH.png"
             alt="Created Bawah"
           />
-        </motion.div>
+        </div>
 
         {/* ELEMENT 2 */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 1.0 }}
-          className="absolute"
-        >
+        <div className="absolute">
           <img
             src="/assets/ELEMENT 2.png"
             alt="Element 2"
           />
-        </motion.div>
+        </div>
 
         {/* ELEMENT 3 */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 1.1 }}
-          className="absolute"
-        >
+        <div className="absolute">
           <img
             src="/assets/ELEMENT 3.png"
             alt="Element 3"
           />
-        </motion.div>
+        </div>
 
         {/* ELEMENT DOODLE 1 */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 1.2 }}
-          className="absolute"
-        >
+        <div className="absolute">
           <img
             src="/assets/ELEMENT DOODLE 1.png"
             alt="Element Doodle 1"
           />
-        </motion.div>
+        </div>
 
         {/* SHAPE OREN */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 1.4 }}
-          className="absolute"
-        >
+        <div className="absolute">
           <img
             src="/assets/SHAPE OREN.png"
             alt="Shape Oren"
           />
-        </motion.div>
+        </div>
 
         {/* SHAPE BIRU TUA */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 1.5 }}
-          className="absolute"
-        >
+        <div className="absolute">
           <img
             src="/assets/SHAPE BIRU TUA.png"
             alt="Shape Biru Tua"
           />
-        </motion.div>
+        </div>
 
         {/* SHAPE BIRU GRAD */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 1.6 }}
-          className="absolute"
-        >
+        <div className="absolute">
           <img
             src="/assets/SHAPE BIRU GRAD.png"
             alt="Shape Biru Grad"
           />
-        </motion.div>
+        </div>
 
         {/* OVERLAY AUDIO - Higher z-index to be in front */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 1.7 }}
-          className="absolute z-[2]"
-        >
+        <div className="absolute z-[2]">
           <img
             src="/assets/OVERLAY AUDIO.png"
             alt="Overlay Audio"
           />
-        </motion.div>
+        </div>
 
         {/* INFO 1 DETAIL elements - In front of all other elements except logo */}
         {/* TRANSPARANT HITAM 2 */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 1.8 }}
-          className="absolute z-[5]"
-        >
+        <div className="absolute z-[5]">
           <img
             src="/assets/INFO 1 DETAIL/TRANSPARANT HITAM 2.png"
             alt="Transparant Hitam 2"
           />
-        </motion.div>
+        </div>
 
         {/* THU */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 1.9 }}
-          className="absolute z-[5]"
-        >
+        <div className="absolute z-[5]">
           <img
             src="/assets/INFO 1 DETAIL/THU.png"
             alt="THU"
           />
-        </motion.div>
+        </div>
 
         {/* PM */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 2.0 }}
-          className="absolute z-[5]"
-        >
+        <div className="absolute z-[5]">
           <img
             src="/assets/INFO 1 DETAIL/PM.png"
             alt="PM"
           />
-        </motion.div>
+        </div>
 
         {/* jam 7 */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 2.1 }}
-          className="absolute z-[5]"
-        >
+        <div className="absolute z-[5]">
           <img
             src="/assets/INFO 1 DETAIL/jam 7.png"
             alt="Jam 7"
           />
-        </motion.div>
+        </div>
 
         {/* GMS TANGERANG */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 2.2 }}
-          className="absolute z-[5]"
-        >
+        <div className="absolute z-[5]">
           <img
             src="/assets/INFO 1 DETAIL/GMS TANGERANG.png"
             alt="GMS Tangerang"
           />
-        </motion.div>
+        </div>
 
         {/* CHAPEL 1 */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 2.3 }}
-          className="absolute z-[5]"
-        >
+        <div className="absolute z-[5]">
           <img
             src="/assets/INFO 1 DETAIL/CHAPEL 1.png"
             alt="Chapel 1"
           />
-        </motion.div>
+      </div>
 
         {/* 20 NOVEMBER 2025 */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 2.4 }}
-          className="absolute z-[5]"
-        >
+        <div className="absolute z-[5]">
           <img
             src="/assets/INFO 1 DETAIL/20 NOVEMBER 2025.png"
             alt="20 November 2025"
           />
-        </motion.div>
+        </div>
 
         {/* INFO 2 DETAIL elements - In front of all other elements except logo */}
         {/* YELLOW */}
-          <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 2.5 }}
-          className="absolute z-[6]"
-        >
+        <div className="absolute z-[6]">
           <img
             src="/assets/INFO 2 DETAIL/YELLOW.png"
             alt="Yellow"
           />
-          </motion.div>
+        </div>
 
         {/* TRANSPARAN HITAM */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 2.6 }}
-          className="absolute z-[4]"
-        >
+        <div className="absolute z-[4]">
           <img
             src="/assets/INFO 2 DETAIL/TRANSPARAN HITAM.png"
             alt="Transparan Hitam"
           />
-        </motion.div>
-        
+        </div>
+
         {/* ORANGE */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 2.7 }}
-          className="absolute z-[6]"
-        >
+        <div className="absolute z-[6]">
           <img
             src="/assets/INFO 2 DETAIL/ORANGE.png"
             alt="Orange"
           />
-        </motion.div>
+        </div>
 
         {/* DRESSCCODE */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 2.8 }}
-          className="absolute z-[5]"
-        >
+        <div className="absolute z-[5]">
           <img
             src="/assets/INFO 2 DETAIL/DRESSCCODE.png"
             alt="Dresscode"
           />
-        </motion.div>
+        </div>
 
         {/* BLUE */}
-            <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 2.9 }}
-          className="absolute z-[6]"
-        >
+        <div className="absolute z-[6]">
           <img
             src="/assets/INFO 2 DETAIL/BLUE.png"
             alt="Blue"
           />
-            </motion.div>
+        </div>
 
         {/* JESUS with complex visual effects */}
-            <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.3, scale: 1 }}
-          transition={{ duration: 1, delay: 3.0 }}
-          className="absolute -z-10"
-        >
+        <div className="absolute -z-10 opacity-30">
           {/* Base halftone background */}
               <div className="relative">
             {/* Halftone pattern background */}
@@ -410,7 +275,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
                   mixBlendMode: 'overlay'
                 }}
               />
-            </div>
+              </div>
             
             {/* Blurred colored glow layer */}
             <div 
@@ -438,56 +303,34 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
                 WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 20%, rgba(0,0,0,1) 40%, rgba(0,0,0,1) 100%)'
               }}
             />
-              </div>
-            </motion.div>
           </div>
+        </div>
+      </div>
 
       {/* Main content - logo and register button */}
-      <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 py-4 sm:py-8">
+      <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 py-4 sm:py-8 max-w-7xl mx-auto">
         {/* Logo */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex justify-center flex-shrink-0 mb-4 sm:mb-6 md:mb-8"
-        >
+        <div className="flex justify-center flex-shrink-0 mb-4 sm:mb-6 md:mb-8 lg:mb-12 xl:mb-16">
           <img
             src="/assets/LOGO.png"
             alt="Logo"
+            className="max-w-[90vw] sm:max-w-[80vw] md:max-w-[70vw] lg:max-w-[60vw] xl:max-w-[50vw] 2xl:max-w-[40vw]"
           />
-        </motion.div>
+        </div>
 
         {/* CTA Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="flex flex-col sm:flex-row gap-6 items-center flex-shrink-0"
-        >
-          <motion.button
+        <div className="flex flex-col sm:flex-row gap-6 items-center flex-shrink-0">
+          <button
             onClick={onRegisterClick}
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            className="group relative px-8 sm:px-10 md:px-12 py-3 sm:py-4 md:py-5 bg-sunshine text-midnight font-bebas text-xl sm:text-2xl md:text-3xl tracking-wider neo-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200 overflow-hidden"
+            className="group relative px-8 sm:px-10 md:px-12 lg:px-16 xl:px-20 2xl:px-24 py-3 sm:py-4 md:py-5 lg:py-6 xl:py-7 2xl:py-8 bg-sunshine text-midnight font-bebas text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl tracking-wider neo-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200 overflow-hidden"
           >
-            <span className="relative z-10 flex items-center gap-2 sm:gap-3">
+            <span className="relative z-10 flex items-center gap-2 sm:gap-3 lg:gap-4 xl:gap-5 2xl:gap-6">
               REGISTER NOW
-              <motion.span
-                initial={{ x: 0 }}
-                whileHover={{ x: 5 }}
-                className="inline-block"
-              >
-                →
-              </motion.span>
+              <span className="inline-block">→</span>
             </span>
-            <motion.div
-              className="absolute inset-0 bg-flame"
-              initial={{ x: '-100%' }}
-              whileHover={{ x: 0 }}
-              transition={{ duration: 0.3 }}
-            />
-          </motion.button>
-        </motion.div>
+            <div className="absolute inset-0 bg-flame opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </button>
+          </div>
       </div>
     </div>
   );
