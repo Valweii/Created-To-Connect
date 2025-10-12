@@ -98,3 +98,6 @@ export default function StepBasicInfo({ register, errors }: StepBasicInfoProps) 
 
 
 
+
+
+
