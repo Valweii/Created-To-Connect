@@ -159,7 +159,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/INFO 1 DETAIL/TRANSPARANT HITAM 2.png"
             alt="Transparant Hitam 2"
-            className="lg:scale-50 xl:scale-50 2xl:scale-50"
+            className=" sm:scale-50 lg:scale-50 xl:scale-50 2xl:scale-50"
           />
         </div>
 
@@ -168,7 +168,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/INFO 1 DETAIL/THU.png"
             alt="THU"
-            className="lg:scale-50 xl:scale-50 2xl:scale-50"
+            className=" sm:scale-50 lg:scale-50 xl:scale-50 2xl:scale-50"
           />
         </div>
 
@@ -177,7 +177,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/INFO 1 DETAIL/PM.png"
             alt="PM"
-            className="lg:scale-50 xl:scale-50 2xl:scale-50"
+            className=" sm:scale-50 lg:scale-50 xl:scale-50 2xl:scale-50"
           />
         </div>
 
@@ -186,7 +186,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/INFO 1 DETAIL/jam 7.png"
             alt="Jam 7"
-            className="lg:scale-50 xl:scale-50 2xl:scale-50"
+            className=" sm:scale-50 lg:scale-50 xl:scale-50 2xl:scale-50"
           />
         </div>
 
@@ -195,7 +195,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/INFO 1 DETAIL/GMS TANGERANG.png"
             alt="GMS Tangerang"
-            className="lg:scale-50 xl:scale-50 2xl:scale-50"
+            className=" sm:scale-50 lg:scale-50 xl:scale-50 2xl:scale-50"
           />
         </div>
 
@@ -204,7 +204,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/INFO 1 DETAIL/CHAPEL 1.png"
             alt="Chapel 1"
-            className="lg:scale-50 xl:scale-50 2xl:scale-50"
+            className=" sm:scale-50 lg:scale-50 xl:scale-50 2xl:scale-50"
           />
       </div>
 
@@ -213,7 +213,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/INFO 1 DETAIL/20 NOVEMBER 2025.png"
             alt="20 November 2025"
-            className="lg:scale-50 xl:scale-50 2xl:scale-50"
+            className=" sm:scale-50 lg:scale-50 xl:scale-50 2xl:scale-50"
           />
         </div>
 
@@ -321,7 +321,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/LOGO.png"
             alt="Logo"
-            className="max-w-[90vw] sm:max-w-[80vw] md:max-w-[70vw] lg:max-w-[60vw] xl:max-w-[50vw] 2xl:max-w-[40vw]"
+            className="max-w-[90vw] sm:max-w-[80vw] md:max-w-[60vw] lg:max-w-[60vw] xl:max-w-[50vw] 2xl:max-w-[40vw]"
           />
         </div>
       </div>
