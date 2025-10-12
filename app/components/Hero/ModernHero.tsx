@@ -319,7 +319,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         </div>
 
         {/* CTA Button */}
-        <div className="flex flex-col sm:flex-row gap-6 items-center flex-shrink-0">
+        <div className="flex flex-col sm:flex-row gap-6 items-center flex-shrink-0 -mt-12 sm:-mt-16 md:-mt-20 lg:-mt-24 xl:-mt-28 2xl:-mt-32">
           <button
             onClick={onRegisterClick}
             className="group relative px-8 sm:px-10 md:px-12 lg:px-16 xl:px-20 2xl:px-24 py-3 sm:py-4 md:py-5 lg:py-6 xl:py-7 2xl:py-8 bg-sunshine text-midnight font-bebas text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl tracking-wider neo-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200 overflow-hidden"
