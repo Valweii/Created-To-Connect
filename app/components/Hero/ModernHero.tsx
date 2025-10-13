@@ -135,7 +135,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         </div>
 
         {/* CG - Top of screen */}
-        <div className="absolute top-0">
+        <div className="absolute top-0 z-[10]">
           <img
             src="/assets/CG.png"
             alt="CG"
