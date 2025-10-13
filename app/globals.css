@@ -127,27 +127,18 @@ body {
   img {
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
-    /* Prevent layout shifts */
-    height: auto;
-    max-width: 100%;
-    /* Force hardware acceleration */
-    transform: translateZ(0);
-    backface-visibility: hidden;
   }
 }
 
 /* Tablet optimization - Reduce animations for better performance */
 @media (min-width: 768px) and (max-width: 1024px) {
-  /* Reduce animation complexity on tablets */
-  .tablet-reduced-motion {
-    animation-duration: 0.5s !important;
-    animation-iteration-count: 1 !important;
+  .tablet-static {
+    animation: none !important;
   }
   
   /* Simplify transform animations on tablets */
   [data-tablet-optimize="true"] {
-    animation-duration: 2s !important;
-    animation-timing-function: ease-out !important;
+    animation-duration: 0s !important;
   }
   
   /* Force GPU acceleration and prevent repaint on tablets */
@@ -157,35 +148,10 @@ body {
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    will-change: auto; /* Reset will-change after animation */
   }
   
   /* Prevent layout shifts on tablet */
   img {
-    contain: layout style paint;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-  }
-  
-  /* Reduce motion for better tablet performance */
-  * {
-    animation-duration: 0.3s !important;
-    transition-duration: 0.2s !important;
-  }
-  
-  /* Critical: Prevent repaints and reflows on tablets */
-  .motion-safe\:animate-* {
-    will-change: auto !important;
-  }
-  
-  /* Optimize Framer Motion components for tablets */
-  [data-framer-motion] {
-    transform: translateZ(0);
-    backface-visibility: hidden;
-  }
-  
-  /* Prevent layout shifts during animations */
-  .motion-div {
     contain: layout style paint;
   }
 }

@@ -9,21 +9,9 @@ interface ModernHeroProps {
 
 export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
   const [mounted, setMounted] = useState(false);
-  const [isTablet, setIsTablet] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    
-    // Detect tablet for performance optimization
-    const checkDevice = () => {
-      const isTabletDevice = window.innerWidth >= 768 && window.innerWidth <= 1024;
-      setIsTablet(isTabletDevice);
-    };
-    
-    checkDevice();
-    window.addEventListener('resize', checkDevice);
-    
-    return () => window.removeEventListener('resize', checkDevice);
   }, []);
 
   if (!mounted) return null;
@@ -42,18 +30,12 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
       <div className="absolute inset-0 pointer-events-none z-[1] flex items-center justify-center">
         {/* BRUSH NOISE BIRU */}
         <motion.div 
-          className={`absolute ${isTablet ? 'tablet-reduced-motion' : 'will-change-transform'}`}
-          animate={isTablet ? { 
-            y: [0, -4, 0]
-          } : { 
+          className="absolute will-change-transform"
+          animate={{ 
             y: [0, -8, 0],
             rotate: [0, 1, 0]
           }}
-          transition={isTablet ? { 
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut"
-          } : { 
+          transition={{ 
             duration: 6,
             repeat: Infinity,
             ease: "easeInOut"
@@ -101,19 +83,12 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
 
         {/* BRUSH NOISE BIRU MUDA 1 */}
         <motion.div 
-          className={`absolute ${isTablet ? 'tablet-reduced-motion' : 'will-change-transform'}`}
-          animate={isTablet ? { 
-            y: [0, 3, 0]
-          } : { 
+          className="absolute will-change-transform"
+          animate={{ 
             y: [0, 7, 0],
             x: [0, -4, 0]
           }}
-          transition={isTablet ? { 
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.3
-          } : { 
+          transition={{ 
             duration: 9,
             repeat: Infinity,
             ease: "easeInOut",
@@ -179,17 +154,11 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
 
         {/* ELEMENT 2 */}
         <motion.div 
-          className={`absolute ${isTablet ? 'tablet-reduced-motion' : 'will-change-transform'}`}
-          animate={isTablet ? { 
-            rotate: [0, 1, 0]
-          } : { 
+          className="absolute will-change-transform"
+          animate={{ 
             rotate: [0, 2, -2, 0]
           }}
-          transition={isTablet ? { 
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut"
-          } : { 
+          transition={{ 
             duration: 10,
             repeat: Infinity,
             ease: "easeInOut"
@@ -226,19 +195,12 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
 
         {/* ELEMENT DOODLE 1 */}
         <motion.div 
-          className={`absolute ${isTablet ? 'tablet-reduced-motion' : 'will-change-transform'}`}
-          animate={isTablet ? { 
-            y: [0, -2, 0]
-          } : { 
+          className="absolute will-change-transform"
+          animate={{ 
             rotate: [0, 1.5, -1.5, 0],
             y: [0, -5, 0]
           }}
-          transition={isTablet ? { 
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1.2
-          } : { 
+          transition={{ 
             duration: 8.5,
             repeat: Infinity,
             ease: "easeInOut",
@@ -274,18 +236,11 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
 
         {/* SHAPE BIRU TUA */}
         <motion.div 
-          className={`absolute ${isTablet ? 'tablet-reduced-motion' : 'animate-optimized'}`}
-          animate={isTablet ? { 
-            scale: [1, 1.02, 1]
-          } : { 
+          className="absolute animate-optimized"
+          animate={{ 
             scale: [1, 1.04, 1]
           }}
-          transition={isTablet ? { 
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.8
-          } : { 
+          transition={{ 
             duration: 6,
             repeat: Infinity,
             ease: "easeInOut",
@@ -302,18 +257,11 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
 
         {/* SHAPE BIRU GRAD */}
         <motion.div 
-          className={`absolute ${isTablet ? 'tablet-reduced-motion' : 'animate-optimized'}`}
-          animate={isTablet ? { 
-            scale: [1, 1.03, 1]
-          } : { 
+          className="absolute animate-optimized"
+          animate={{ 
             scale: [1, 1.06, 1]
           }}
-          transition={isTablet ? { 
-            duration: 3.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1.5
-          } : { 
+          transition={{ 
             duration: 7,
             repeat: Infinity,
             ease: "easeInOut",
@@ -400,17 +348,11 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 py-4 max-w-7xl mx-auto will-change-transform md:justify-center">
         {/* Logo */}
         <motion.div 
-          className={`flex justify-center flex-shrink-0 mb-4 ${isTablet ? 'tablet-reduced-motion' : 'will-change-transform'}`}
-          animate={isTablet ? { 
-            y: [0, -5, 0]
-          } : { 
+          className="flex justify-center flex-shrink-0 mb-4 will-change-transform"
+          animate={{ 
             y: [0, -10, 0]
           }}
-          transition={isTablet ? { 
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut"
-          } : { 
+          transition={{ 
             duration: 4,
             repeat: Infinity,
             ease: "easeInOut"
@@ -430,23 +372,23 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         <motion.button
           onClick={onRegisterClick}
           className="group relative w-full max-w-xs py-2 bg-sunshine text-midnight font-bebas text-sm tracking-wider neo-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200 overflow-hidden"
-          animate={isTablet ? {} : { 
+          animate={{ 
             scale: [1, 1.03, 1]
           }}
-          transition={isTablet ? {} : { 
+          transition={{ 
             duration: 2,
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          whileHover={{ scale: isTablet ? 1.02 : 1.05 }}
+          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
         >
           <span className="relative z-10 flex items-center justify-center gap-1">
             REGISTER NOW
             <motion.span 
               className="inline-block"
-              animate={isTablet ? {} : { x: [0, 3, 0] }}
-              transition={isTablet ? {} : { 
+              animate={{ x: [0, 3, 0] }}
+              transition={{ 
                 duration: 1.5,
                 repeat: Infinity,
                 ease: "easeInOut"
@@ -474,18 +416,11 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
 
         {/* ELEMENT 3 - Right positioned - Desktop only animation */}
         <motion.div 
-          className={`fixed right-0 top-[-60%] z-[1] ${isTablet ? 'tablet-reduced-motion' : 'will-change-transform'}`}
-          animate={isTablet ? { 
-            rotate: [0, -1, 0]
-          } : { 
+          className="fixed right-0 top-[-60%] z-[1] will-change-transform"
+          animate={{ 
             rotate: [0, -2, 2, 0]
           }}
-          transition={isTablet ? { 
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.7
-          } : { 
+          transition={{ 
             duration: 11,
             repeat: Infinity,
             ease: "easeInOut",
