@@ -28,12 +28,12 @@ body {
 }
 
 /* Disable vertical scrolling on tablet and desktop */
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   html,
   body {
     overflow-y: hidden;
   }
-}
+} */
 
 body {
   background-image: url('/assets/BAGROUND.png');

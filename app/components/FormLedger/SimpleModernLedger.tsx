@@ -15,18 +15,6 @@ export default function SimpleModernLedger() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showBlackHole, setShowBlackHole] = useState(false);
   const [ticketData, setTicketData] = useState<{ ticketId: string; qrUrl: string } | null>(null);
-  const [isDesktopOrTablet, setIsDesktopOrTablet] = useState(false);
-
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setIsDesktopOrTablet(window.innerWidth >= 768);
-    };
-    
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-    
-    return () => window.removeEventListener('resize', checkScreenSize);
-  }, []);
 
   const {
     register,
@@ -136,7 +124,7 @@ export default function SimpleModernLedger() {
         id="page-content" 
         className="min-h-screen py-8 md:py-12 px-4 relative overflow-hidden flex items-center"
         style={{
-          backgroundColor: !isDesktopOrTablet ? '#FAF3E0' : 'transparent'
+          backgroundColor: '#FAF3E0'
         }}
       >
         {/* Decorative elements */}
@@ -149,7 +137,7 @@ export default function SimpleModernLedger() {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-4 md:mb-5 flex items-center justify-center gap-2 md:gap-3 md:hidden"
+            className="mb-4 md:mb-5 flex items-center justify-center gap-2 md:gap-3"
           >
             {[1, 2].map((step) => (
               <div key={step} className="flex items-center gap-2 md:gap-3">
@@ -174,7 +162,7 @@ export default function SimpleModernLedger() {
           {/* Form card */}
           <motion.div
             layout
-            className="bg-cream border-2 md:border-4 border-midnight neo-shadow p-4 md:p-5 lg:p-6 md:max-h-[65vh] md:overflow-y-auto"
+            className="bg-cream border-2 md:border-4 border-midnight neo-shadow p-4 md:p-5 lg:p-6"
           >
             {/* Step title */}
             <motion.div
