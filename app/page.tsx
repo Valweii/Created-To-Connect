@@ -38,7 +38,7 @@ export default function Home() {
         <div className="relative md:mb-[10rem]">
           <div className="relative mix-blend-overlay">
             <img
-              src="/assets/JESUS REVISI.png"
+              src="/assets/JESUS REVISI.webp"
               alt="Jesus"
               className="w-full h-auto"
               decoding="async"

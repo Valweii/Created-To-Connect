@@ -54,7 +54,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           }}
         >
           <img
-            src="/assets/BRUSH NOISE BIRU.png"
+            src="/assets/BRUSH NOISE BIRU.webp"
             alt="Brush stroke"
             className="opacity-80"
             decoding="async"
@@ -76,7 +76,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           }}
         >
           <img
-            src="/assets/BRUSH NOISE ORANGE.png"
+            src="/assets/BRUSH NOISE ORANGE.webp"
             alt="Brush stroke"
             className="opacity-80"
             decoding="async"
@@ -100,7 +100,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           }}
         >
           <img
-            src="/assets/BRUSH NOISE BIRU MUDA 2.png"
+            src="/assets/BRUSH NOISE BIRU MUDA 2.webp"
             alt="Brush stroke"
             className="opacity-70"
             decoding="async"
@@ -110,7 +110,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* CREATED ATAS - Hidden on desktop/tablet, shown on mobile */}
         <div className="absolute top-0 md:hidden">
           <img
-            src="/assets/CREATED ATAS.png"
+            src="/assets/CREATED ATAS.webp"
             alt="Created Atas"
             decoding="async"
           />
@@ -119,7 +119,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* CG - Top of screen */}
         <div className="absolute top-0 z-[10]">
           <img
-            src="/assets/CG.png"
+            src="/assets/CG.webp"
             alt="CG"
             decoding="async"
           />
@@ -141,7 +141,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           }}
         >
           <img
-            src="/assets/ELEMENT 3.png"
+            src="/assets/ELEMENT 3.webp"
             alt="Element 3"
             decoding="async"
             style={{ transform: 'translateZ(0)' }}
@@ -162,7 +162,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           }}
         >
           <img
-            src="/assets/SHAPE OREN.png"
+            src="/assets/SHAPE OREN.webp"
             alt="Shape Oren"
             decoding="async"
             style={{ opacity: 0.9 }}
@@ -185,7 +185,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           }}
         >
           <img
-            src="/assets/OVERLAY AUDIO.png"
+            src="/assets/OVERLAY AUDIO.webp"
             alt="Overlay Audio"
             decoding="async"
           />
@@ -205,7 +205,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           }}
         >
           <img
-            src="/assets/ELEMENT 2.png"
+            src="/assets/ELEMENT 2.webp"
             alt="Element 2"
             decoding="async"
             style={{ transform: 'translateZ(0)' }}
@@ -227,7 +227,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           }}
         >
           <img
-            src="/assets/ELEMENT DOODLE 1.png"
+            src="/assets/ELEMENT DOODLE 1.webp"
             alt="Element Doodle 1"
             decoding="async"
           />
@@ -248,7 +248,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           }}
         >
           <img
-            src="/assets/BRUSH NOISE BIRU MUDA 1.png"
+            src="/assets/BRUSH NOISE BIRU MUDA 1.webp"
             alt="Brush stroke"
             className="opacity-80"
             decoding="async"
@@ -258,7 +258,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* BRUSH NOISE YELLOW - Mobile version */}
         <div className="absolute md:hidden">
           <img
-            src="/assets/BRUSH NOISE YELLOW.png"
+            src="/assets/BRUSH NOISE YELLOW.webp"
             alt="Brush stroke"
             className="opacity-80"
             decoding="async"
@@ -279,7 +279,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           }}
         >
           <img
-            src="/assets/SHAPE BIRU TUA.png"
+            src="/assets/SHAPE BIRU TUA.webp"
             alt="Shape Biru Tua"
             decoding="async"
             style={{ opacity: 0.95 }}
@@ -300,7 +300,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           }}
         >
           <img
-            src="/assets/SHAPE BIRU GRAD.png"
+            src="/assets/SHAPE BIRU GRAD.webp"
             alt="Shape Biru Grad"
             decoding="async"
             style={{ opacity: 0.9 }}
@@ -310,7 +310,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* CREATED BAWAH - Mobile version */}
         <div className="absolute bottom-0 md:hidden">
           <img
-            src="/assets/CREATED BAWAH.png"
+            src="/assets/CREATED BAWAH.webp"
             alt="Created Bawah"
             decoding="async"
           />
@@ -320,7 +320,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* TRANSPARANT HITAM 2 */}
         <div className="absolute z-[5] mb-6">
           <img
-            src="/assets/INFO 1 DETAIL/TRANSPARANT HITAM 2.png"
+            src="/assets/INFO 1 DETAIL/TRANSPARANT HITAM 2.webp"
             alt="Transparant Hitam 2"
             decoding="async"
           />
@@ -329,7 +329,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* THU */}
         <div className="absolute z-[5] mb-6">
           <img
-            src="/assets/INFO 1 DETAIL/thu.png"
+            src="/assets/INFO 1 DETAIL/THU.webp"
             alt="THU"
             decoding="async"
           />
@@ -338,7 +338,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* 20 NOVEMBER 2025 */}
         <div className="absolute z-[5]">
           <img
-            src="/assets/INFO 1 DETAIL/20 NOVEMBER 2025.png"
+            src="/assets/INFO 1 DETAIL/20 NOVEMBER 2025.webp"
             alt="20 November 2025"
             decoding="async"
           />
@@ -347,7 +347,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* CHAPEL 1 */}
         <div className="absolute z-[5] mb-6">
           <img
-            src="/assets/INFO 1 DETAIL/CHAPEL 1.png"
+            src="/assets/INFO 1 DETAIL/CHAPEL 1.webp"
             alt="Chapel 1"
             decoding="async"
           />
@@ -356,7 +356,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* GMS ALAM SUTERA */}
         <div className="absolute z-[5] mb-6">
           <img
-            src="/assets/GMS ALAM SUTERA.png"
+            src="/assets/GMS ALAM SUTERA.webp"
             alt="GMS Alam Sutera"
             decoding="async"
           />
@@ -383,7 +383,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           }}
         >
           <img
-            src="/assets/LOGO.png"
+            src="/assets/LOGO.webp"
             alt="Logo"
             decoding="async"
             style={{ 
@@ -457,7 +457,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           }}
         >
           <img
-            src="/assets/ELEMENT 2.png"
+            src="/assets/ELEMENT 2.webp"
             alt="Element 2"
             decoding="async"
             style={{ transform: 'translateZ(0)',
@@ -486,7 +486,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           }}
         >
           <img
-            src="/assets/ELEMENT DOODLE 1.png"
+            src="/assets/ELEMENT DOODLE 1.webp"
             alt="Element Doodle 1"
             decoding="async"
             style={{
@@ -515,7 +515,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           }}
         >
           <img
-            src="/assets/BRUSH NOISE BIRU MUDA 1.png"
+            src="/assets/BRUSH NOISE BIRU MUDA 1.webp"
             alt="Brush stroke"
             className="opacity-80"
             decoding="async"
@@ -529,7 +529,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* BRUSH NOISE YELLOW */}
         <div className="absolute">
           <img
-            src="/assets/BRUSH NOISE YELLOW.png"
+            src="/assets/BRUSH NOISE YELLOW.webp"
             alt="Brush stroke"
             className="opacity-80"
             decoding="async"
@@ -558,7 +558,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           }}
         >
           <img
-            src="/assets/SHAPE BIRU TUA.png"
+            src="/assets/SHAPE BIRU TUA.webp"
             alt="Shape Biru Tua"
             decoding="async"
             style={{ opacity: 0.95,
@@ -586,7 +586,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           }}
         >
           <img
-            src="/assets/SHAPE BIRU GRAD.png"
+            src="/assets/SHAPE BIRU GRAD.webp"
             alt="Shape Biru Grad"
             decoding="async"
             style={{ opacity: 0.9,
@@ -599,7 +599,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* CREATED BAWAH */}
         <div className="absolute bottom-0">
           <img
-            src="/assets/CREATED BAWAH.png"
+            src="/assets/CREATED BAWAH.webp"
             alt="Created Bawah"
             decoding="async"
             style={{
@@ -615,7 +615,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* CREATED ATAS - Right positioned - Static for performance */}
         <div className="absolute top-0 right-0 z-[1]">
           <img
-            src="/assets/CREATED ATAS.png"
+            src="/assets/CREATED ATAS.webp"
             alt="Created Atas"
             className="w-full h-auto"
             decoding="async"
@@ -641,7 +641,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           data-tablet-optimize="true"
         >
           <img
-            src="/assets/ELEMENT 3.png"
+            src="/assets/ELEMENT 3.webp"
             alt="Element 3"
             className="w-full h-auto"
             decoding="async"
@@ -654,7 +654,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           style={{ opacity: 0.9 }}
         >
           <img
-            src="/assets/SHAPE OREN.png"
+            src="/assets/SHAPE OREN.webp"
             alt="Shape Oren"
             className="w-full h-auto"
             decoding="async"
@@ -679,7 +679,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           data-tablet-optimize="true"
         >
           <img
-            src="/assets/OVERLAY AUDIO.png"
+            src="/assets/OVERLAY AUDIO.webp"
             alt="Overlay Audio"
             className="w-full h-auto"
             decoding="async"
@@ -704,7 +704,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           }}
         >
           <img
-            src="/assets/BRUSH NOISE BIRU MUDA 2.png"
+            src="/assets/BRUSH NOISE BIRU MUDA 2.webp"
             alt="Brush stroke"
             className="opacity-70 w-full h-auto"
             decoding="async"
@@ -729,7 +729,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           }}
         >
           <img
-            src="/assets/BRUSH NOISE ORANGE.png"
+            src="/assets/BRUSH NOISE ORANGE.webp"
             alt="Brush stroke"
             className="opacity-80 w-full h-auto"
             decoding="async"
