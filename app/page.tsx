@@ -63,13 +63,11 @@ export default function Home() {
           <ModernHero onRegisterClick={scrollToForm} />
         </section>
 
-        {/* Registration Form Section - Right Side takes remaining space, centered */}
+        {/* Registration Form Section - Right Side takes remaining space, centered - Always visible on desktop/tablet */}
         <section 
           ref={formRef} 
           id="registration" 
-          className={`flex-1 overflow-y-auto transition-opacity duration-500 flex items-center justify-center ${
-            showForm ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}
+          className="flex-1 overflow-y-auto flex items-center justify-center"
           style={{
             backgroundImage: 'url(/assets/BAGROUND.png)',
             backgroundSize: '500px 100%',

@@ -388,8 +388,8 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         </motion.div>
       </div>
 
-      {/* Register Button - Sticky to bottom */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 flex justify-center pb-20 pt-4">
+      {/* Register Button - Sticky to bottom - Mobile only */}
+      <div className="absolute bottom-0 left-0 right-0 z-10 flex justify-center pb-20 pt-4 md:hidden">
         <motion.button
           onClick={onRegisterClick}
           className="group relative w-full max-w-xs py-2 bg-sunshine text-midnight font-bebas text-sm tracking-wider neo-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200 overflow-hidden"
