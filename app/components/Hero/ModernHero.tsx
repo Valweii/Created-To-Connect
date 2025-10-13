@@ -324,34 +324,6 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           />
         </div>
 
-        {/* JESUS with complex visual effects */}
-        <div className="absolute bottom-0 -z-10 opacity-30">
-          {/* Base halftone background */}
-              <div className="relative">
-            {/* Halftone pattern background */}
-            {/* <div 
-              className="absolute inset-0 opacity-30"
-              style={{
-                backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,0,0,0.8) 1px, transparent 0)`,
-                backgroundSize: '8px 8px'
-              }}
-            /> */}
-            
-            {/* Graffiti layer with blend mode */}
-            <div className="relative mix-blend-overlay">
-              <img
-                src="/assets/JESUS REVISI.png"
-                alt="Jesus"
-                className="w-full h-auto"
-                decoding="async"
-                style={{
-                  filter: 'contrast(1.2) saturate(1.3) brightness(0.9)',
-                  mixBlendMode: 'overlay'
-                }}
-              />
-              </div>
-              </div>
-            </div>
           </div>
 
       {/* Main content - logo and register button */}
