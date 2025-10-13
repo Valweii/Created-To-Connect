@@ -59,7 +59,7 @@ export default function StepCGInfo({ register, errors, watch, setValue }: StepCG
               </svg>
             </label>
           </div>
-          <label htmlFor="isCGMember" className="text-midnight font-inter font-bold text-sm md:text-base cursor-pointer uppercase tracking-wide pt-1">
+          <label htmlFor="isCGMember" className="text-midnight font-inter font-bold text-sm md:text-sm cursor-pointer uppercase tracking-wide pt-1">
             I&apos;m a part of a Connect Group (CG)
           </label>
         </div>
@@ -82,7 +82,7 @@ export default function StepCGInfo({ register, errors, watch, setValue }: StepCG
             <select
               id="cgNumber"
               {...register('cgNumber')}
-              className="w-full px-4 py-3 md:px-4 md:py-3 border-3 md:border-3 border-midnight bg-cream text-midnight font-inter font-bold text-base md:text-base focus:outline-none focus:border-electric focus:ring-3 md:focus:ring-4 focus:ring-electric/30 transition-all cursor-pointer hover:bg-electric/5 hover:border-electric shadow-[4px_4px_0px_0px_rgba(31,31,31,1)] hover:shadow-[6px_6px_0px_0px_rgba(242,187,5,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%231f1f1f%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:24px_24px] bg-[right_1rem_center] bg-no-repeat pr-12"
+              className="w-full px-4 py-3 md:px-4 md:py-3 border-3 md:border-3 border-midnight bg-cream text-midnight font-inter font-bold text-base md:text-sm focus:outline-none focus:border-electric focus:ring-3 md:focus:ring-4 focus:ring-electric/30 transition-all cursor-pointer hover:bg-electric/5 hover:border-electric shadow-[4px_4px_0px_0px_rgba(31,31,31,1)] hover:shadow-[6px_6px_0px_0px_rgba(242,187,5,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%231f1f1f%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:24px_24px] bg-[right_1rem_center] bg-no-repeat pr-12"
               aria-describedby={errors.cgNumber ? 'cgNumber-error' : undefined}
             >
               <option value="">-- Select CG Number --</option>
@@ -118,7 +118,7 @@ export default function StepCGInfo({ register, errors, watch, setValue }: StepCG
             <select
               id="heardFrom"
               {...register('heardFrom')}
-              className="w-full px-4 py-3 md:px-4 md:py-3 border-3 md:border-3 border-midnight bg-cream text-midnight font-inter font-bold text-base md:text-base focus:outline-none focus:border-electric focus:ring-3 md:focus:ring-4 focus:ring-electric/30 transition-all cursor-pointer hover:bg-electric/5 hover:border-electric shadow-[4px_4px_0px_0px_rgba(31,31,31,1)] hover:shadow-[6px_6px_0px_0px_rgba(242,187,5,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%231f1f1f%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:24px_24px] bg-[right_1rem_center] bg-no-repeat pr-12"
+              className="w-full px-4 py-3 md:px-4 md:py-3 border-3 md:border-3 border-midnight bg-cream text-midnight font-inter font-bold text-base md:text-sm focus:outline-none focus:border-electric focus:ring-3 md:focus:ring-4 focus:ring-electric/30 transition-all cursor-pointer hover:bg-electric/5 hover:border-electric shadow-[4px_4px_0px_0px_rgba(31,31,31,1)] hover:shadow-[6px_6px_0px_0px_rgba(242,187,5,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%231f1f1f%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:24px_24px] bg-[right_1rem_center] bg-no-repeat pr-12"
               aria-describedby={errors.heardFrom ? 'heardFrom-error' : undefined}
             >
               <option value="">-- Select an option --</option>

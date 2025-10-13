@@ -174,7 +174,7 @@ export default function SimpleModernLedger() {
           {/* Form card */}
           <motion.div
             layout
-            className="bg-cream border-2 md:border-4 border-midnight neo-shadow p-4 md:p-6 lg:p-8 md:max-h-[70vh] md:overflow-y-auto form-scrollbar"
+            className="bg-cream border-2 md:border-4 border-midnight neo-shadow p-4 md:p-6 lg:p-8"
           >
             {/* Step title */}
             <motion.div
@@ -184,7 +184,7 @@ export default function SimpleModernLedger() {
               className="mb-4 md:mb-6"
             >
               <div className={`inline-block px-4 py-1 md:px-4 md:py-1.5 ${stepBg} mb-2 md:mb-3`}>
-                <h2 className="font-bebas text-2xl md:text-3xl lg:text-3xl text-midnight tracking-wider">
+                <h2 className="font-bebas text-2xl md:text-2xl lg:text-2xl text-midnight tracking-wider">
                   {currentStep === 1 && 'YOUR INFO'}
                   {currentStep === 2 && 'EXTRAS'}
                 </h2>
