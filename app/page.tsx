@@ -77,12 +77,6 @@ export default function Home() {
           ref={formRef} 
           id="registration" 
           className="flex-1 overflow-hidden flex items-center justify-center"
-          style={{
-            backgroundImage: 'url(/assets/BAGROUND.png)',
-            backgroundSize: '500px 100vh',
-            backgroundPosition: 'left center',
-            backgroundRepeat: 'repeat-x'
-          }}
         >
           <div className="w-full max-w-4xl px-8">
             <SimpleModernLedger />

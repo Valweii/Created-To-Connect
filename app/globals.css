@@ -27,6 +27,13 @@ body {
   scrollbar-width: none;  /* Firefox */
 }
 
+body {
+  background-image: url('/assets/BAGROUND.png');
+  background-size: 500px 100vh;
+  background-position: left top;
+  background-repeat: repeat-x;
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {

@@ -18,9 +18,8 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
 
   return (
     <div 
-      className="relative overflow-hidden bg-cover bg-center bg-no-repeat flex justify-center"
+      className="relative overflow-hidden flex justify-center"
       style={{ 
-        backgroundImage: 'url(/assets/BAGROUND.png)',
         height: '10vh',
         minHeight: '100vh',
       }}
@@ -339,7 +338,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
             />
             
             {/* Graffiti layer with blend mode */}
-            <div className="relative mix-blend-overlay">
+            {/* <div className="relative mix-blend-overlay">
               <img
                 src="/assets/JESUS.png"
                 alt="Jesus"
@@ -350,7 +349,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
                   mixBlendMode: 'overlay'
                 }}
               />
-              </div>
+              </div> */}
             
             {/* Blurred colored glow layer */}
             <div 
