@@ -149,7 +149,7 @@ export default function SimpleModernLedger() {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-6 md:mb-8 flex items-center justify-center gap-2 md:gap-4"
+            className="mb-6 md:mb-8 flex items-center justify-center gap-2 md:gap-4 md:hidden"
           >
             {[1, 2].map((step) => (
               <div key={step} className="flex items-center gap-2 md:gap-4">

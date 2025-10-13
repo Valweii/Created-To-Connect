@@ -67,12 +67,12 @@ export default function Home() {
         <section 
           ref={formRef} 
           id="registration" 
-          className="flex-1 overflow-y-auto flex items-center justify-center"
+          className="flex-1 overflow-hidden flex items-center justify-center"
           style={{
             backgroundImage: 'url(/assets/BAGROUND.png)',
-            backgroundSize: '500px 100%',
-            backgroundPosition: 'left center',
-            backgroundRepeat: 'repeat-x'
+            backgroundSize: '500px auto',
+            backgroundPosition: 'left top',
+            backgroundRepeat: 'repeat'
           }}
         >
           <div className="w-full max-w-4xl px-8">
