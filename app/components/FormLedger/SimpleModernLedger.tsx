@@ -140,7 +140,7 @@ export default function SimpleModernLedger() {
         }}
       >
         {/* Decorative elements */}
-        <div className="absolute top-20 right-10 font-bebas text-[8rem] text-midnight/5 pointer-events-none hidden lg:block">
+        <div className="absolute top-20 right-10 font-bebas text-[8rem] text-midnight/20 pointer-events-none hidden lg:block">
           REGISTER
         </div>
 
@@ -263,9 +263,11 @@ export default function SimpleModernLedger() {
             transition={{ delay: 0.6 }}
             className="mt-4 md:mt-6 text-center"
           >
-            <p className="font-inter text-midnight/40 text-xs">
-              Step {currentStep} of 2 — Make it count! 
-            </p>
+            <div className="inline-block bg-white rounded-full px-4 py-2 border-2 border-midnight neo-shadow">
+              <p className="font-inter text-midnight/40 text-xs">
+                Step {currentStep} of 2 — Make it count! 
+              </p>
+            </div>
           </motion.div>
         </div>
       </div>

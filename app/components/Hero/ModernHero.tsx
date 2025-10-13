@@ -307,9 +307,9 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         </div>
 
         {/* THU */}
-        <div className="absolute z-[5]">
+        <div className="absolute z-[5] mb-6">
           <img
-            src="/assets/INFO 1 DETAIL/THU.png"
+            src="/assets/INFO 1 DETAIL/thu.png"
             alt="THU"
             decoding="async"
           />

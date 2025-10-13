@@ -50,7 +50,6 @@ export default function ModernConfirmation({ ticketId, qrUrl }: ModernConfirmati
   return (
     <div 
       className="min-h-screen flex items-center justify-center py-12 px-4 relative overflow-hidden bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: 'url(/assets/BAGROUND.png)' }}
     >
 
       <motion.div

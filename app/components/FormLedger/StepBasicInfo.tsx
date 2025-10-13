@@ -28,7 +28,7 @@ export default function StepBasicInfo({ register, errors }: StepBasicInfoProps) 
           type="text"
           {...register('name')}
           className="w-full px-4 py-2 md:px-4 md:py-3 border-2 md:border-3 border-midnight bg-cream text-midnight font-inter text-base md:text-sm focus:outline-none focus:border-electric focus:ring-2 md:focus:ring-3 focus:ring-electric/20 transition-all"
-          placeholder="John Doe"
+          placeholder="Vincent Wijaya"
           aria-describedby={errors.name ? 'name-error' : undefined}
         />
         {errors.name && (
@@ -78,7 +78,7 @@ export default function StepBasicInfo({ register, errors }: StepBasicInfoProps) 
           type="tel"
           {...register('phonenumber')}
           className="w-full px-4 py-3 md:px-4 md:py-3 border-2 md:border-3 border-midnight bg-cream text-midnight font-inter text-base md:text-sm focus:outline-none focus:border-electric focus:ring-2 md:focus:ring-3 focus:ring-electric/20 transition-all"
-          placeholder="+1 (555) 000-0000"
+          placeholder="0812345678"
           aria-describedby={errors.phonenumber ? 'phonenumber-error' : undefined}
         />
         {errors.phonenumber && (

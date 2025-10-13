@@ -31,15 +31,13 @@ export default function ConfirmationTicket({ ticketId, qrUrl }: ConfirmationTick
 
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 relative">
-      <div className="absolute inset-0 bg-gradient-to-br from-lodgeWood via-[#2a1810] to-[#1a0f08] opacity-90" />
-      
       <motion.div
         initial={{ opacity: 0, scale: 0.9, rotateY: -15 }}
         animate={{ opacity: 1, scale: 1, rotateY: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className="relative"
       >
-        <div className="bg-parchment rounded-lg shadow-2xl parchment-shadow p-8 max-w-md w-full">
+        <div className="bg-parchment rounded-lg shadow-2xl parchment-shadow p-4 md:p-6 lg:p-8 max-w-md w-full md:max-h-[70vh] md:overflow-y-auto">
           {/* Ticket header */}
           <div className="text-center mb-6">
             <motion.div
