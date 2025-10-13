@@ -369,20 +369,27 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* Logo */}
         <motion.div 
           className="flex justify-center flex-shrink-0 mb-4 will-change-transform"
-          animate={{ 
+          animate={isTablet ? {} : { 
             y: [0, -10, 0]
           }}
-          transition={{ 
+          transition={isTablet ? {} : { 
             duration: 4,
             repeat: Infinity,
             ease: "easeInOut"
+          }}
+          style={{
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden'
           }}
         >
           <img
             src="/assets/LOGO.png"
             alt="Logo"
             decoding="async"
-            style={{ transform: 'translateZ(0)'}}
+            style={{ 
+              transform: 'translateZ(0)',
+              backfaceVisibility: 'hidden'
+            }}
           />
         </motion.div>
       </div>
@@ -392,26 +399,34 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         <motion.button
           onClick={onRegisterClick}
           className="group relative w-full max-w-xs py-2 bg-sunshine text-midnight font-bebas text-sm tracking-wider neo-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200 overflow-hidden"
-          animate={{ 
+          animate={isTablet ? {} : { 
             scale: [1, 1.03, 1]
           }}
-          transition={{ 
+          transition={isTablet ? {} : { 
             duration: 2,
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.98 }}
+          whileHover={isTablet ? {} : { scale: 1.05 }}
+          whileTap={isTablet ? {} : { scale: 0.98 }}
+          style={{
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden'
+          }}
         >
           <span className="relative z-10 flex items-center justify-center gap-1">
             REGISTER NOW
             <motion.span 
               className="inline-block"
-              animate={{ x: [0, 3, 0] }}
-              transition={{ 
+              animate={isTablet ? {} : { x: [0, 3, 0] }}
+              transition={isTablet ? {} : { 
                 duration: 1.5,
                 repeat: Infinity,
                 ease: "easeInOut"
+              }}
+              style={{
+                transform: 'translateZ(0)',
+                backfaceVisibility: 'hidden'
               }}
             >
               →
