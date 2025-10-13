@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 import ModernHero from './components/Hero/ModernHero';
 import SimpleModernLedger from './components/FormLedger/SimpleModernLedger';
+import CombinedHeroForm from './components/CombinedHeroForm';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 
 export default function Home() {
@@ -82,26 +83,9 @@ export default function Home() {
         )}
       </div>
 
-      {/* Desktop/Tablet: Side by Side Layout */}
-      <div className="hidden md:flex h-screen">
-        {/* Hero Section - Left Side, fully aligned left */}
-        <section 
-          id="hero" 
-          className="flex-shrink-0 w-[500px]"
-        >
-          <ModernHero onRegisterClick={scrollToForm} />
-        </section>
-
-        {/* Registration Form Section - Right Side takes remaining space, centered - Always visible on desktop/tablet */}
-        <section 
-          ref={formRef} 
-          id="registration" 
-          className="flex-1 overflow-hidden flex items-center justify-center"
-        >
-          <div className="w-full max-w-4xl px-8">
-            <SimpleModernLedger />
-          </div>
-        </section>
+      {/* Desktop/Tablet: Combined Layout */}
+      <div className="hidden md:block">
+        <CombinedHeroForm onRegisterClick={scrollToForm} />
       </div>
       </main>
     </>
