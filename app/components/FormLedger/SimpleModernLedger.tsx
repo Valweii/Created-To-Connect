@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -15,6 +15,18 @@ export default function SimpleModernLedger() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showBlackHole, setShowBlackHole] = useState(false);
   const [ticketData, setTicketData] = useState<{ ticketId: string; qrUrl: string } | null>(null);
+  const [isDesktopOrTablet, setIsDesktopOrTablet] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsDesktopOrTablet(window.innerWidth >= 768);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   const {
     register,
@@ -120,7 +132,13 @@ export default function SimpleModernLedger() {
         onCancel={handleBlackHoleCancel}
       />
 
-      <div id="page-content" className="min-h-screen bg-cream py-8 md:py-20 px-4 relative overflow-hidden flex items-center">
+      <div 
+        id="page-content" 
+        className="min-h-screen py-8 md:py-20 px-4 relative overflow-hidden flex items-center"
+        style={{
+          backgroundColor: !isDesktopOrTablet ? '#FAF3E0' : 'transparent'
+        }}
+      >
         {/* Decorative elements */}
         <div className="absolute top-20 right-10 font-bebas text-[8rem] text-midnight/5 pointer-events-none hidden lg:block">
           REGISTER

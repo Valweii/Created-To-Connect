@@ -50,9 +50,9 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           />
         </motion.div>
 
-        {/* BRUSH NOISE ORANGE */}
+        {/* BRUSH NOISE ORANGE - Hidden on desktop/tablet, shown on mobile */}
         <motion.div 
-          className="absolute"
+          className="absolute md:hidden"
           animate={{ 
             y: [0, 10, 0],
             rotate: [0, -1, 0]
@@ -74,16 +74,6 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* BRUSH NOISE YELLOW */}
         <motion.div 
           className="absolute"
-          animate={{ 
-            y: [0, -6, 0],
-            x: [0, 3, 0]
-          }}
-          transition={{ 
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1
-          }}
         >
           <img
             src="/assets/BRUSH NOISE YELLOW.png"
@@ -113,9 +103,9 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           />
         </motion.div>
 
-        {/* BRUSH NOISE BIRU MUDA 2 */}
+        {/* BRUSH NOISE BIRU MUDA 2 - Hidden on desktop/tablet, shown on mobile */}
         <motion.div 
-          className="absolute"
+          className="absolute md:hidden"
           animate={{ 
             y: [0, -9, 0],
             rotate: [0, 0.5, 0]
@@ -134,8 +124,8 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           />
         </motion.div>
 
-        {/* CREATED ATAS */}
-        <div className="absolute top-0">
+        {/* CREATED ATAS - Hidden on desktop/tablet, shown on mobile */}
+        <div className="absolute top-0 md:hidden">
           <img
             src="/assets/CREATED ATAS.png"
             alt="Created Atas"
@@ -177,9 +167,9 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           />
         </motion.div>
 
-        {/* ELEMENT 3 */}
+        {/* ELEMENT 3 - Hidden on desktop/tablet, shown on mobile */}
         <motion.div 
-          className="absolute"
+          className="absolute md:hidden"
           animate={{ 
             rotate: [0, -2, 2, 0],
             scale: [1, 1.03, 1]
@@ -217,9 +207,9 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           />
         </motion.div>
 
-        {/* SHAPE OREN */}
+        {/* SHAPE OREN - Hidden on desktop/tablet, shown on mobile */}
         <motion.div 
-          className="absolute"
+          className="absolute md:hidden"
           animate={{ 
             scale: [1, 1.05, 1],
             opacity: [0.8, 1, 0.8]
@@ -276,9 +266,9 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           />
         </motion.div>
 
-        {/* OVERLAY AUDIO */}
+        {/* OVERLAY AUDIO - Hidden on desktop/tablet, shown on mobile */}
         <motion.div 
-          className="absolute z-[2]"
+          className="absolute z-[2] md:hidden"
           animate={{ 
             scale: [1, 1.08, 1],
             rotate: [0, 3, -3, 0]
@@ -297,7 +287,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
 
         {/* INFO 1 DETAIL elements - In front of all other elements except logo */}
         {/* TRANSPARANT HITAM 2 */}
-        <div className="absolute z-[5]">
+        <div className="absolute z-[5] mb-6">
           <img
             src="/assets/INFO 1 DETAIL/TRANSPARANT HITAM 2.png"
             alt="Transparant Hitam 2"
@@ -312,38 +302,6 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           />
         </div>
 
-        {/* PM */}
-        <div className="absolute z-[5]">
-          <img
-            src="/assets/INFO 1 DETAIL/PM.png"
-            alt="PM"
-          />
-        </div>
-
-        {/* jam 7 */}
-        <div className="absolute z-[5]">
-          <img
-            src="/assets/INFO 1 DETAIL/jam 7.png"
-            alt="Jam 7"
-          />
-        </div>
-
-        {/* GMS TANGERANG */}
-        <div className="absolute z-[5]">
-          <img
-            src="/assets/INFO 1 DETAIL/GMS TANGERANG.png"
-            alt="GMS Tangerang"
-          />
-        </div>
-
-        {/* CHAPEL 1 */}
-        <div className="absolute z-[5]">
-          <img
-            src="/assets/INFO 1 DETAIL/CHAPEL 1.png"
-            alt="Chapel 1"
-          />
-      </div>
-
         {/* 20 NOVEMBER 2025 */}
         <div className="absolute z-[5]">
           <img
@@ -351,89 +309,6 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
             alt="20 November 2025"
           />
         </div>
-
-        {/* INFO 2 DETAIL elements - In front of all other elements except logo */}
-        {/* YELLOW */}
-        <motion.div 
-          className="absolute z-[6]"
-          animate={{ 
-            scale: [1, 1.03, 1]
-          }}
-          transition={{ 
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        >
-          <img
-            src="/assets/INFO 2 DETAIL/YELLOW.png"
-            alt="Yellow"
-          />
-        </motion.div>
-
-        {/* TRANSPARAN HITAM */}
-        <div className="absolute z-[4]">
-          <img
-            src="/assets/INFO 2 DETAIL/TRANSPARAN HITAM.png"
-            alt="Transparan Hitam"
-          />
-        </div>
-
-        {/* ORANGE */}
-        <motion.div 
-          className="absolute z-[6]"
-          animate={{ 
-            scale: [1, 1.03, 1]
-          }}
-          transition={{ 
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.5
-          }}
-        >
-          <img
-            src="/assets/INFO 2 DETAIL/ORANGE.png"
-            alt="Orange"
-          />
-        </motion.div>
-
-        {/* DRESSCCODE */}
-        <motion.div 
-          className="absolute z-[5]"
-          animate={{ 
-            y: [0, -3, 0]
-          }}
-          transition={{ 
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        >
-          <img
-            src="/assets/INFO 2 DETAIL/DRESSCCODE.png"
-            alt="Dresscode"
-          />
-        </motion.div>
-
-        {/* BLUE */}
-        <motion.div 
-          className="absolute z-[6]"
-          animate={{ 
-            scale: [1, 1.03, 1]
-          }}
-          transition={{ 
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1
-          }}
-        >
-          <img
-            src="/assets/INFO 2 DETAIL/BLUE.png"
-            alt="Blue"
-          />
-        </motion.div>
 
         {/* JESUS with complex visual effects */}
         <div className="absolute -z-10 opacity-30">
@@ -546,6 +421,119 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <div className="absolute inset-0 bg-flame opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </motion.button>
       </div>
+      </div>
+
+      {/* Right-side decorative elements for desktop/tablet */}
+      <div className="hidden md:block pointer-events-none">
+        {/* CREATED ATAS - Right positioned */}
+        <div className="fixed top-0 right-0 z-[1]">
+          <img
+            src="/assets/CREATED ATAS.png"
+            alt="Created Atas"
+            className="w-full h-auto"
+          />
+        </div>
+
+        {/* ELEMENT 3 - Right positioned */}
+        <motion.div 
+          className="fixed right-0 top-[-60%] z-[1]"
+          animate={{ 
+            rotate: [0, -2, 2, 0]
+          }}
+          transition={{ 
+            duration: 11,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.7
+          }}
+        >
+          <img
+            src="/assets/ELEMENT 3.png"
+            alt="Element 3"
+            className="w-full h-auto"
+          />
+        </motion.div>
+
+        {/* SHAPE OREN - Right positioned */}
+        <motion.div 
+          className="fixed right-0 top-[-60%] z-[1]"
+          animate={{ 
+            opacity: [0.8, 1, 0.8],
+            rotate: [0, -2, 2, 0]
+          }}
+          transition={{ 
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <img
+            src="/assets/SHAPE OREN.png"
+            alt="Shape Oren"
+            className="w-full h-auto"
+          />
+        </motion.div>
+
+        {/* OVERLAY AUDIO - Right positioned */}
+        <motion.div 
+          className="fixed right-0 top-[-50%] z-[2]"
+          animate={{ 
+            rotate: [0, 3, -3, 0]
+          }}
+          transition={{ 
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <img
+            src="/assets/OVERLAY AUDIO.png"
+            alt="Overlay Audio"
+            className="w-full h-auto"
+          />
+        </motion.div>
+
+        {/* BRUSH NOISE BIRU MUDA 2 - Right positioned */}
+        <motion.div 
+          className="fixed right-0 top-[-70%] z-[1]"
+          animate={{ 
+            y: [0, -9, 0],
+            rotate: [0, 0.5, 0]
+          }}
+          transition={{ 
+            duration: 7.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1.5
+          }}
+        >
+          <img
+            src="/assets/BRUSH NOISE BIRU MUDA 2.png"
+            alt="Brush stroke"
+            className="opacity-70 w-full h-auto"
+          />
+        </motion.div>
+
+        {/* BRUSH NOISE ORANGE - Right positioned */}
+        <motion.div 
+          className="fixed right-0 top-[-60%] z-[0]"
+          animate={{ 
+            y: [0, 10, 0],
+            rotate: [0, -1, 0]
+          }}
+          transition={{ 
+            duration: 7,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5
+          }}
+        >
+          <img
+            src="/assets/BRUSH NOISE ORANGE.png"
+            alt="Brush stroke"
+            className="opacity-80 w-full h-auto"
+          />
+        </motion.div>
       </div>
     </div>
   );
