@@ -134,7 +134,7 @@ export default function SimpleModernLedger() {
 
       <div 
         id="page-content" 
-        className="min-h-screen py-8 md:py-20 px-4 relative overflow-hidden flex items-center"
+        className="min-h-screen py-8 md:py-12 px-4 relative overflow-hidden flex items-center"
         style={{
           backgroundColor: !isDesktopOrTablet ? '#FAF3E0' : 'transparent'
         }}
@@ -174,7 +174,7 @@ export default function SimpleModernLedger() {
           {/* Form card */}
           <motion.div
             layout
-            className="bg-cream border-2 md:border-4 border-midnight neo-shadow p-4 md:p-6 lg:p-8"
+            className="bg-cream border-2 md:border-4 border-midnight neo-shadow p-4 md:p-6 lg:p-8 md:max-h-[60vh] md:overflow-y-auto"
           >
             {/* Step title */}
             <motion.div

@@ -345,7 +345,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           </div>
 
       {/* Main content - logo and register button */}
-      <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 py-4 max-w-7xl mx-auto will-change-transform">
+      <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 py-4 max-w-7xl mx-auto will-change-transform md:justify-center">
         {/* Logo */}
         <motion.div 
           className="flex justify-center flex-shrink-0 mb-4 will-change-transform"
