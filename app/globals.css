@@ -81,6 +81,33 @@ body {
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
   }
+  
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .will-change-opacity {
+    will-change: opacity;
+  }
+  
+  .animate-optimized {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+}
+
+/* Tablet optimization - Reduce animations for better performance */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .tablet-static {
+    animation: none !important;
+  }
+  
+  /* Simplify transform animations on tablets */
+  [data-tablet-optimize="true"] {
+    animation-duration: 0s !important;
+  }
 }
 
 /* Reduced motion fallback */
