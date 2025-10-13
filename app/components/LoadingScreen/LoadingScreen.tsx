@@ -28,29 +28,34 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
       });
     }, 150);
 
-    // Ensure all images are loaded
-    const images = [
+    // Load only critical images first, then others
+    const criticalImages = [
       '/assets/BAGROUND.png',
+      '/assets/LOGO.png',
+      '/assets/CG.png',
+      '/assets/CREATED ATAS.png',
+      '/assets/CREATED BAWAH.png',
+    ];
+    
+    const secondaryImages = [
       '/assets/BRUSH NOISE BIRU MUDA 1.png',
       '/assets/BRUSH NOISE BIRU MUDA 2.png',
       '/assets/BRUSH NOISE BIRU.png',
       '/assets/BRUSH NOISE ORANGE.png',
       '/assets/BRUSH NOISE YELLOW.png',
-      '/assets/CG.png',
-      '/assets/CREATED ATAS.png',
-      '/assets/CREATED BAWAH.png',
       '/assets/ELEMENT 2.png',
       '/assets/ELEMENT 3.png',
       '/assets/ELEMENT DOODLE 1.png',
       '/assets/INFO 1.png',
       '/assets/INFO 2.png',
       '/assets/JESUS.png',
-      '/assets/LOGO.png',
       '/assets/OVERLAY AUDIO.png',
       '/assets/SHAPE BIRU GRAD.png',
       '/assets/SHAPE BIRU TUA.png',
       '/assets/SHAPE OREN.png',
     ];
+    
+    const images = [...criticalImages, ...secondaryImages];
 
     let loadedCount = 0;
     const totalImages = images.length;
@@ -69,15 +74,24 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
       });
     };
 
-    Promise.all(images.map(loadImage))
-      .then(() => {
+    // Load critical images first, then secondary images
+    const loadImagesStaggered = async () => {
+      try {
+        // Load critical images first
+        await Promise.all(criticalImages.map(loadImage));
+        
+        // Small delay to prevent overwhelming the browser
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+        // Load secondary images
+        await Promise.all(secondaryImages.map(loadImage));
+        
         setProgress(100);
         setIsComplete(true);
         setTimeout(() => {
           onLoadingComplete();
-        }, 1500); // Increased delay for smoother transition
-      })
-      .catch((error) => {
+        }, 1500);
+      } catch (error) {
         console.error('Error loading images:', error);
         // Continue anyway after a delay
         setTimeout(() => {
@@ -85,9 +99,12 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
           setIsComplete(true);
           setTimeout(() => {
             onLoadingComplete();
-          }, 1500); // Increased delay for smoother transition
+          }, 1500);
         }, 1000);
-      });
+      }
+    };
+    
+    loadImagesStaggered();
 
     return () => clearInterval(interval);
   }, [onLoadingComplete]);

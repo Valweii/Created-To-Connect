@@ -16,16 +16,30 @@ export default function SimpleModernLedger() {
   const [showBlackHole, setShowBlackHole] = useState(false);
   const [ticketData, setTicketData] = useState<{ ticketId: string; qrUrl: string } | null>(null);
   const [isDesktopOrTablet, setIsDesktopOrTablet] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsDesktopOrTablet(window.innerWidth >= 768);
+      const width = window.innerWidth;
+      setIsDesktopOrTablet(width >= 768);
+      setIsTablet(width >= 768 && width <= 1024);
     };
     
     checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
     
-    return () => window.removeEventListener('resize', checkScreenSize);
+    // Throttle resize events to prevent excessive re-renders
+    let timeoutId: NodeJS.Timeout;
+    const throttledResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(checkScreenSize, 100);
+    };
+    
+    window.addEventListener('resize', throttledResize);
+    
+    return () => {
+      window.removeEventListener('resize', throttledResize);
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   const {
@@ -174,13 +188,14 @@ export default function SimpleModernLedger() {
           {/* Form card */}
           <motion.div
             layout
-            className="bg-cream border-2 md:border-4 border-midnight neo-shadow p-4 md:p-5 lg:p-6 md:max-h-[65vh] md:overflow-y-auto"
+            className={`bg-cream border-2 md:border-4 border-midnight neo-shadow p-4 md:p-5 lg:p-6 md:max-h-[65vh] md:overflow-y-auto ${isTablet ? 'tablet-reduced-motion' : ''}`}
           >
             {/* Step title */}
             <motion.div
               key={`title-${currentStep}`}
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: isTablet ? -10 : -20 }}
               animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: isTablet ? 0.2 : 0.3 }}
               className="mb-3 md:mb-4"
             >
               <div className={`inline-block px-3 py-1 md:px-3 md:py-1 ${stepBg} mb-1 md:mb-2`}>

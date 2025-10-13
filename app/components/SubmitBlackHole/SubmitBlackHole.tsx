@@ -56,10 +56,10 @@ interface SubmitBlackHoleProps {
 }
 
 // Animation timing constants (tune these for different feel)
-const SUCK_DURATION = 800; // ms - black-hole suck animation (reduced for smoother performance)
-const REVEAL_DURATION = 600; // ms - video montage reveal
-const CLIP_DURATION = 3000; // ms - time per video clip
-const CROSSFADE_DURATION = 600; // ms - crossfade between clips
+const SUCK_DURATION = 600; // ms - black-hole suck animation (further reduced for tablets)
+const REVEAL_DURATION = 400; // ms - video montage reveal (reduced for tablets)
+const CLIP_DURATION = 2500; // ms - time per video clip (reduced for tablets)
+const CROSSFADE_DURATION = 400; // ms - crossfade between clips (reduced for tablets)
 
 export default function SubmitBlackHole({
   isActive,
@@ -124,9 +124,15 @@ export default function SubmitBlackHole({
       // Trigger reflow
       element.offsetHeight;
       
-      // Apply transformations - optimized for performance (removed blur and clip-path)
-      element.style.transform = 'scale(0.01) translateZ(0) rotateZ(360deg)';
-      element.style.opacity = '0';
+      // Apply transformations - optimized for performance (simplified for tablets)
+      const isTablet = window.innerWidth >= 768 && window.innerWidth <= 1024;
+      if (isTablet) {
+        element.style.transform = 'scale(0.01) translateZ(0)';
+        element.style.opacity = '0';
+      } else {
+        element.style.transform = 'scale(0.01) translateZ(0) rotateZ(360deg)';
+        element.style.opacity = '0';
+      }
     }
     
     const suckTimer = setTimeout(() => {
