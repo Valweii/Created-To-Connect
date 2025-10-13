@@ -146,10 +146,6 @@ export default function CombinedHeroForm({ onRegisterClick }: CombinedHeroFormPr
         className="relative overflow-hidden flex h-screen"
         style={{ 
           minHeight: '100vh',
-          backgroundImage: 'url(/assets/BAGROUND.png)',
-          backgroundRepeat: 'repeat-x',
-          backgroundPosition: 'top',
-          backgroundSize: 'auto 100%',
         }}
       >
         {/* Left Side - Hero Section */}
