@@ -15,8 +15,13 @@ export default function StepBasicInfo({ register, errors }: StepBasicInfoProps) 
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -20 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
       className="space-y-3 md:space-y-3"
+      style={{
+        willChange: 'auto',
+        transform: 'translateZ(0)',
+        backfaceVisibility: 'hidden'
+      }}
     >
       {/* Name */}
       <div>

@@ -19,8 +19,13 @@ export default function StepCGInfo({ register, errors, watch, setValue }: StepCG
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -20 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
       className="space-y-3 md:space-y-3"
+      style={{
+        willChange: 'auto',
+        transform: 'translateZ(0)',
+        backfaceVisibility: 'hidden'
+      }}
     >
       {/* CG Member Checkbox */}
       <div className="bg-electric/10 border-3 md:border-3 border-electric p-3 md:p-3 shadow-[4px_4px_0px_0px_rgba(242,187,5,1)] hover:shadow-[6px_6px_0px_0px_rgba(242,187,5,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all">
