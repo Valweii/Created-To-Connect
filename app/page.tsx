@@ -13,17 +13,18 @@ export default function Home() {
     // On mobile, scroll to form section
     if (window.innerWidth < 768) {
       if (formRef.current) {
-        const yOffset = 0;
-        const element = formRef.current;
-        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        
-        window.scrollTo({ top: y, behavior: 'smooth' });
+        // Use scrollIntoView for more reliable scrolling
+        formRef.current.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start',
+          inline: 'nearest'
+        });
         
         // Focus on first input after scroll completes
         setTimeout(() => {
           const firstInput = formRef.current?.querySelector('input');
           firstInput?.focus();
-        }, 800);
+        }, 1000);
       }
     } else {
       // On desktop/tablet, just focus on the form
@@ -44,7 +45,7 @@ export default function Home() {
       {/* Main Content */}
       <main className={`relative ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-1000 ease-out`}>
         {/* Mobile: Stacked Layout */}
-        <div className="md:hidden bg-cream">
+        <div className="md:hidden">
         {/* Hero Section */}
         <section id="hero">
           <ModernHero onRegisterClick={scrollToForm} />
