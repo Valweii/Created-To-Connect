@@ -324,6 +324,24 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           />
         </div>
 
+        {/* CHAPEL 1 */}
+        <div className="absolute z-[5] mb-6">
+          <img
+            src="/assets/INFO 1 DETAIL/CHAPEL 1.png"
+            alt="Chapel 1"
+            decoding="async"
+          />
+        </div>
+
+        {/* GMS ALAM SUTERA */}
+        <div className="absolute z-[5] mb-6">
+          <img
+            src="/assets/GMS ALAM SUTERA.png"
+            alt="GMS Alam Sutera"
+            decoding="async"
+          />
+        </div>
+
           </div>
 
       {/* Main content - logo and register button */}
