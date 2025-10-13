@@ -156,10 +156,9 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
 
         {/* ELEMENT 2 */}
         <motion.div 
-          className="absolute animate-optimized"
+          className="absolute will-change-transform"
           animate={{ 
-            rotate: [0, 2, -2, 0],
-            scale: [1, 1.02, 1]
+            rotate: [0, 2, -2, 0]
           }}
           transition={{ 
             duration: 10,
@@ -171,6 +170,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
             src="/assets/ELEMENT 2.png"
             alt="Element 2"
             decoding="async"
+            style={{ transform: 'translateZ(0)' }}
           />
         </motion.div>
 
@@ -178,8 +178,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         <motion.div 
           className="absolute md:hidden will-change-transform"
           animate={{ 
-            rotate: [0, -2, 2, 0],
-            scale: [1, 1.03, 1]
+            rotate: [0, -2, 2, 0]
           }}
           transition={{ 
             duration: 11,
@@ -192,6 +191,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
             src="/assets/ELEMENT 3.png"
             alt="Element 3"
             decoding="async"
+            style={{ transform: 'translateZ(0)' }}
           />
         </motion.div>
 
@@ -387,10 +387,9 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 py-4 max-w-7xl mx-auto">
         {/* Logo */}
         <motion.div 
-          className="flex justify-center flex-shrink-0 mb-4"
+          className="flex justify-center flex-shrink-0 mb-4 will-change-transform"
           animate={{ 
-            y: [0, -10, 0],
-            scale: [1, 1.02, 1]
+            y: [0, -10, 0]
           }}
           transition={{ 
             duration: 4,
@@ -402,6 +401,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
             src="/assets/LOGO.png"
             alt="Logo"
             decoding="async"
+            style={{ transform: 'translateZ(0)' }}
           />
         </motion.div>
       </div>
