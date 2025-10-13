@@ -174,7 +174,7 @@ export default function SimpleModernLedger() {
           {/* Form card */}
           <motion.div
             layout
-            className="bg-cream border-2 md:border-4 border-midnight neo-shadow p-4 md:p-6 lg:p-8 md:max-h-[60vh] md:overflow-y-auto"
+            className="bg-cream border-2 md:border-4 border-midnight neo-shadow p-4 md:p-5 lg:p-6 md:max-h-[65vh] md:overflow-y-auto"
           >
             {/* Step title */}
             <motion.div

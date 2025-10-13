@@ -20,10 +20,10 @@ export default function StepCGInfo({ register, errors, watch, setValue }: StepCG
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -20 }}
       transition={{ duration: 0.3 }}
-      className="space-y-4 md:space-y-5"
+      className="space-y-3 md:space-y-3"
     >
       {/* CG Member Checkbox */}
-      <div className="bg-electric/10 border-3 md:border-3 border-electric p-4 md:p-4 shadow-[4px_4px_0px_0px_rgba(242,187,5,1)] hover:shadow-[6px_6px_0px_0px_rgba(242,187,5,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all">
+      <div className="bg-electric/10 border-3 md:border-3 border-electric p-3 md:p-3 shadow-[4px_4px_0px_0px_rgba(242,187,5,1)] hover:shadow-[6px_6px_0px_0px_rgba(242,187,5,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all">
         <div className="flex items-start gap-3 md:gap-3">
           <div className="relative flex-shrink-0">
             <input
@@ -59,7 +59,7 @@ export default function StepCGInfo({ register, errors, watch, setValue }: StepCG
               </svg>
             </label>
           </div>
-          <label htmlFor="isCGMember" className="text-midnight font-inter font-bold text-sm md:text-sm cursor-pointer uppercase tracking-wide pt-1">
+          <label htmlFor="isCGMember" className="text-midnight font-inter font-bold text-xs md:text-xs cursor-pointer uppercase tracking-wide pt-1">
             I&apos;m a part of a Connect Group (CG)
           </label>
         </div>
@@ -76,13 +76,13 @@ export default function StepCGInfo({ register, errors, watch, setValue }: StepCG
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <label htmlFor="cgNumber" className="block text-midnight font-inter font-semibold mb-2 text-xs uppercase tracking-wider">
+            <label htmlFor="cgNumber" className="block text-midnight font-inter font-semibold mb-1 text-xs uppercase tracking-wider">
               Select Your CG Number *
             </label>
             <select
               id="cgNumber"
               {...register('cgNumber')}
-              className="w-full px-4 py-3 md:px-4 md:py-3 border-3 md:border-3 border-midnight bg-cream text-midnight font-inter font-bold text-base md:text-sm focus:outline-none focus:border-electric focus:ring-3 md:focus:ring-4 focus:ring-electric/30 transition-all cursor-pointer hover:bg-electric/5 hover:border-electric shadow-[4px_4px_0px_0px_rgba(31,31,31,1)] hover:shadow-[6px_6px_0px_0px_rgba(242,187,5,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%231f1f1f%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:24px_24px] bg-[right_1rem_center] bg-no-repeat pr-12"
+              className="w-full px-3 py-2 md:px-3 md:py-2 border-3 md:border-3 border-midnight bg-cream text-midnight font-inter font-bold text-sm md:text-sm focus:outline-none focus:border-electric focus:ring-3 md:focus:ring-4 focus:ring-electric/30 transition-all cursor-pointer hover:bg-electric/5 hover:border-electric shadow-[4px_4px_0px_0px_rgba(31,31,31,1)] hover:shadow-[6px_6px_0px_0px_rgba(242,187,5,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%231f1f1f%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:24px_24px] bg-[right_1rem_center] bg-no-repeat pr-12"
               aria-describedby={errors.cgNumber ? 'cgNumber-error' : undefined}
             >
               <option value="">-- Select CG Number --</option>
@@ -112,13 +112,13 @@ export default function StepCGInfo({ register, errors, watch, setValue }: StepCG
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <label htmlFor="heardFrom" className="block text-midnight font-inter font-semibold mb-2 text-xs uppercase tracking-wider">
+            <label htmlFor="heardFrom" className="block text-midnight font-inter font-semibold mb-1 text-xs uppercase tracking-wider">
               How did you hear about us? *
             </label>
             <select
               id="heardFrom"
               {...register('heardFrom')}
-              className="w-full px-4 py-3 md:px-4 md:py-3 border-3 md:border-3 border-midnight bg-cream text-midnight font-inter font-bold text-base md:text-sm focus:outline-none focus:border-electric focus:ring-3 md:focus:ring-4 focus:ring-electric/30 transition-all cursor-pointer hover:bg-electric/5 hover:border-electric shadow-[4px_4px_0px_0px_rgba(31,31,31,1)] hover:shadow-[6px_6px_0px_0px_rgba(242,187,5,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%231f1f1f%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:24px_24px] bg-[right_1rem_center] bg-no-repeat pr-12"
+              className="w-full px-3 py-2 md:px-3 md:py-2 border-3 md:border-3 border-midnight bg-cream text-midnight font-inter font-bold text-sm md:text-sm focus:outline-none focus:border-electric focus:ring-3 md:focus:ring-4 focus:ring-electric/30 transition-all cursor-pointer hover:bg-electric/5 hover:border-electric shadow-[4px_4px_0px_0px_rgba(31,31,31,1)] hover:shadow-[6px_6px_0px_0px_rgba(242,187,5,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%231f1f1f%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:24px_24px] bg-[right_1rem_center] bg-no-repeat pr-12"
               aria-describedby={errors.heardFrom ? 'heardFrom-error' : undefined}
             >
               <option value="">-- Select an option --</option>

@@ -16,18 +16,18 @@ export default function StepBasicInfo({ register, errors }: StepBasicInfoProps) 
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -20 }}
       transition={{ duration: 0.3 }}
-      className="space-y-4 md:space-y-5"
+      className="space-y-3 md:space-y-3"
     >
       {/* Name */}
       <div>
-        <label htmlFor="name" className="block text-midnight font-inter font-semibold mb-2 text-xs uppercase tracking-wider">
+        <label htmlFor="name" className="block text-midnight font-inter font-semibold mb-1 text-xs uppercase tracking-wider">
           Full Name *
         </label>
         <input
           id="name"
           type="text"
           {...register('name')}
-          className="w-full px-4 py-2 md:px-4 md:py-3 border-2 md:border-3 border-midnight bg-cream text-midnight font-inter text-base md:text-sm focus:outline-none focus:border-electric focus:ring-2 md:focus:ring-3 focus:ring-electric/20 transition-all"
+          className="w-full px-3 py-2 md:px-3 md:py-2 border-2 md:border-3 border-midnight bg-cream text-midnight font-inter text-sm md:text-sm focus:outline-none focus:border-electric focus:ring-2 md:focus:ring-3 focus:ring-electric/20 transition-all"
           placeholder="Vincent Wijaya"
           aria-describedby={errors.name ? 'name-error' : undefined}
         />
@@ -45,14 +45,14 @@ export default function StepBasicInfo({ register, errors }: StepBasicInfoProps) 
 
       {/* Instagram */}
       <div>
-        <label htmlFor="instagram" className="block text-midnight font-inter font-semibold mb-2 text-xs uppercase tracking-wider">
+        <label htmlFor="instagram" className="block text-midnight font-inter font-semibold mb-1 text-xs uppercase tracking-wider">
           Instagram Username *
         </label>
         <input
           id="instagram"
           type="text"
           {...register('instagram')}
-          className="w-full px-4 py-3 md:px-4 md:py-3 border-2 md:border-3 border-midnight bg-cream text-midnight font-inter text-base md:text-sm focus:outline-none focus:border-electric focus:ring-2 md:focus:ring-3 focus:ring-electric/20 transition-all"
+          className="w-full px-3 py-2 md:px-3 md:py-2 border-2 md:border-3 border-midnight bg-cream text-midnight font-inter text-sm md:text-sm focus:outline-none focus:border-electric focus:ring-2 md:focus:ring-3 focus:ring-electric/20 transition-all"
           placeholder="@username or username"
           aria-describedby={errors.instagram ? 'instagram-error' : undefined}
         />
@@ -70,14 +70,14 @@ export default function StepBasicInfo({ register, errors }: StepBasicInfoProps) 
 
       {/* Phone Number */}
       <div>
-        <label htmlFor="phonenumber" className="block text-midnight font-inter font-semibold mb-2 text-xs uppercase tracking-wider">
+        <label htmlFor="phonenumber" className="block text-midnight font-inter font-semibold mb-1 text-xs uppercase tracking-wider">
           Phone Number *
         </label>
         <input
           id="phonenumber"
           type="tel"
           {...register('phonenumber')}
-          className="w-full px-4 py-3 md:px-4 md:py-3 border-2 md:border-3 border-midnight bg-cream text-midnight font-inter text-base md:text-sm focus:outline-none focus:border-electric focus:ring-2 md:focus:ring-3 focus:ring-electric/20 transition-all"
+          className="w-full px-3 py-2 md:px-3 md:py-2 border-2 md:border-3 border-midnight bg-cream text-midnight font-inter text-sm md:text-sm focus:outline-none focus:border-electric focus:ring-2 md:focus:ring-3 focus:ring-electric/20 transition-all"
           placeholder="0812345678"
           aria-describedby={errors.phonenumber ? 'phonenumber-error' : undefined}
         />
