@@ -3,10 +3,12 @@
 import { useRef, useState } from 'react';
 import ModernHero from './components/Hero/ModernHero';
 import SimpleModernLedger from './components/FormLedger/SimpleModernLedger';
+import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 
 export default function Home() {
   const formRef = useRef<HTMLDivElement>(null);
   const [showForm, setShowForm] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const scrollToForm = () => {
     setShowForm(true);
@@ -37,9 +39,16 @@ export default function Home() {
   };
 
   return (
-    <main className="relative">
-      {/* Mobile: Stacked Layout */}
-      <div className="md:hidden bg-cream">
+    <>
+      {/* Loading Screen */}
+      {isLoading && (
+        <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />
+      )}
+
+      {/* Main Content */}
+      <main className={`relative ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-1000 ease-out`}>
+        {/* Mobile: Stacked Layout */}
+        <div className="md:hidden bg-cream">
         {/* Hero Section */}
         <section id="hero">
           <ModernHero onRegisterClick={scrollToForm} />
@@ -70,9 +79,9 @@ export default function Home() {
           className="flex-1 overflow-hidden flex items-center justify-center"
           style={{
             backgroundImage: 'url(/assets/BAGROUND.png)',
-            backgroundSize: '500px auto',
-            backgroundPosition: 'left top',
-            backgroundRepeat: 'repeat'
+            backgroundSize: '500px 100vh',
+            backgroundPosition: 'left center',
+            backgroundRepeat: 'repeat-x'
           }}
         >
           <div className="w-full max-w-4xl px-8">
@@ -80,6 +89,7 @@ export default function Home() {
           </div>
         </section>
       </div>
-    </main>
+      </main>
+    </>
   );
 }

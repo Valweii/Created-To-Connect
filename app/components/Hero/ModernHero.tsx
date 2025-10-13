@@ -21,9 +21,8 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
       className="relative overflow-hidden bg-cover bg-center bg-no-repeat flex justify-center"
       style={{ 
         backgroundImage: 'url(/assets/BAGROUND.png)',
-        height: '100dvh',
+        height: '10vh',
         minHeight: '100vh',
-        maxHeight: '100dvh'
       }}
     >
       {/* Content container with max-width */}
