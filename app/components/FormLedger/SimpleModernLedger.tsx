@@ -136,10 +136,7 @@ export default function SimpleModernLedger() {
         id="page-content" 
         className="min-h-screen py-8 md:py-12 px-4 relative overflow-hidden flex items-center"
         style={{
-          backgroundColor: !isDesktopOrTablet ? '#FAF3E0' : 'transparent',
-          willChange: 'auto',
-          transform: 'translateZ(0)',
-          backfaceVisibility: 'hidden'
+          backgroundColor: !isDesktopOrTablet ? '#FAF3E0' : 'transparent'
         }}
       >
         {/* Decorative elements */}
@@ -178,12 +175,6 @@ export default function SimpleModernLedger() {
           <motion.div
             layout
             className="bg-cream border-2 md:border-4 border-midnight neo-shadow p-4 md:p-5 lg:p-6 md:max-h-[65vh] md:overflow-y-auto"
-            style={{
-              willChange: 'auto',
-              transform: 'translateZ(0)',
-              backfaceVisibility: 'hidden',
-              perspective: '1000px'
-            }}
           >
             {/* Step title */}
             <motion.div
@@ -205,7 +196,7 @@ export default function SimpleModernLedger() {
             </motion.div>
 
             <form onSubmit={handleSubmit(onSubmit)}>
-              <AnimatePresence mode="wait" initial={false}>
+              <AnimatePresence mode="wait">
                 {currentStep === 1 && (
                   <StepBasicInfo key="step1" register={register} errors={errors} />
                 )}

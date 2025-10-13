@@ -154,28 +154,6 @@ body {
   img {
     contain: layout style paint;
   }
-  
-  /* Form-specific optimizations for tablet */
-  form, input, select, button {
-    will-change: auto;
-    transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-    -webkit-transform: translateZ(0);
-  }
-  
-  /* Prevent flickering on form interactions */
-  input:focus, select:focus, button:focus {
-    will-change: auto;
-    transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-  }
-  
-  /* Optimize motion components */
-  [data-framer-motion] {
-    will-change: auto;
-    transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-  }
 }
 
 /* Reduced motion fallback */
