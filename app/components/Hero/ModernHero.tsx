@@ -9,9 +9,21 @@ interface ModernHeroProps {
 
 export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
   const [mounted, setMounted] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    
+    // Detect tablet for performance optimizations
+    const checkDevice = () => {
+      const width = window.innerWidth;
+      setIsTablet(width >= 768 && width <= 1024);
+    };
+    
+    checkDevice();
+    window.addEventListener('resize', checkDevice);
+    
+    return () => window.removeEventListener('resize', checkDevice);
   }, []);
 
   if (!mounted) return null;
@@ -415,13 +427,18 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* ELEMENT 2 */}
         <motion.div 
           className="absolute will-change-transform"
-          animate={{ 
+          animate={isTablet ? {} : { 
             rotate: [0, 2, -2, 0]
           }}
-          transition={{ 
+          transition={isTablet ? {} : { 
             duration: 10,
             repeat: Infinity,
             ease: "easeInOut"
+          }}
+          style={{
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden',
+            perspective: 1000
           }}
         >
           <img
@@ -438,15 +455,19 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* ELEMENT DOODLE 1 */}
         <motion.div 
           className="absolute will-change-transform"
-          animate={{ 
+          animate={isTablet ? {} : { 
             rotate: [0, 1.5, -1.5, 0],
             y: [0, -5, 0]
           }}
-          transition={{ 
+          transition={isTablet ? {} : { 
             duration: 8.5,
             repeat: Infinity,
             ease: "easeInOut",
             delay: 1.2
+          }}
+          style={{
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden'
           }}
         >
           <img
@@ -463,15 +484,19 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* BRUSH NOISE BIRU MUDA 1 */}
         <motion.div 
           className="absolute will-change-transform"
-          animate={{ 
+          animate={isTablet ? {} : { 
             y: [0, 7, 0],
             x: [0, -4, 0]
           }}
-          transition={{ 
+          transition={isTablet ? {} : { 
             duration: 9,
             repeat: Infinity,
             ease: "easeInOut",
             delay: 0.3
+          }}
+          style={{
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden'
           }}
         >
           <img
@@ -503,14 +528,18 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* SHAPE BIRU TUA */}
         <motion.div 
           className="absolute animate-optimized"
-          animate={{ 
+          animate={isTablet ? {} : { 
             scale: [1, 1.04, 1]
           }}
-          transition={{ 
+          transition={isTablet ? {} : { 
             duration: 6,
             repeat: Infinity,
             ease: "easeInOut",
             delay: 0.8
+          }}
+          style={{
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden'
           }}
         >
           <img
@@ -527,14 +556,18 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* SHAPE BIRU GRAD */}
         <motion.div 
           className="absolute animate-optimized"
-          animate={{ 
+          animate={isTablet ? {} : { 
             scale: [1, 1.06, 1]
           }}
-          transition={{ 
+          transition={isTablet ? {} : { 
             duration: 7,
             repeat: Infinity,
             ease: "easeInOut",
             delay: 1.5
+          }}
+          style={{
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden'
           }}
         >
           <img
@@ -577,14 +610,18 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* ELEMENT 3 - Right positioned - Desktop only animation */}
         <motion.div 
           className="absolute right-0 top-[-60%] z-[1] will-change-transform"
-          animate={{ 
+          animate={isTablet ? {} : { 
             rotate: [0, -2, 2, 0]
           }}
-          transition={{ 
+          transition={isTablet ? {} : { 
             duration: 11,
             repeat: Infinity,
             ease: "easeInOut",
             delay: 0.7
+          }}
+          style={{
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden'
           }}
           data-tablet-optimize="true"
         >
@@ -612,13 +649,17 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* OVERLAY AUDIO - Right positioned - Desktop only animation */}
         <motion.div 
           className="absolute right-0 top-[-50%] z-[2] will-change-transform"
-          animate={{ 
+          animate={isTablet ? {} : { 
             rotate: [0, 3, -3, 0]
           }}
-          transition={{ 
+          transition={isTablet ? {} : { 
             duration: 4,
             repeat: Infinity,
             ease: "easeInOut"
+          }}
+          style={{
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden'
           }}
           data-tablet-optimize="true"
         >
@@ -633,14 +674,18 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* BRUSH NOISE BIRU MUDA 2 - Right positioned - Simplified for tablet */}
         <motion.div 
           className="absolute right-0 top-[-70%] z-[1] will-change-transform"
-          animate={{ 
+          animate={isTablet ? {} : { 
             y: [0, -9, 0]
           }}
-          transition={{ 
+          transition={isTablet ? {} : { 
             duration: 7.5,
             repeat: Infinity,
             ease: "easeInOut",
             delay: 1.5
+          }}
+          style={{
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden'
           }}
         >
           <img
@@ -654,14 +699,18 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* BRUSH NOISE ORANGE - Right positioned - Simplified for tablet */}
         <motion.div 
           className="absolute right-0 top-[-60%] z-[1] will-change-transform"
-          animate={{ 
+          animate={isTablet ? {} : { 
             y: [0, 10, 0]
           }}
-          transition={{ 
+          transition={isTablet ? {} : { 
             duration: 7,
             repeat: Infinity,
             ease: "easeInOut",
             delay: 0.5
+          }}
+          style={{
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden'
           }}
         >
           <img
