@@ -8,24 +8,28 @@ import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 export default function Home() {
   const formRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [showForm, setShowForm] = useState(false);
 
   const scrollToForm = () => {
-    // On mobile, scroll to form section
+    // On mobile, show form and scroll to it
     if (window.innerWidth < 768) {
-      if (formRef.current) {
-        // Use scrollIntoView for more reliable scrolling
-        formRef.current.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'start',
-          inline: 'nearest'
-        });
-        
-        // Focus on first input after scroll completes
-        setTimeout(() => {
-          const firstInput = formRef.current?.querySelector('input');
-          firstInput?.focus();
-        }, 1000);
-      }
+      setShowForm(true);
+      // Wait for form to render, then scroll
+      setTimeout(() => {
+        if (formRef.current) {
+          formRef.current.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start',
+            inline: 'nearest'
+          });
+          
+          // Focus on first input after scroll completes
+          setTimeout(() => {
+            const firstInput = formRef.current?.querySelector('input');
+            firstInput?.focus();
+          }, 1000);
+        }
+      }, 100);
     } else {
       // On desktop/tablet, just focus on the form
       setTimeout(() => {
@@ -52,9 +56,11 @@ export default function Home() {
         </section>
 
         {/* Registration Form Section */}
-        <section ref={formRef} id="registration" className="bg-cream">
-          <SimpleModernLedger />
-        </section>
+        {showForm && (
+          <section ref={formRef} id="registration" className="bg-cream">
+            <SimpleModernLedger />
+          </section>
+        )}
       </div>
 
       {/* Desktop/Tablet: Side by Side Layout */}
