@@ -325,22 +325,22 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         </div>
 
         {/* JESUS with complex visual effects */}
-        <div className="absolute -z-10 opacity-30">
+        <div className="absolute bottom-0 -z-10 opacity-30">
           {/* Base halftone background */}
               <div className="relative">
             {/* Halftone pattern background */}
-            <div 
+            {/* <div 
               className="absolute inset-0 opacity-30"
               style={{
                 backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,0,0,0.8) 1px, transparent 0)`,
                 backgroundSize: '8px 8px'
               }}
-            />
+            /> */}
             
             {/* Graffiti layer with blend mode */}
-            {/* <div className="relative mix-blend-overlay">
+            <div className="relative mix-blend-overlay">
               <img
-                src="/assets/JESUS.png"
+                src="/assets/JESUS REVISI.png"
                 alt="Jesus"
                 className="w-full h-auto"
                 decoding="async"
@@ -349,34 +349,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
                   mixBlendMode: 'overlay'
                 }}
               />
-              </div> */}
-            
-            {/* Blurred colored glow layer */}
-            <div 
-              className="absolute inset-0 mix-blend-screen opacity-60"
-              style={{
-                filter: 'blur(20px) brightness(1.5) saturate(1.8)',
-                background: 'linear-gradient(45deg, rgba(0,100,255,0.6), rgba(255,100,0,0.4), rgba(255,255,0,0.3))'
-              }}
-            />
-            
-            {/* Duplicate layer for enhanced glow */}
-            <div 
-              className="absolute inset-0 mix-blend-screen opacity-40"
-              style={{
-                filter: 'blur(40px) brightness(2) saturate(2)',
-                background: 'radial-gradient(ellipse at center, rgba(0,150,255,0.8) 0%, rgba(255,150,0,0.6) 50%, transparent 100%)'
-              }}
-            />
-            
-            {/* Soft vertical mask for top fade */}
-            <div 
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                maskImage: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 20%, rgba(0,0,0,1) 40%, rgba(0,0,0,1) 100%)',
-                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 20%, rgba(0,0,0,1) 40%, rgba(0,0,0,1) 100%)'
-              }}
-            />
+              </div>
               </div>
             </div>
           </div>
