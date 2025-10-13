@@ -7,35 +7,31 @@ import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 
 export default function Home() {
   const formRef = useRef<HTMLDivElement>(null);
-  const [showForm, setShowForm] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   const scrollToForm = () => {
-    setShowForm(true);
-    setTimeout(() => {
-      // On mobile, scroll to form section
-      if (window.innerWidth < 768) {
-        if (formRef.current) {
-          const yOffset = 0;
-          const element = formRef.current;
-          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          
-          window.scrollTo({ top: y, behavior: 'smooth' });
-          
-          // Focus on first input after scroll completes
-          setTimeout(() => {
-            const firstInput = formRef.current?.querySelector('input');
-            firstInput?.focus();
-          }, 800);
-        }
-      } else {
-        // On desktop/tablet, just focus on the form
+    // On mobile, scroll to form section
+    if (window.innerWidth < 768) {
+      if (formRef.current) {
+        const yOffset = 0;
+        const element = formRef.current;
+        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        
+        window.scrollTo({ top: y, behavior: 'smooth' });
+        
+        // Focus on first input after scroll completes
         setTimeout(() => {
           const firstInput = formRef.current?.querySelector('input');
           firstInput?.focus();
-        }, 100);
+        }, 800);
       }
-    }, 100);
+    } else {
+      // On desktop/tablet, just focus on the form
+      setTimeout(() => {
+        const firstInput = formRef.current?.querySelector('input');
+        firstInput?.focus();
+      }, 100);
+    }
   };
 
   return (
@@ -55,11 +51,9 @@ export default function Home() {
         </section>
 
         {/* Registration Form Section */}
-        {showForm && (
-          <section ref={formRef} id="registration" className="bg-cream">
-            <SimpleModernLedger />
-          </section>
-        )}
+        <section ref={formRef} id="registration" className="bg-cream">
+          <SimpleModernLedger />
+        </section>
       </div>
 
       {/* Desktop/Tablet: Side by Side Layout */}
