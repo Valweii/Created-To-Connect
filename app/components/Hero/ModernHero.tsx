@@ -47,12 +47,13 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
             src="/assets/BRUSH NOISE BIRU.png"
             alt="Brush stroke"
             className="opacity-80"
+            decoding="async"
           />
         </motion.div>
 
         {/* BRUSH NOISE ORANGE - Hidden on desktop/tablet, shown on mobile */}
         <motion.div 
-          className="absolute md:hidden"
+          className="absolute md:hidden will-change-transform"
           animate={{ 
             y: [0, 10, 0],
             rotate: [0, -1, 0]
@@ -68,19 +69,19 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
             src="/assets/BRUSH NOISE ORANGE.png"
             alt="Brush stroke"
             className="opacity-80"
+            decoding="async"
           />
         </motion.div>
 
         {/* BRUSH NOISE YELLOW */}
-        <motion.div 
-          className="absolute"
-        >
+        <div className="absolute">
           <img
             src="/assets/BRUSH NOISE YELLOW.png"
             alt="Brush stroke"
             className="opacity-80"
+            decoding="async"
           />
-        </motion.div>
+        </div>
 
         {/* BRUSH NOISE BIRU MUDA 1 */}
         <motion.div 
@@ -100,12 +101,13 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
             src="/assets/BRUSH NOISE BIRU MUDA 1.png"
             alt="Brush stroke"
             className="opacity-80"
+            decoding="async"
           />
         </motion.div>
 
         {/* BRUSH NOISE BIRU MUDA 2 - Hidden on desktop/tablet, shown on mobile */}
         <motion.div 
-          className="absolute md:hidden"
+          className="absolute md:hidden will-change-transform"
           animate={{ 
             y: [0, -9, 0],
             rotate: [0, 0.5, 0]
@@ -121,6 +123,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
             src="/assets/BRUSH NOISE BIRU MUDA 2.png"
             alt="Brush stroke"
             className="opacity-70"
+            decoding="async"
           />
         </motion.div>
 
@@ -129,6 +132,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/CREATED ATAS.png"
             alt="Created Atas"
+            decoding="async"
           />
         </div>
 
@@ -137,6 +141,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/CG.png"
             alt="CG"
+            decoding="async"
           />
         </div>
 
@@ -145,6 +150,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/CREATED BAWAH.png"
             alt="Created Bawah"
+            decoding="async"
           />
         </div>
 
@@ -164,12 +170,13 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/ELEMENT 2.png"
             alt="Element 2"
+            decoding="async"
           />
         </motion.div>
 
         {/* ELEMENT 3 - Hidden on desktop/tablet, shown on mobile */}
         <motion.div 
-          className="absolute md:hidden"
+          className="absolute md:hidden will-change-transform"
           animate={{ 
             rotate: [0, -2, 2, 0],
             scale: [1, 1.03, 1]
@@ -184,6 +191,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/ELEMENT 3.png"
             alt="Element 3"
+            decoding="async"
           />
         </motion.div>
 
@@ -204,15 +212,15 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/ELEMENT DOODLE 1.png"
             alt="Element Doodle 1"
+            decoding="async"
           />
         </motion.div>
 
         {/* SHAPE OREN - Hidden on desktop/tablet, shown on mobile */}
         <motion.div 
-          className="absolute md:hidden"
+          className="absolute md:hidden will-change-transform"
           animate={{ 
-            scale: [1, 1.05, 1],
-            opacity: [0.8, 1, 0.8]
+            scale: [1, 1.05, 1]
           }}
           transition={{ 
             duration: 5,
@@ -223,6 +231,8 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/SHAPE OREN.png"
             alt="Shape Oren"
+            decoding="async"
+            style={{ opacity: 0.9 }}
           />
         </motion.div>
 
@@ -230,8 +240,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         <motion.div 
           className="absolute animate-optimized"
           animate={{ 
-            scale: [1, 1.04, 1],
-            opacity: [0.9, 1, 0.9]
+            scale: [1, 1.04, 1]
           }}
           transition={{ 
             duration: 6,
@@ -243,6 +252,8 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/SHAPE BIRU TUA.png"
             alt="Shape Biru Tua"
+            decoding="async"
+            style={{ opacity: 0.95 }}
           />
         </motion.div>
 
@@ -250,8 +261,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         <motion.div 
           className="absolute animate-optimized"
           animate={{ 
-            scale: [1, 1.06, 1],
-            opacity: [0.85, 1, 0.85]
+            scale: [1, 1.06, 1]
           }}
           transition={{ 
             duration: 7,
@@ -263,12 +273,14 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/SHAPE BIRU GRAD.png"
             alt="Shape Biru Grad"
+            decoding="async"
+            style={{ opacity: 0.9 }}
           />
         </motion.div>
 
         {/* OVERLAY AUDIO - Hidden on desktop/tablet, shown on mobile */}
         <motion.div 
-          className="absolute z-[2] md:hidden"
+          className="absolute z-[2] md:hidden will-change-transform"
           animate={{ 
             scale: [1, 1.08, 1],
             rotate: [0, 3, -3, 0]
@@ -282,6 +294,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/OVERLAY AUDIO.png"
             alt="Overlay Audio"
+            decoding="async"
           />
         </motion.div>
 
@@ -291,6 +304,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/INFO 1 DETAIL/TRANSPARANT HITAM 2.png"
             alt="Transparant Hitam 2"
+            decoding="async"
           />
         </div>
 
@@ -299,6 +313,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/INFO 1 DETAIL/THU.png"
             alt="THU"
+            decoding="async"
           />
         </div>
 
@@ -307,6 +322,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/INFO 1 DETAIL/20 NOVEMBER 2025.png"
             alt="20 November 2025"
+            decoding="async"
           />
         </div>
 
@@ -329,6 +345,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
                 src="/assets/JESUS.png"
                 alt="Jesus"
                 className="w-full h-auto"
+                decoding="async"
                 style={{
                   filter: 'contrast(1.2) saturate(1.3) brightness(0.9)',
                   mixBlendMode: 'overlay'
@@ -384,6 +401,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/LOGO.png"
             alt="Logo"
+            decoding="async"
           />
         </motion.div>
       </div>
@@ -426,11 +444,12 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
       {/* Right-side decorative elements for desktop/tablet */}
       <div className="hidden md:block pointer-events-none">
         {/* CREATED ATAS - Right positioned - Static for performance */}
-        <div className="fixed top-0 right-0 z-[1] animate-optimized">
+        <div className="fixed top-0 right-0 z-[1]">
           <img
             src="/assets/CREATED ATAS.png"
             alt="Created Atas"
             className="w-full h-auto"
+            decoding="async"
           />
         </div>
 
@@ -451,32 +470,27 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
           <img
             src="/assets/ELEMENT 3.png"
             alt="Element 3"
-            className="w-full h-auto lg:animate-optimized"
+            className="w-full h-auto"
+            decoding="async"
           />
         </motion.div>
 
-        {/* SHAPE OREN - Right positioned - Simplified for tablet */}
-        <motion.div 
-          className="fixed right-0 top-[-60%] z-[1] will-change-opacity"
-          animate={{ 
-            opacity: [0.8, 1, 0.8]
-          }}
-          transition={{ 
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
+        {/* SHAPE OREN - Right positioned - Static opacity for tablet stability */}
+        <div 
+          className="fixed right-0 top-[-60%] z-[1]"
+          style={{ opacity: 0.9 }}
         >
           <img
             src="/assets/SHAPE OREN.png"
             alt="Shape Oren"
             className="w-full h-auto"
+            decoding="async"
           />
-        </motion.div>
+        </div>
 
         {/* OVERLAY AUDIO - Right positioned - Desktop only animation */}
         <motion.div 
-          className="fixed right-0 top-[-50%] z-[2] will-change-transform lg:animate-optimized"
+          className="fixed right-0 top-[-50%] z-[2] will-change-transform"
           animate={{ 
             rotate: [0, 3, -3, 0]
           }}
@@ -491,6 +505,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
             src="/assets/OVERLAY AUDIO.png"
             alt="Overlay Audio"
             className="w-full h-auto"
+            decoding="async"
           />
         </motion.div>
 
@@ -511,6 +526,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
             src="/assets/BRUSH NOISE BIRU MUDA 2.png"
             alt="Brush stroke"
             className="opacity-70 w-full h-auto"
+            decoding="async"
           />
         </motion.div>
 
@@ -531,6 +547,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
             src="/assets/BRUSH NOISE ORANGE.png"
             alt="Brush stroke"
             className="opacity-80 w-full h-auto"
+            decoding="async"
           />
         </motion.div>
       </div>

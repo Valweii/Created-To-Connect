@@ -91,10 +91,18 @@ body {
   }
   
   .animate-optimized {
-    will-change: transform, opacity;
+    will-change: transform;
     transform: translateZ(0);
     backface-visibility: hidden;
     perspective: 1000px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Prevent image reflow and optimize decoding */
+  img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
   }
 }
 
@@ -107,6 +115,20 @@ body {
   /* Simplify transform animations on tablets */
   [data-tablet-optimize="true"] {
     animation-duration: 0s !important;
+  }
+  
+  /* Force GPU acceleration and prevent repaint on tablets */
+  .will-change-transform,
+  .will-change-opacity,
+  .animate-optimized {
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  
+  /* Prevent layout shifts on tablet */
+  img {
+    contain: layout style paint;
   }
 }
 
