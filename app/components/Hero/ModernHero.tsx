@@ -5,14 +5,33 @@ import { useEffect, useState } from 'react';
 
 interface ModernHeroProps {
   onRegisterClick: () => void;
+  hasExistingTickets?: boolean;
 }
 
-export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
+export default function ModernHero({ onRegisterClick, hasExistingTickets = false }: ModernHeroProps) {
   const [mounted, setMounted] = useState(false);
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const handleRegisterClick = () => {
+    if (hasExistingTickets) {
+      setShowConfirmDialog(true);
+    } else {
+      onRegisterClick();
+    }
+  };
+
+  const handleConfirmYes = () => {
+    setShowConfirmDialog(false);
+    onRegisterClick();
+  };
+
+  const handleConfirmNo = () => {
+    setShowConfirmDialog(false);
+  };
 
   if (!mounted) return null;
 
@@ -355,7 +374,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
         {/* Register Button - Sticky to bottom */}
         <div className="absolute bottom-40 left-0 right-0 z-10 flex justify-center pt-4">
           <motion.button
-            onClick={onRegisterClick}
+            onClick={handleRegisterClick}
             className="group relative w-full max-w-xs py-2 bg-sunshine text-midnight font-bebas text-sm tracking-wider neo-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200 overflow-hidden"
             animate={{ 
               scale: [1, 1.03, 1]
@@ -373,7 +392,7 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
             }}
           >
             <span className="relative z-10 flex items-center justify-center gap-1">
-              REGISTER NOW
+              REGISTER
               <motion.span 
                 className="inline-block"
                 animate={{ x: [0, 3, 0] }}
@@ -393,6 +412,47 @@ export default function ModernHero({ onRegisterClick }: ModernHeroProps) {
             <div className="absolute inset-0 bg-flame opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </motion.button>
         </div>
+
+
+        {/* Confirmation Dialog */}
+        {showConfirmDialog && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+            onClick={handleConfirmNo}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-cream border-4 border-midnight neo-shadow p-6 max-w-sm w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h3 className="font-bebas text-2xl text-midnight mb-4 text-center">
+                Register Another Person?
+              </h3>
+              <p className="font-inter text-midnight/70 mb-6 text-center">
+                Do you want to register another person for the event?
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={handleConfirmNo}
+                  className="flex-1 px-4 py-2 border-3 border-midnight text-midnight font-bebas text-sm tracking-wider hover:bg-midnight hover:text-cream transition-all"
+                >
+                  NO
+                </button>
+                <button
+                  onClick={handleConfirmYes}
+                  className="flex-1 px-4 py-2 bg-midnight text-cream font-bebas text-sm tracking-wider neo-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
+                >
+                  YES
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
       </div>
     </div>
   );

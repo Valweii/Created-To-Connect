@@ -9,8 +9,13 @@ import StepBasicInfo from './StepBasicInfo';
 import StepCGInfo from './StepCGInfo';
 import ModernConfirmation from './ModernConfirmation';
 import SubmitBlackHole from '../SubmitBlackHole/SubmitBlackHole';
+import { ticketStorage } from '../../../lib/ticketStorage';
 
-export default function SimpleModernLedger() {
+interface SimpleModernLedgerProps {
+  onRegistrationComplete?: () => void;
+}
+
+export default function SimpleModernLedger({ onRegistrationComplete }: SimpleModernLedgerProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showBlackHole, setShowBlackHole] = useState(false);
@@ -76,6 +81,23 @@ export default function SimpleModernLedger() {
       if (response.ok) {
         // Store the result, black hole will handle the timing
         setTicketData(result);
+        
+        // Save ticket to localStorage
+        ticketStorage.saveTicket({
+          ticketId: result.ticketId,
+          qrUrl: result.qrUrl,
+          name: data.name,
+          registrationData: {
+            instagram: data.instagram,
+            phonenumber: data.phonenumber,
+            isCGMember: data.isCGMember,
+            cgNumber: data.cgNumber,
+            heardFrom: data.heardFrom,
+          }
+        });
+        
+        // Notify parent component
+        onRegistrationComplete?.();
       } else {
         // On error, revert black-hole and show error
         setShowBlackHole(false);
@@ -105,7 +127,30 @@ export default function SimpleModernLedger() {
   };
 
   if (ticketData && !showBlackHole) {
-    return <ModernConfirmation ticketId={ticketData.ticketId} qrUrl={ticketData.qrUrl} />;
+    // Check if user has multiple tickets
+    const allTickets = ticketStorage.getAllTickets();
+    if (allTickets.length > 1) {
+      // Show carousel for multiple tickets
+      return (
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="font-bebas text-4xl text-midnight mb-4">Registration Complete!</h1>
+            <p className="font-inter text-midnight/70 mb-6">
+              You now have {allTickets.length} tickets. Please refresh the page to view all your tickets.
+            </p>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-6 py-3 bg-midnight text-cream font-bebas text-lg tracking-wider neo-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
+            >
+              VIEW ALL TICKETS
+            </button>
+          </div>
+        </div>
+      );
+    } else {
+      // Show single ticket confirmation
+      return <ModernConfirmation ticketId={ticketData.ticketId} qrUrl={ticketData.qrUrl} onRegisterAnother={() => window.location.reload()} />;
+    }
   }
 
   const stepColors = ['bg-flame', 'bg-sunshine'];

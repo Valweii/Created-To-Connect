@@ -8,9 +8,10 @@ import html2canvas from 'html2canvas';
 interface ModernConfirmationProps {
   ticketId: string;
   qrUrl: string;
+  onRegisterAnother?: () => void;
 }
 
-export default function ModernConfirmation({ ticketId, qrUrl }: ModernConfirmationProps) {
+export default function ModernConfirmation({ ticketId, qrUrl, onRegisterAnother }: ModernConfirmationProps) {
   const ticketRef = useRef<HTMLDivElement>(null);
 
   const downloadTicket = async () => {
@@ -166,6 +167,17 @@ export default function ModernConfirmation({ ticketId, qrUrl }: ModernConfirmati
             >
               SAVED TO GALLERY
             </motion.button>
+
+            {onRegisterAnother && (
+              <motion.button
+                onClick={onRegisterAnother}
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full px-8 py-5 bg-sunshine text-midnight font-bebas text-2xl tracking-wider neo-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
+              >
+                REGISTER ANOTHER PERSON
+              </motion.button>
+            )}
 
             <button
               onClick={() => window.location.href = '/'}

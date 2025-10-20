@@ -1,15 +1,47 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import ModernHero from './components/Hero/ModernHero';
 import SimpleModernLedger from './components/FormLedger/SimpleModernLedger';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
+import TicketCarousel from './components/FormLedger/TicketCarousel';
+import { ticketStorage } from '../lib/ticketStorage';
 
 export default function Home() {
   const formRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [hasExistingTickets, setHasExistingTickets] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+
+  // Check for existing tickets on mount
+  useEffect(() => {
+    const existingTickets = ticketStorage.hasExistingTickets();
+    setHasExistingTickets(existingTickets);
+  }, []);
 
   const scrollToForm = () => {
+    // Show form if we're currently showing tickets
+    if (hasExistingTickets && !showForm) {
+      setShowForm(true);
+      // Scroll to form after state update
+      setTimeout(() => {
+        if (formRef.current) {
+          formRef.current.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start',
+            inline: 'nearest'
+          });
+          
+          // Focus on first input after scroll completes
+          setTimeout(() => {
+            const firstInput = formRef.current?.querySelector('input');
+            firstInput?.focus();
+          }, 1000);
+        }
+      }, 100);
+      return;
+    }
+    
     // Scroll to form and focus on first input
     if (formRef.current) {
       formRef.current.scrollIntoView({ 
@@ -24,6 +56,11 @@ export default function Home() {
         firstInput?.focus();
       }, 1000);
     }
+  };
+
+  const handleBackToHome = () => {
+    // Reset to tickets view
+    setShowForm(false);
   };
 
   return (
@@ -52,18 +89,25 @@ export default function Home() {
 
       {/* Main Content */}
       <main className={`relative ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-1000 ease-out`}>
-        {/* Stacked Layout for All Screen Sizes */}
-        <div>
-          {/* Hero Section */}
-          <section id="hero">
-            <ModernHero onRegisterClick={scrollToForm} />
-          </section>
+        {/* Hero Section - Always visible */}
+        <section id="hero">
+          <ModernHero 
+            onRegisterClick={scrollToForm} 
+            hasExistingTickets={hasExistingTickets}
+          />
+        </section>
 
-          {/* Registration Form Section */}
+        {/* Conditional Content Section */}
+        {hasExistingTickets && !showForm ? (
+          <TicketCarousel onBackToHome={handleBackToHome} onRegisterAnother={scrollToForm} />
+        ) : (
           <section ref={formRef} id="registration">
-            <SimpleModernLedger />
+            <SimpleModernLedger onRegistrationComplete={() => {
+              setHasExistingTickets(true);
+              setShowForm(false);
+            }} />
           </section>
-        </div>
+        )}
       </main>
     </>
   );
