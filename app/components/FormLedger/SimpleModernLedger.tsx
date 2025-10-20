@@ -51,6 +51,12 @@ export default function SimpleModernLedger() {
   };
 
   const onSubmit = async (data: RegistrationFormData) => {
+    // Prevent multiple submissions
+    if (isSubmitting || showBlackHole) {
+      console.log('🚫 Submission already in progress, ignoring...');
+      return;
+    }
+    
     console.log('🚀 SUBMIT TRIGGERED!', data);
     setIsSubmitting(true);
     
@@ -68,11 +74,8 @@ export default function SimpleModernLedger() {
       const result = await response.json();
       
       if (response.ok) {
-        // Wait for black-hole animation to complete before showing confirmation
-        setTimeout(() => {
-          setTicketData(result);
-          setShowBlackHole(false);
-        }, 4000); // Show montage for 4s before transitioning
+        // Store the result, black hole will handle the timing
+        setTicketData(result);
       } else {
         // On error, revert black-hole and show error
         setShowBlackHole(false);
@@ -88,7 +91,10 @@ export default function SimpleModernLedger() {
   };
 
   const handleBlackHoleComplete = () => {
-    // Called when montage finishes
+    // Called when progress bar reaches 100%
+    console.log('🎉 Black hole animation completed, showing ticket...');
+    setShowBlackHole(false);
+    setIsSubmitting(false);
   };
 
   const handleBlackHoleCancel = () => {
@@ -110,22 +116,16 @@ export default function SimpleModernLedger() {
       {/* Black-hole submit animation overlay */}
       <SubmitBlackHole
         isActive={showBlackHole}
-        videoAssets={[
-          '/assets/dummy-montage.mp4',
-        ]}
-        videoPoster="/assets/dummy-poster.jpg"
         message="We'll be waiting for you"
         pageContentSelector="#page-content"
+        duration={4000}
         onComplete={handleBlackHoleComplete}
         onCancel={handleBlackHoleCancel}
       />
 
       <div 
         id="page-content" 
-        className="min-h-screen py-8 md:py-12 px-4 relative overflow-hidden flex items-center"
-        style={{
-          backgroundColor: '#FAF3E0'
-        }}
+        className="min-h-screen py-8 px-4 relative overflow-hidden flex items-center"
       >
 
         <div className="relative z-10 max-w-5xl mx-auto w-full">

@@ -60,7 +60,7 @@ export default function Home() {
           </section>
 
           {/* Registration Form Section */}
-          <section ref={formRef} id="registration" className="bg-cream">
+          <section ref={formRef} id="registration">
             <SimpleModernLedger />
           </section>
         </div>

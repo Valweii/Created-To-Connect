@@ -47,35 +47,32 @@ import './SubmitBlackHole.css';
 
 interface SubmitBlackHoleProps {
   isActive: boolean;
-  videoAssets?: string[];
-  videoPoster?: string;
   onComplete?: () => void;
   onCancel?: () => void;
   message?: string;
   pageContentSelector?: string; // CSS selector for page content to animate
+  duration?: number; // Duration in milliseconds for the progress bar
 }
 
 // Animation timing constants (tune these for different feel)
 const SUCK_DURATION = 800; // ms - black-hole suck animation (reduced for smoother performance)
-const REVEAL_DURATION = 600; // ms - video montage reveal
-const CLIP_DURATION = 3000; // ms - time per video clip
-const CROSSFADE_DURATION = 600; // ms - crossfade between clips
+const REVEAL_DURATION = 600; // ms - message reveal
+const DEFAULT_DURATION = 4000; // ms - default progress bar duration
 
 export default function SubmitBlackHole({
   isActive,
-  videoAssets = ['/assets/dummy-montage.mp4'],
-  videoPoster = '/assets/dummy-poster.jpg',
   onComplete,
   onCancel,
   message = "We'll be waiting for you",
   pageContentSelector = 'body > main, body > div', // Target main content
+  duration = DEFAULT_DURATION,
 }: SubmitBlackHoleProps) {
-  const [phase, setPhase] = useState<'idle' | 'sucking' | 'montage'>('idle');
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const [phase, setPhase] = useState<'idle' | 'sucking' | 'waiting'>('idle');
+  const [progress, setProgress] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const pageContentRef = useRef<HTMLElement | null>(null);
   const prefersReducedMotion = useRef(false);
+  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Detect prefers-reduced-motion
   useEffect(() => {
@@ -92,7 +89,14 @@ export default function SubmitBlackHole({
   // Main animation sequence
   useEffect(() => {
     if (!isActive) {
+      console.log('🔄 Black hole deactivated, resetting...');
       setPhase('idle');
+      setProgress(0);
+      // Clear progress interval
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+        progressIntervalRef.current = null;
+      }
       // Remove transform from page content
       if (pageContentRef.current) {
         pageContentRef.current.style.transform = '';
@@ -102,6 +106,8 @@ export default function SubmitBlackHole({
       }
       return;
     }
+
+    console.log('🚀 Black hole activated, starting animation...');
 
     // Find and store page content element
     const pageContent = document.querySelector(pageContentSelector) as HTMLElement;
@@ -130,44 +136,44 @@ export default function SubmitBlackHole({
     }
     
     const suckTimer = setTimeout(() => {
-      // Phase 2: Montage reveal
-      setPhase('montage');
+      // Phase 2: Waiting with progress bar
+      setPhase('waiting');
       
-      // Preload and play first video
-      if (videoRefs.current[0]) {
-        videoRefs.current[0].play().catch(err => {
-          console.warn('Video autoplay failed:', err);
-        });
-      }
+      // Start progress bar animation
+      const startTime = Date.now();
+      const updateProgress = () => {
+        const elapsed = Date.now() - startTime;
+        const progressPercent = Math.min((elapsed / duration) * 100, 100);
+        setProgress(progressPercent);
+        
+        // Only complete when we've actually reached the full duration
+        if (elapsed >= duration) {
+          // Clear the interval to prevent multiple calls
+          if (progressIntervalRef.current) {
+            clearInterval(progressIntervalRef.current);
+            progressIntervalRef.current = null;
+          }
+          console.log('🎯 Black hole progress complete!');
+          onComplete?.();
+        }
+      };
+      
+      // Update progress every 16ms for smooth animation (60fps)
+      progressIntervalRef.current = setInterval(updateProgress, 16);
     }, prefersReducedMotion.current ? 200 : SUCK_DURATION);
 
-    return () => clearTimeout(suckTimer);
-  }, [isActive, pageContentSelector]);
-
-  // Video crossfade rotation
-  useEffect(() => {
-    if (phase !== 'montage' || videoAssets.length <= 1) return;
-
-    const interval = setInterval(() => {
-      setCurrentVideoIndex((prev) => {
-        const nextIndex = (prev + 1) % videoAssets.length;
-        
-        // Preload and play next video
-        if (videoRefs.current[nextIndex]) {
-          videoRefs.current[nextIndex]!.currentTime = 0;
-          videoRefs.current[nextIndex]!.play().catch(console.warn);
-        }
-        
-        return nextIndex;
-      });
-    }, CLIP_DURATION);
-
-    return () => clearInterval(interval);
-  }, [phase, videoAssets.length]);
+    return () => {
+      clearTimeout(suckTimer);
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+        progressIntervalRef.current = null;
+      }
+    };
+  }, [isActive, pageContentSelector, duration, onComplete]);
 
   // Escape key handler
   const handleEscape = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'Escape' && phase === 'montage') {
+    if (e.key === 'Escape' && phase === 'waiting') {
       onCancel?.();
     }
   }, [phase, onCancel]);
@@ -177,18 +183,16 @@ export default function SubmitBlackHole({
     return () => document.removeEventListener('keydown', handleEscape);
   }, [handleEscape]);
 
-  // Cleanup videos and page transforms on unmount
+  // Cleanup on unmount
   useEffect(() => {
-    const videos = videoRefs.current;
     const pageContent = pageContentRef.current;
     
     return () => {
-      videos.forEach(video => {
-        if (video) {
-          video.pause();
-          video.src = '';
-        }
-      });
+      // Clear progress interval
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+        progressIntervalRef.current = null;
+      }
       
       // Reset page content
       if (pageContent) {
@@ -222,11 +226,11 @@ export default function SubmitBlackHole({
           />
         )}
 
-        {/* Phase 2: Video montage */}
-        {phase === 'montage' && (
+        {/* Phase 2: Waiting with progress bar */}
+        {phase === 'waiting' && (
           <motion.div
-            key="video-montage"
-            className="submit-blackhole-montage"
+            key="waiting-screen"
+            className="submit-blackhole-waiting"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ 
               opacity: 1, 
@@ -242,42 +246,8 @@ export default function SubmitBlackHole({
             }}
             role="dialog"
             aria-live="polite"
-            aria-label="Registration confirmation"
+            aria-label="Registration processing"
           >
-            {/* Video layers with crossfade */}
-            <div className="submit-blackhole-video-container">
-              {videoAssets.map((src, index) => (
-                <motion.video
-                  key={src}
-                  ref={el => { if (el) videoRefs.current[index] = el; }}
-                  className="submit-blackhole-video"
-                  src={src}
-                  poster={videoPoster}
-                  loop
-                  muted
-                  playsInline
-                  preload="metadata"
-                  initial={{ opacity: 0 }}
-                  animate={{ 
-                    opacity: currentVideoIndex === index ? 1 : 0,
-                  }}
-                  transition={{ 
-                    duration: CROSSFADE_DURATION / 1000,
-                    ease: 'easeInOut'
-                  }}
-                  style={{
-                    filter: 'grayscale(100%)',
-                  }}
-                />
-              ))}
-              
-              {/* Subtle grain overlay */}
-              <div className="submit-blackhole-grain" />
-              
-              {/* Vignette */}
-              <div className="submit-blackhole-vignette" />
-            </div>
-
             {/* Message overlay */}
             <motion.div
               className="submit-blackhole-message-container"
@@ -293,17 +263,26 @@ export default function SubmitBlackHole({
                 {message}
               </h1>
               
-              {/* Subtle decorative line */}
-              <motion.div
-                className="submit-blackhole-message-line"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{
-                  delay: REVEAL_DURATION / 1000 + 0.6,
-                  duration: 0.6,
-                  ease: [0.22, 1, 0.36, 1]
-                }}
-              />
+              {/* Progress bar */}
+              <div className="submit-blackhole-progress-container">
+                <div className="submit-blackhole-progress-bar">
+                  <motion.div
+                    className="submit-blackhole-progress-fill"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${progress}%` }}
+                    transition={{ duration: 0.1, ease: 'linear' }}
+                    style={{
+                      width: `${progress}%`,
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      transformOrigin: 'center'
+                    }}
+                  />
+                </div>
+                <div className="submit-blackhole-progress-text">
+                  {Math.round(progress)}%
+                </div>
+              </div>
             </motion.div>
 
             {/* Close button (accessible) */}
@@ -323,7 +302,7 @@ export default function SubmitBlackHole({
 
             {/* Screen reader announcement */}
             <div className="sr-only" role="status" aria-live="polite">
-              Registration submitted successfully. {message}. Press Escape to continue.
+              Registration submitted successfully. {message}. Processing... {Math.round(progress)}% complete. Press Escape to continue.
             </div>
           </motion.div>
         )}

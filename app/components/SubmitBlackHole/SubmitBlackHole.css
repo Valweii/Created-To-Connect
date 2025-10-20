@@ -34,8 +34,8 @@
   pointer-events: none;
 }
 
-/* Phase 2: Video montage container */
-.submit-blackhole-montage {
+/* Phase 2: Waiting screen container */
+.submit-blackhole-waiting {
   position: absolute;
   inset: 0;
   background: #000000;
@@ -45,57 +45,6 @@
   overflow: hidden;
 }
 
-.submit-blackhole-video-container {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.submit-blackhole-video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) translateZ(0);
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: cover;
-  will-change: opacity;
-}
-
-/* Fallback for no autoplay support */
-.submit-blackhole-video::-webkit-media-controls {
-  display: none !important;
-}
-
-.submit-blackhole-video::cue {
-  display: none;
-}
-
-/* Film grain overlay - subtle texture (disabled for performance) */
-.submit-blackhole-grain {
-  position: absolute;
-  inset: 0;
-  /* Grain disabled for better performance */
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Vignette - focus attention to center */
-.submit-blackhole-vignette {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    ellipse at center,
-    transparent 0%,
-    transparent 50%,
-    rgba(0, 0, 0, 0.4) 100%
-  );
-  pointer-events: none;
-}
-
 /* Message overlay */
 .submit-blackhole-message-container {
   position: relative;
@@ -103,6 +52,10 @@
   text-align: center;
   padding: 2rem;
   max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .submit-blackhole-message {
@@ -121,13 +74,47 @@
   will-change: transform, opacity;
 }
 
-.submit-blackhole-message-line {
-  width: 120px;
-  height: 3px;
-  background: #fdfbf1; /* cream */
-  margin: 1.5rem auto 0;
+
+/* Progress bar styles */
+.submit-blackhole-progress-container {
+  margin: 2rem 0 1.5rem;
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.submit-blackhole-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(253, 251, 241, 0.2); /* cream with low opacity */
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.submit-blackhole-progress-fill {
+  height: 100%;
+  background: #fdfbf1; /* solid white/cream */
+  border-radius: 3px;
+  will-change: width;
+  transition: width 0.1s linear;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   transform-origin: center;
-  will-change: transform;
+}
+
+.submit-blackhole-progress-text {
+  text-align: center;
+  font-family: 'Bebas Neue', 'Impact', 'Arial Black', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: #fdfbf1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 /* Close button - minimal, elegant */
@@ -189,20 +176,22 @@
   .submit-blackhole-message-container {
     padding: 1rem;
   }
+  
+  .submit-blackhole-progress-container {
+    max-width: 250px;
+  }
+  
+  .submit-blackhole-progress-text {
+    font-size: 1rem;
+  }
 }
 
 /* Reduced motion fallback */
 @media (prefers-reduced-motion: reduce) {
-  .submit-blackhole-mask,
-  .submit-blackhole-video,
   .submit-blackhole-message,
-  .submit-blackhole-message-line {
+  .submit-blackhole-progress-fill {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
-  }
-  
-  .submit-blackhole-grain {
-    display: none; /* Skip grain animation for reduced motion */
   }
 }
 
@@ -221,10 +210,6 @@
   }
 }
 
-/* Loading state for video */
-.submit-blackhole-video[poster] {
-  background-color: #000000;
-}
 
 /* Prevent scroll when active */
 body:has(.submit-blackhole-root) {
