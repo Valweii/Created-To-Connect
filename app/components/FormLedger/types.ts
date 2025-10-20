@@ -28,7 +28,7 @@ export const registrationSchema = z.object({
 export type RegistrationFormData = z.infer<typeof registrationSchema>;
 
 // CG Numbers list
-export const CG_NUMBERS = ['CG 47', 'CG 61', 'CG 75', 'CG 79', 'CG 88', 'CG 102'] as const;
+export const CG_NUMBERS = ['CG 47 - Diandra', 'CG 61 - Yulius', 'CG 75 - Janice', 'CG 79 - Alvin Liem', 'CG 88 - Cindy', 'CG 102 - Josephine'] as const;
 
 // Heard From options
 export const HEARD_FROM_OPTIONS = [
