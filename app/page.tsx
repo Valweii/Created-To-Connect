@@ -34,8 +34,8 @@ export default function Home() {
       )}
 
       {/* JESUS REVISI - Body level element */}
-      <div className="fixed bottom-0 left-0 right-0 -z-10 opacity-30 md:scale-[1.5] md:origin-bottom pointer-events-none">
-        <div className="relative md:mb-[10rem]">
+      <div className="fixed bottom-0 left-0 right-0 -z-10 opacity-30 pointer-events-none">
+        <div className="relative">
           <div className="relative mix-blend-overlay">
             <img
               src="/assets/JESUS REVISI.webp"
@@ -43,8 +43,6 @@ export default function Home() {
               className="w-full h-auto"
               decoding="async"
               style={{
-                // filter: 'contrast(1.2) saturate(1.3) brightness(0.9)',
-                // mixBlendMode: 'overlay',
                 scale: 1.2,
               }}
             />

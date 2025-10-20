@@ -16,7 +16,7 @@ export default function StepBasicInfo({ register, errors }: StepBasicInfoProps) 
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -20 }}
       transition={{ duration: 0.3 }}
-      className="space-y-3 md:space-y-3"
+      className="space-y-3"
     >
       {/* Name */}
       <div>
@@ -27,7 +27,7 @@ export default function StepBasicInfo({ register, errors }: StepBasicInfoProps) 
           id="name"
           type="text"
           {...register('name')}
-          className="w-full px-3 py-2 md:px-3 md:py-2 border-2 md:border-3 border-midnight bg-cream text-midnight font-inter text-sm md:text-sm focus:outline-none focus:border-electric focus:ring-2 md:focus:ring-3 focus:ring-electric/20 transition-all"
+          className="w-full px-3 py-2 border-2 border-midnight bg-cream text-midnight font-inter text-sm focus:outline-none focus:border-electric focus:ring-2 focus:ring-electric/20 transition-all"
           placeholder="Vincent Wijaya"
           aria-describedby={errors.name ? 'name-error' : undefined}
         />
@@ -36,7 +36,7 @@ export default function StepBasicInfo({ register, errors }: StepBasicInfoProps) 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             id="name-error"
-            className="mt-2 text-xs md:text-sm text-flame font-inter font-medium"
+            className="mt-2 text-xs text-flame font-inter font-medium"
           >
             {errors.name.message}
           </motion.p>
@@ -52,7 +52,7 @@ export default function StepBasicInfo({ register, errors }: StepBasicInfoProps) 
           id="instagram"
           type="text"
           {...register('instagram')}
-          className="w-full px-3 py-2 md:px-3 md:py-2 border-2 md:border-3 border-midnight bg-cream text-midnight font-inter text-sm md:text-sm focus:outline-none focus:border-electric focus:ring-2 md:focus:ring-3 focus:ring-electric/20 transition-all"
+          className="w-full px-3 py-2 border-2 border-midnight bg-cream text-midnight font-inter text-sm focus:outline-none focus:border-electric focus:ring-2 focus:ring-electric/20 transition-all"
           placeholder="@username or username"
           aria-describedby={errors.instagram ? 'instagram-error' : undefined}
         />
@@ -61,7 +61,7 @@ export default function StepBasicInfo({ register, errors }: StepBasicInfoProps) 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             id="instagram-error"
-            className="mt-2 text-xs md:text-sm text-flame font-inter font-medium"
+            className="mt-2 text-xs text-flame font-inter font-medium"
           >
             {errors.instagram.message}
           </motion.p>
@@ -77,7 +77,7 @@ export default function StepBasicInfo({ register, errors }: StepBasicInfoProps) 
           id="phonenumber"
           type="tel"
           {...register('phonenumber')}
-          className="w-full px-3 py-2 md:px-3 md:py-2 border-2 md:border-3 border-midnight bg-cream text-midnight font-inter text-sm md:text-sm focus:outline-none focus:border-electric focus:ring-2 md:focus:ring-3 focus:ring-electric/20 transition-all"
+          className="w-full px-3 py-2 border-2 border-midnight bg-cream text-midnight font-inter text-sm focus:outline-none focus:border-electric focus:ring-2 focus:ring-electric/20 transition-all"
           placeholder="0812345678"
           aria-describedby={errors.phonenumber ? 'phonenumber-error' : undefined}
         />
@@ -86,7 +86,7 @@ export default function StepBasicInfo({ register, errors }: StepBasicInfoProps) 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             id="phonenumber-error"
-            className="mt-2 text-xs md:text-sm text-flame font-inter font-medium"
+            className="mt-2 text-xs text-flame font-inter font-medium"
           >
             {errors.phonenumber.message}
           </motion.p>

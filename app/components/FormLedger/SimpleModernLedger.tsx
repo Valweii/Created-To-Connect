@@ -15,20 +15,6 @@ export default function SimpleModernLedger() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showBlackHole, setShowBlackHole] = useState(false);
   const [ticketData, setTicketData] = useState<{ ticketId: string; qrUrl: string } | null>(null);
-  const [isTablet, setIsTablet] = useState(false);
-
-  useEffect(() => {
-    // Detect tablet for performance optimizations
-    const checkDevice = () => {
-      const width = window.innerWidth;
-      setIsTablet(width >= 768 && width <= 1024);
-    };
-    
-    checkDevice();
-    window.addEventListener('resize', checkDevice);
-    
-    return () => window.removeEventListener('resize', checkDevice);
-  }, []);
 
   const {
     register,
@@ -141,43 +127,37 @@ export default function SimpleModernLedger() {
           backgroundColor: '#FAF3E0'
         }}
       >
-        {/* Decorative elements */}
-        <div className="absolute top-20 right-10 font-bebas text-[8rem] text-midnight/20 pointer-events-none hidden lg:block">
-          REGISTER
-        </div>
 
         <div className="relative z-10 max-w-5xl mx-auto w-full">
           {/* Step indicator */}
           <motion.div
-            initial={isTablet ? {} : { opacity: 0, y: -20 }}
-            animate={isTablet ? {} : { opacity: 1, y: 0 }}
-            className="mb-4 md:mb-5 flex items-center justify-center gap-2 md:gap-3"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-4 flex items-center justify-center gap-2"
             style={{
               transform: 'translateZ(0)',
               backfaceVisibility: 'hidden'
             }}
           >
             {[1, 2].map((step) => (
-              <div key={step} className="flex items-center gap-2 md:gap-3">
+              <div key={step} className="flex items-center gap-2">
                 <motion.div
-                  animate={isTablet ? {
-                    backgroundColor: currentStep >= step ? '#1f1f1f' : '#e0e0e0',
-                  } : {
+                  animate={{
                     scale: currentStep === step ? 1.2 : 1,
                     backgroundColor: currentStep >= step ? '#1f1f1f' : '#e0e0e0',
                   }}
-                  className="w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center"
+                  className="w-6 h-6 rounded-full flex items-center justify-center"
                   style={{
                     transform: 'translateZ(0)',
                     backfaceVisibility: 'hidden'
                   }}
                 >
-                  <span className={`font-bebas text-sm md:text-base ${currentStep >= step ? 'text-cream' : 'text-midnight'}`}>
+                  <span className={`font-bebas text-sm ${currentStep >= step ? 'text-cream' : 'text-midnight'}`}>
                     {step}
                   </span>
                 </motion.div>
                 {step < 2 && (
-                  <div className={`w-6 md:w-8 h-1 ${currentStep > step ? 'bg-midnight' : 'bg-midnight/20'}`} />
+                  <div className={`w-6 h-1 ${currentStep > step ? 'bg-midnight' : 'bg-midnight/20'}`} />
                 )}
               </div>
             ))}
@@ -185,8 +165,8 @@ export default function SimpleModernLedger() {
 
           {/* Form card */}
           <motion.div
-            layout={isTablet ? false : true}
-            className="bg-cream border-2 md:border-4 border-midnight neo-shadow p-4 md:p-5 lg:p-6"
+            layout={true}
+            className="bg-cream border-2 border-midnight neo-shadow p-4"
             style={{
               transform: 'translateZ(0)',
               backfaceVisibility: 'hidden'
@@ -195,21 +175,21 @@ export default function SimpleModernLedger() {
             {/* Step title */}
             <motion.div
               key={`title-${currentStep}`}
-              initial={isTablet ? {} : { opacity: 0, x: -20 }}
-              animate={isTablet ? {} : { opacity: 1, x: 0 }}
-              className="mb-3 md:mb-4"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="mb-3"
               style={{
                 transform: 'translateZ(0)',
                 backfaceVisibility: 'hidden'
               }}
             >
-              <div className={`inline-block px-3 py-1 md:px-3 md:py-1 ${stepBg} mb-1 md:mb-2`}>
-                <h2 className="font-bebas text-xl md:text-lg lg:text-xl text-midnight tracking-wider">
+              <div className={`inline-block px-3 py-1 ${stepBg} mb-1`}>
+                <h2 className="font-bebas text-xl text-midnight tracking-wider">
                   {currentStep === 1 && 'YOUR INFO'}
                   {currentStep === 2 && 'EXTRAS'}
                 </h2>
               </div>
-              <p className="font-inter text-xs md:text-xs text-midnight/60 leading-tight">
+              <p className="font-inter text-xs text-midnight/60 leading-tight">
                 {currentStep === 1 && 'Tell us who you are'}
                 {currentStep === 2 && 'Connect Group membership'}
               </p>
@@ -232,14 +212,14 @@ export default function SimpleModernLedger() {
               </AnimatePresence>
 
               {/* Navigation */}
-              <div className="flex justify-between items-center mt-4 md:mt-5 pt-3 md:pt-4 border-t-2 border-midnight/10">
+              <div className="flex justify-between items-center mt-4 pt-3 border-t-2 border-midnight/10">
                 {currentStep > 1 ? (
                   <motion.button
                     type="button"
                     onClick={prevStep}
-                    whileHover={isTablet ? {} : { x: -4 }}
-                    whileTap={isTablet ? {} : { scale: 0.98 }}
-                    className="flex items-center gap-1 md:gap-1 font-bebas text-base md:text-lg text-midnight hover:text-electric transition-colors"
+                    whileHover={{ x: -4 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="flex items-center gap-1 font-bebas text-base text-midnight hover:text-electric transition-colors"
                     style={{
                       transform: 'translateZ(0)',
                       backfaceVisibility: 'hidden'
@@ -255,9 +235,9 @@ export default function SimpleModernLedger() {
                   <motion.button
                     type="button"
                     onClick={nextStep}
-                    whileHover={isTablet ? {} : { scale: 1.05, x: 2 }}
-                    whileTap={isTablet ? {} : { scale: 0.98 }}
-                    className="px-4 md:px-6 py-2 md:py-2 bg-midnight text-cream font-bebas text-base md:text-lg tracking-wider neo-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
+                    whileHover={{ scale: 1.05, x: 2 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="px-4 py-2 bg-midnight text-cream font-bebas text-base tracking-wider neo-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
                     style={{
                       transform: 'translateZ(0)',
                       backfaceVisibility: 'hidden'
@@ -269,9 +249,9 @@ export default function SimpleModernLedger() {
                   <motion.button
                     type="submit"
                     disabled={isSubmitting}
-                    whileHover={isTablet ? {} : { scale: isSubmitting ? 1 : 1.05 }}
-                    whileTap={isTablet ? {} : { scale: isSubmitting ? 1 : 0.98 }}
-                    className={`px-4 md:px-6 py-2 md:py-2 font-bebas text-base md:text-lg tracking-wider transition-all ${
+                    whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
+                    whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+                    className={`px-4 py-2 font-bebas text-base tracking-wider transition-all ${
                       isSubmitting
                         ? 'bg-midnight/50 text-cream cursor-wait'
                         : 'bg-electric text-cream neo-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none'
@@ -290,10 +270,10 @@ export default function SimpleModernLedger() {
 
           {/* Decorative text */}
           <motion.div
-            initial={isTablet ? {} : { opacity: 0 }}
-            animate={isTablet ? {} : { opacity: 1 }}
-            transition={isTablet ? {} : { delay: 0.6 }}
-            className="mt-3 md:mt-4 text-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="mt-3 text-center"
             style={{
               transform: 'translateZ(0)',
               backfaceVisibility: 'hidden'

@@ -111,16 +111,16 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
             transition={{ duration: 0.5 }}
             className="mb-12 text-center"
           >
-            <h1 className="font-bebas text-6xl md:text-7xl text-midnight tracking-wider mb-2">
+            <h1 className="font-bebas text-6xl text-midnight tracking-wider mb-2">
               CREATED
             </h1>
             <div className="flex items-center justify-center gap-2">
-              <h2 className="font-bebas text-5xl md:text-6xl text-midnight tracking-wider">
+              <h2 className="font-bebas text-5xl text-midnight tracking-wider">
                 TO
               </h2>
               <div className="w-12 h-1 bg-electric"></div>
             </div>
-            <h1 className="font-bebas text-6xl md:text-7xl text-electric tracking-wider">
+            <h1 className="font-bebas text-6xl text-electric tracking-wider">
               CONNECT
             </h1>
           </motion.div>

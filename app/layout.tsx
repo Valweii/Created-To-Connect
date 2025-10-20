@@ -13,7 +13,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {/* Mobile-only view */}
+        <div className="block md:hidden">
+          {children}
+        </div>
+        
+        {/* Desktop/Tablet message */}
+        <div className="hidden md:flex items-center justify-center min-h-screen bg-white">
+          <div className="text-center p-8">
+            <h1 className="text-2xl font-bold text-gray-800 mb-4">
+              Please register on your mobile phone
+            </h1>
+            <p className="text-gray-600">
+              This registration form is optimized for mobile devices.
+            </p>
+          </div>
+        </div>
+      </body>
     </html>
   );
 }
