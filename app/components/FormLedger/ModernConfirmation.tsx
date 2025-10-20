@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import html2canvas from 'html2canvas';
@@ -13,11 +13,19 @@ interface ModernConfirmationProps {
 
 export default function ModernConfirmation({ ticketId, qrUrl, onRegisterAnother }: ModernConfirmationProps) {
   const ticketRef = useRef<HTMLDivElement>(null);
+  const [downloadAttempted, setDownloadAttempted] = useState(false);
 
   const downloadTicket = async () => {
-    if (!ticketRef.current) return;
+    console.log('🔍 Download function called, ticketRef:', ticketRef.current);
+    setDownloadAttempted(true);
+    
+    if (!ticketRef.current) {
+      console.error('❌ No ticketRef found, cannot download');
+      return;
+    }
     
     try {
+      console.log('🎨 Generating canvas...');
       const canvas = await html2canvas(ticketRef.current, {
         backgroundColor: '#F5F5DC', // cream color
         logging: false,
@@ -27,26 +35,20 @@ export default function ModernConfirmation({ ticketId, qrUrl, onRegisterAnother 
         height: ticketRef.current.scrollHeight,
       } as any);
       
+      console.log('📎 Creating download link...');
       const link = document.createElement('a');
       link.href = canvas.toDataURL('image/png');
       link.download = `ticket-${ticketId}.png`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+      console.log('✅ Download triggered successfully');
     } catch (error) {
-      console.error('Error downloading ticket:', error);
+      console.error('❌ Error downloading ticket:', error);
     }
   };
 
-  // Automatically download ticket when component mounts
-  useEffect(() => {
-    // Small delay to ensure DOM is fully rendered
-    const timer = setTimeout(() => {
-      downloadTicket();
-    }, 1000);
-    
-    return () => clearTimeout(timer);
-  }, []);
+  // No auto-download in ModernConfirmation - download happens in carousel
 
   return (
     <div 
@@ -98,6 +100,17 @@ export default function ModernConfirmation({ ticketId, qrUrl, onRegisterAnother 
             <p className="font-inter text-xl text-midnight/70">
               Welcome to <span className="font-bold text-electric">Created 2 Connect</span>
             </p>
+            {downloadAttempted && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-4 p-3 bg-electric/20 border-2 border-electric rounded-lg"
+              >
+                <p className="font-inter text-sm text-midnight text-center">
+                  📱 <strong>Ticket downloaded!</strong> Check your downloads folder or gallery.
+                </p>
+              </motion.div>
+            )}
           </div>
 
           {/* Divider */}
@@ -160,12 +173,15 @@ export default function ModernConfirmation({ ticketId, qrUrl, onRegisterAnother 
           {/* Actions */}
           <div className="mt-10 space-y-4">
             <motion.button
-              onClick={downloadTicket}
+              onClick={() => {
+                console.log('👆 User clicked download button');
+                downloadTicket();
+              }}
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
               className="w-full px-8 py-5 bg-midnight text-cream font-bebas text-2xl tracking-wider neo-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
             >
-              SAVED TO GALLERY
+              {downloadAttempted ? 'DOWNLOAD AGAIN' : 'DOWNLOAD TICKET'}
             </motion.button>
 
             {onRegisterAnother && (

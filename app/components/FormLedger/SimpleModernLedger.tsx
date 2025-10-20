@@ -12,7 +12,7 @@ import SubmitBlackHole from '../SubmitBlackHole/SubmitBlackHole';
 import { ticketStorage } from '../../../lib/ticketStorage';
 
 interface SimpleModernLedgerProps {
-  onRegistrationComplete?: () => void;
+  onRegistrationComplete?: (shouldAutoDownload?: boolean) => void;
 }
 
 export default function SimpleModernLedger({ onRegistrationComplete }: SimpleModernLedgerProps) {
@@ -96,8 +96,8 @@ export default function SimpleModernLedger({ onRegistrationComplete }: SimpleMod
           }
         });
         
-        // Notify parent component
-        onRegistrationComplete?.();
+        // Don't call onRegistrationComplete here - let black hole handle timing
+        console.log('✅ Registration successful, waiting for black hole to complete...');
       } else {
         // On error, revert black-hole and show error
         setShowBlackHole(false);
@@ -117,6 +117,10 @@ export default function SimpleModernLedger({ onRegistrationComplete }: SimpleMod
     console.log('🎉 Black hole animation completed, showing ticket...');
     setShowBlackHole(false);
     setIsSubmitting(false);
+    
+    // Notify parent component now that black hole is complete
+    // Pass true to indicate user just registered and should auto-download
+    onRegistrationComplete?.(true);
   };
 
   const handleBlackHoleCancel = () => {
@@ -127,30 +131,15 @@ export default function SimpleModernLedger({ onRegistrationComplete }: SimpleMod
   };
 
   if (ticketData && !showBlackHole) {
-    // Check if user has multiple tickets
-    const allTickets = ticketStorage.getAllTickets();
-    if (allTickets.length > 1) {
-      // Show carousel for multiple tickets
-      return (
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="font-bebas text-4xl text-midnight mb-4">Registration Complete!</h1>
-            <p className="font-inter text-midnight/70 mb-6">
-              You now have {allTickets.length} tickets. Please refresh the page to view all your tickets.
-            </p>
-            <button
-              onClick={() => window.location.reload()}
-              className="px-6 py-3 bg-midnight text-cream font-bebas text-lg tracking-wider neo-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
-            >
-              VIEW ALL TICKETS
-            </button>
-          </div>
-        </div>
-      );
-    } else {
-      // Show single ticket confirmation
-      return <ModernConfirmation ticketId={ticketData.ticketId} qrUrl={ticketData.qrUrl} onRegisterAnother={() => window.location.reload()} />;
-    }
+    // Always show confirmation with download, then redirect to carousel
+    return <ModernConfirmation 
+      ticketId={ticketData.ticketId} 
+      qrUrl={ticketData.qrUrl} 
+      onRegisterAnother={() => {
+        // Notify parent to show carousel instead of reloading
+        onRegistrationComplete?.();
+      }} 
+    />;
   }
 
   const stepColors = ['bg-flame', 'bg-sunshine'];

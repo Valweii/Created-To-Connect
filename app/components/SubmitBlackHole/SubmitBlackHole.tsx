@@ -57,6 +57,7 @@ interface SubmitBlackHoleProps {
 // Animation timing constants (tune these for different feel)
 const SUCK_DURATION = 800; // ms - black-hole suck animation (reduced for smoother performance)
 const REVEAL_DURATION = 600; // ms - message reveal
+const MIN_DURATION = 2000; // ms - minimum duration for "We'll be waiting for you" message
 const DEFAULT_DURATION = 4000; // ms - default progress bar duration
 
 export default function SubmitBlackHole({
@@ -67,6 +68,8 @@ export default function SubmitBlackHole({
   pageContentSelector = 'body > main, body > div', // Target main content
   duration = DEFAULT_DURATION,
 }: SubmitBlackHoleProps) {
+  // Ensure minimum duration of 2 seconds for "We'll be waiting for you" message
+  const actualDuration = Math.max(duration, MIN_DURATION);
   const [phase, setPhase] = useState<'idle' | 'sucking' | 'waiting'>('idle');
   const [progress, setProgress] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -108,6 +111,7 @@ export default function SubmitBlackHole({
     }
 
     console.log('🚀 Black hole activated, starting animation...');
+    console.log(`⏱️ Duration: ${actualDuration}ms (minimum: ${MIN_DURATION}ms)`);
 
     // Find and store page content element
     const pageContent = document.querySelector(pageContentSelector) as HTMLElement;
@@ -143,17 +147,17 @@ export default function SubmitBlackHole({
       const startTime = Date.now();
       const updateProgress = () => {
         const elapsed = Date.now() - startTime;
-        const progressPercent = Math.min((elapsed / duration) * 100, 100);
+        const progressPercent = Math.min((elapsed / actualDuration) * 100, 100);
         setProgress(progressPercent);
         
         // Only complete when we've actually reached the full duration
-        if (elapsed >= duration) {
+        if (elapsed >= actualDuration) {
           // Clear the interval to prevent multiple calls
           if (progressIntervalRef.current) {
             clearInterval(progressIntervalRef.current);
             progressIntervalRef.current = null;
           }
-          console.log('🎯 Black hole progress complete!');
+          console.log(`🎯 Black hole progress complete! (${elapsed}ms elapsed, ${actualDuration}ms required)`);
           onComplete?.();
         }
       };
@@ -169,7 +173,7 @@ export default function SubmitBlackHole({
         progressIntervalRef.current = null;
       }
     };
-  }, [isActive, pageContentSelector, duration, onComplete]);
+  }, [isActive, pageContentSelector, actualDuration, onComplete]);
 
   // Escape key handler
   const handleEscape = useCallback((e: KeyboardEvent) => {

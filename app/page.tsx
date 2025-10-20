@@ -12,6 +12,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [hasExistingTickets, setHasExistingTickets] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [shouldAutoDownload, setShouldAutoDownload] = useState(false);
 
   // Check for existing tickets on mount
   useEffect(() => {
@@ -61,6 +62,13 @@ export default function Home() {
   const handleBackToHome = () => {
     // Reset to tickets view
     setShowForm(false);
+    setShouldAutoDownload(false); // Reset auto-download flag
+  };
+
+  const handleRegistrationComplete = (shouldDownload?: boolean) => {
+    setHasExistingTickets(true);
+    setShowForm(false);
+    setShouldAutoDownload(shouldDownload || false); // Set auto-download flag
   };
 
   return (
@@ -99,13 +107,14 @@ export default function Home() {
 
         {/* Conditional Content Section */}
         {hasExistingTickets && !showForm ? (
-          <TicketCarousel onBackToHome={handleBackToHome} onRegisterAnother={scrollToForm} />
+          <TicketCarousel 
+            onBackToHome={handleBackToHome} 
+            onRegisterAnother={scrollToForm}
+            shouldAutoDownload={shouldAutoDownload}
+          />
         ) : (
           <section ref={formRef} id="registration">
-            <SimpleModernLedger onRegistrationComplete={() => {
-              setHasExistingTickets(true);
-              setShowForm(false);
-            }} />
+            <SimpleModernLedger onRegistrationComplete={handleRegistrationComplete} />
           </section>
         )}
       </main>
