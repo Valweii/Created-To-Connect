@@ -126,24 +126,6 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
         style={{ cursor: tickets.length > 1 ? 'grab' : 'default' }}
         whileDrag={{ cursor: 'grabbing' }}
       >
-        {/* Carousel Indicators - positioned above the ticket */}
-        {tickets.length > 1 && (
-          <div className="flex justify-center mb-4">
-            <div className="bg-midnight/20 rounded-full px-3 py-1 flex gap-1">
-              {tickets.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    index === currentIndex 
-                      ? 'bg-cream' 
-                      : 'bg-midnight/40 hover:bg-midnight/60'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-        )}
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
@@ -154,8 +136,8 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
             className="relative"
           >
             {/* Page Indicator Pill - Outside ticketRef so it won't be downloaded */}
-            <div className="absolute top-2 right-2 z-20">
-              <div className="bg-gray-900/70 backdrop-blur-sm text-cream px-3 py-1.5 rounded-full text-xs font-inter font-medium">
+            <div className="absolute top-4 right-4 z-20">
+              <div className="bg-white border-2 border-midnight text-midnight px-3 py-1.5 rounded-full text-xs font-inter font-medium shadow-sm">
                 {currentIndex + 1} of {tickets.length}
               </div>
             </div>
@@ -273,6 +255,25 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
             </div>
           </motion.div>
         </AnimatePresence>
+
+        {/* Carousel Indicators - positioned below the ticket */}
+        {tickets.length > 1 && (
+          <div className="flex justify-center mt-4">
+            <div className="bg-midnight/20 rounded-full px-3 py-1 flex gap-1">
+              {tickets.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    index === currentIndex 
+                      ? 'bg-cream' 
+                      : 'bg-midnight/40 hover:bg-midnight/60'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        )}
       </motion.div>
 
     </div>
