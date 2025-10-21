@@ -19,15 +19,12 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
   const ticketRef = useRef<HTMLDivElement>(null);
 
   const downloadTicket = useCallback(async () => {
-    console.log('🔍 Download function called, ticketRef:', ticketRef.current);
-    
     if (!ticketRef.current) {
       console.error('❌ No ticketRef found, cannot download');
       return;
     }
     
     try {
-      console.log('🎨 Generating canvas...');
       const canvas = await html2canvas(ticketRef.current, {
         backgroundColor: '#F5F5DC', // cream color
         logging: false,
@@ -37,14 +34,12 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
         height: ticketRef.current.scrollHeight,
       } as any);
       
-      console.log('📎 Creating download link...');
       const link = document.createElement('a');
       link.href = canvas.toDataURL('image/png');
       link.download = `ticket-${tickets[currentIndex].ticketId}.png`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      console.log('✅ Download triggered successfully');
     } catch (error) {
       console.error('❌ Error downloading ticket:', error);
     }
@@ -62,7 +57,6 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
   // Auto-download only if user just registered a new ticket
   useEffect(() => {
     if (shouldAutoDownload && tickets.length > 0 && currentIndex === 0) {
-      console.log('🎫 User just registered, auto-downloading newest ticket...');
       const timer = setTimeout(() => {
         downloadTicket();
       }, 2000); // Wait 2 seconds for everything to render
