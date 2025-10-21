@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { ticketStorage, SavedTicket } from '../../../lib/ticketStorage';
 import ModernConfirmation from './ModernConfirmation';
 import html2canvas from 'html2canvas';
+import { img } from 'framer-motion/client';
 
 interface TicketCarouselProps {
   onBackToHome: () => void;
@@ -103,7 +104,17 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
   const currentTicket = tickets[currentIndex];
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-4 px-2 relative overflow-hidden bg-cover bg-center bg-no-repeat">
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-cover bg-center bg-no-repeat" style={{ 
+      height: '100vh',
+      minHeight: '100vh',
+    }}>
+      <div className="absolute top-0 z-[-10]">
+            <img
+              src="/assets/connect bawah.webp"
+              alt="CG"
+              decoding="async"
+            />
+      </div>
 
       {/* Swipeable Ticket Container */}
       <motion.div

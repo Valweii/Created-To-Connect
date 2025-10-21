@@ -153,8 +153,16 @@ export default function SimpleModernLedger({ onRegistrationComplete }: SimpleMod
 
       <div 
         id="page-content" 
-        className="min-h-screen py-8 px-4 relative overflow-hidden flex items-center"
+        className="min-h-screen relative overflow-hidden flex items-center"
       >
+
+      <div className="absolute top-0 z-[-10]">
+            <img
+              src="/assets/connect bawah.webp"
+              alt="CG"
+              decoding="async"
+            />
+      </div>
 
         <div className="relative z-10 max-w-5xl mx-auto w-full">
           {/* Step indicator */}
@@ -194,7 +202,7 @@ export default function SimpleModernLedger({ onRegistrationComplete }: SimpleMod
           {/* Form card */}
           <motion.div
             layout={true}
-            className="bg-cream border-2 border-midnight neo-shadow p-4"
+            className="bg-cream border-2 border-midnight neo-shadow p-4 w-[90vw] mx-auto"
             style={{
               transform: 'translateZ(0)',
               backfaceVisibility: 'hidden'
