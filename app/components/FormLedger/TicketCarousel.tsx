@@ -55,16 +55,22 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
   }, []);
 
   // Auto-download only if user just registered a new ticket
+  const hasDownloadedRef = useRef(false);
+
   useEffect(() => {
-    if (shouldAutoDownload && tickets.length > 0 && currentIndex === 0) {
+    if (
+      shouldAutoDownload &&
+      tickets.length > 0 &&
+      currentIndex === 0 &&
+      !hasDownloadedRef.current
+    ) {
+      hasDownloadedRef.current = true; // ✅ Prevent future auto-downloads
       const timer = setTimeout(() => {
         downloadTicket();
-      }, 2000); // Wait 2 seconds for everything to render
-      
+      }, 2000);
       return () => clearTimeout(timer);
     }
   }, [shouldAutoDownload, tickets.length, currentIndex, downloadTicket]);
-
   const handleDragEnd = (event: any, info: PanInfo) => {
     const threshold = 50;
     
