@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback} from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -112,23 +112,17 @@ export default function SimpleModernLedger({ onRegistrationComplete }: SimpleMod
     }
   };
 
-  const handleBlackHoleComplete = () => {
-    // Called when progress bar reaches 100%
+  const handleBlackHoleComplete = useCallback(() => {
     console.log('🎉 Black hole animation completed, showing ticket...');
     setShowBlackHole(false);
     setIsSubmitting(false);
-    
-    // Notify parent component now that black hole is complete
-    // Pass true to indicate user just registered and should auto-download
     onRegistrationComplete?.(true);
-  };
+  }, [onRegistrationComplete]);
 
-  const handleBlackHoleCancel = () => {
+  const handleBlackHoleCancel = useCallback(() => {
     // User pressed Esc or Close - skip to confirmation
-    if (ticketData) {
-      setShowBlackHole(false);
-    }
-  };
+    if (ticketData) setShowBlackHole(false);
+  }, [ticketData]);
 
   if (ticketData && !showBlackHole) {
     // Always show confirmation with download, then redirect to carousel
