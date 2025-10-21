@@ -9,6 +9,7 @@ export interface SavedTicket {
     isCGMember: boolean;
     cgNumber?: string;
     heardFrom?: string;
+    heardFromOther?: string;
   };
 }
 

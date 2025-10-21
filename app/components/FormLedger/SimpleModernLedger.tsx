@@ -35,10 +35,16 @@ export default function SimpleModernLedger({ onRegistrationComplete }: SimpleMod
 
   const isCGMember = watch('isCGMember');
 
+  const heardFrom = watch('heardFrom');
+
   const validateStep = async (step: number) => {
     const fields: (keyof RegistrationFormData)[][] = [
       ['name', 'instagram', 'phonenumber'],
-      isCGMember ? ['isCGMember', 'cgNumber'] : ['isCGMember', 'heardFrom'],
+      isCGMember 
+        ? ['isCGMember', 'cgNumber'] 
+        : heardFrom === 'Other' 
+          ? ['isCGMember', 'heardFrom', 'heardFromOther']
+          : ['isCGMember', 'heardFrom'],
     ];
     
     return await trigger(fields[step - 1]);
@@ -56,6 +62,12 @@ export default function SimpleModernLedger({ onRegistrationComplete }: SimpleMod
   };
 
   const onSubmit = async (data: RegistrationFormData) => {
+    // Prevent submission if not on final step
+    if (currentStep < 2) {
+      console.log('⚠️ Not on final step, preventing submission');
+      return;
+    }
+    
     // Prevent multiple submissions
     if (isSubmitting || showBlackHole) {
       console.log('🚫 Submission already in progress, ignoring...');
@@ -93,6 +105,7 @@ export default function SimpleModernLedger({ onRegistrationComplete }: SimpleMod
             isCGMember: data.isCGMember,
             cgNumber: data.cgNumber,
             heardFrom: data.heardFrom,
+            heardFromOther: data.heardFromOther,
           }
         });
         
@@ -231,7 +244,17 @@ export default function SimpleModernLedger({ onRegistrationComplete }: SimpleMod
               </p>
             </motion.div>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form 
+              onSubmit={(e) => {
+                // Prevent form submission if not on final step
+                if (currentStep < 2) {
+                  e.preventDefault();
+                  return;
+                }
+                // Only submit on final step
+                handleSubmit(onSubmit)(e);
+              }}
+            >
               <AnimatePresence mode="wait">
                 {currentStep === 1 && (
                   <StepBasicInfo key="step1" register={register} errors={errors} />

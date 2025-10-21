@@ -13,6 +13,7 @@ interface StepCGInfoProps {
 
 export default function StepCGInfo({ register, errors, watch, setValue }: StepCGInfoProps) {
   const isCGMember = watch('isCGMember');
+  const heardFrom = watch('heardFrom');
 
   return (
     <motion.div
@@ -111,33 +112,81 @@ export default function StepCGInfo({ register, errors, watch, setValue }: StepCG
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
+            className="space-y-3"
           >
-            <label htmlFor="heardFrom" className="block text-midnight font-inter font-semibold mb-1 text-xs uppercase tracking-wider">
-              How did you hear about us? *
-            </label>
-            <select
-              id="heardFrom"
-              {...register('heardFrom')}
-              className="w-full px-3 py-2 border-3 border-midnight bg-cream text-midnight font-inter font-bold text-sm focus:outline-none focus:border-electric focus:ring-3 focus:ring-electric/30 transition-all cursor-pointer hover:bg-electric/5 hover:border-electric shadow-[4px_4px_0px_0px_rgba(31,31,31,1)] hover:shadow-[6px_6px_0px_0px_rgba(242,187,5,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%231f1f1f%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:24px_24px] bg-[right_1rem_center] bg-no-repeat pr-12"
-              aria-describedby={errors.heardFrom ? 'heardFrom-error' : undefined}
-            >
-              <option value="">-- Select an option --</option>
-              {HEARD_FROM_OPTIONS.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-            {errors.heardFrom && (
-              <motion.p
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                id="heardFrom-error"
-                className="mt-2 text-xs text-flame font-inter font-medium"
+            <div>
+              <label htmlFor="heardFrom" className="block text-midnight font-inter font-semibold mb-1 text-xs uppercase tracking-wider">
+                How did you hear about us? *
+              </label>
+              <select
+                id="heardFrom"
+                {...register('heardFrom')}
+                onChange={(e) => {
+                  setValue('heardFrom', e.target.value);
+                  // Clear the "Other" field if a different option is selected
+                  if (e.target.value !== 'Other') {
+                    setValue('heardFromOther', undefined);
+                  }
+                }}
+                className="w-full px-3 py-2 border-3 border-midnight bg-cream text-midnight font-inter font-bold text-sm focus:outline-none focus:border-electric focus:ring-3 focus:ring-electric/30 transition-all cursor-pointer hover:bg-electric/5 hover:border-electric shadow-[4px_4px_0px_0px_rgba(31,31,31,1)] hover:shadow-[6px_6px_0px_0px_rgba(242,187,5,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%231f1f1f%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:24px_24px] bg-[right_1rem_center] bg-no-repeat pr-12"
+                aria-describedby={errors.heardFrom ? 'heardFrom-error' : undefined}
               >
-                {errors.heardFrom.message}
-              </motion.p>
-            )}
+                <option value="">-- Select an option --</option>
+                {HEARD_FROM_OPTIONS.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+              {errors.heardFrom && (
+                <motion.p
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  id="heardFrom-error"
+                  className="mt-2 text-xs text-flame font-inter font-medium"
+                >
+                  {errors.heardFrom.message}
+                </motion.p>
+              )}
+            </div>
+
+            {/* Conditional "Other" input field */}
+            <AnimatePresence>
+              {heardFrom === 'Other' && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <label htmlFor="heardFromOther" className="block text-midnight font-inter font-semibold mb-1 text-xs uppercase tracking-wider">
+                    Please specify *
+                  </label>
+                  <input
+                    id="heardFromOther"
+                    type="text"
+                    {...register('heardFromOther')}
+                    className={`w-full px-3 py-2 border-2 bg-cream text-midnight font-inter text-sm focus:outline-none transition-all ${
+                      errors.heardFromOther 
+                        ? 'border-flame focus:border-flame focus:ring-2 focus:ring-flame/20' 
+                        : 'border-midnight focus:border-electric focus:ring-2 focus:ring-electric/20'
+                    }`}
+                    placeholder="Where did you hear about this event?"
+                    aria-describedby={errors.heardFromOther ? 'heardFromOther-error' : undefined}
+                  />
+                  {errors.heardFromOther && (
+                    <motion.p
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      id="heardFromOther-error"
+                      className="mt-2 text-xs text-flame font-inter font-medium"
+                    >
+                      {errors.heardFromOther.message}
+                    </motion.p>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         )}
       </AnimatePresence>

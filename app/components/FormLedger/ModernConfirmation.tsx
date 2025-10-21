@@ -61,6 +61,13 @@ export default function ModernConfirmation({ ticketId, qrUrl, onRegisterAnother 
         transition={{ duration: 0.6 }}
         className="relative z-10 max-w-2xl w-full"
       >
+        {/* Page Indicator Pill - Outside ticketRef so it won't be downloaded */}
+        <div className="absolute top-0 right-0 z-20">
+          <div className="bg-gray-900/70 backdrop-blur-sm text-cream px-3 py-1.5 rounded-full text-xs font-inter font-medium">
+            1 of 1
+          </div>
+        </div>
+
         <div ref={ticketRef} className="bg-cream border-4 border-midnight neo-shadow p-8 md:p-12">
           {/* Success header */}
           <div className="text-center mb-8">

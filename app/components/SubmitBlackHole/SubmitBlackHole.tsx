@@ -289,24 +289,9 @@ export default function SubmitBlackHole({
               </div>
             </motion.div>
 
-            {/* Close button (accessible) */}
-            <motion.button
-              onClick={onCancel}
-              className="submit-blackhole-close"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.6 }}
-              whileHover={{ opacity: 1, scale: 1.1 }}
-              transition={{ delay: REVEAL_DURATION / 1000 + 0.5 }}
-              aria-label="Close and return to confirmation"
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M18 6L6 18M6 6l12 12" />
-              </svg>
-            </motion.button>
-
             {/* Screen reader announcement */}
             <div className="sr-only" role="status" aria-live="polite">
-              Registration submitted successfully. {message}. Processing... {Math.round(progress)}% complete. Press Escape to continue.
+              Registration submitted successfully. {message}. Processing... {Math.round(progress)}% complete.
             </div>
           </motion.div>
         )}

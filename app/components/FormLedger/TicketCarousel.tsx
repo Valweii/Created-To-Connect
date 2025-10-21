@@ -151,7 +151,15 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.3 }}
+            className="relative"
           >
+            {/* Page Indicator Pill - Outside ticketRef so it won't be downloaded */}
+            <div className="absolute top-2 right-2 z-20">
+              <div className="bg-gray-900/70 backdrop-blur-sm text-cream px-3 py-1.5 rounded-full text-xs font-inter font-medium">
+                {currentIndex + 1} of {tickets.length}
+              </div>
+            </div>
+
             <div ref={ticketRef} className="bg-cream border-3 border-midnight neo-shadow p-4 w-full">
               {/* Success header */}
               <div className="text-center mb-4">
@@ -201,7 +209,7 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
                 {/* WhatsApp Group Button */}
                 <div className="py-1">
                   <a
-                    href="/"
+                    href="https://chat.whatsapp.com/EvtY191qEO7D8Po4TpEKlO?mode=wwt"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 w-full px-3 py-2 bg-green-500 text-white font-bebas text-sm tracking-wider neo-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"

@@ -10,20 +10,45 @@ export const registrationSchema = z.object({
   isCGMember: z.boolean().default(false),
   cgNumber: z.string().optional(),
   heardFrom: z.string().optional(),
+  heardFromOther: z.string().optional(),
   
-}).refine(
-  (data) => {
-    // If CG member, must select a CG number
-    if (data.isCGMember && !data.cgNumber) return false;
-    // If not CG member, must select where they heard from
-    if (!data.isCGMember && !data.heardFrom) return false;
-    return true;
-  },
-  {
-    message: 'Please provide required information',
-    path: ['cgNumber'],
+}).superRefine((data, ctx) => {
+  // If CG member, must select a CG number
+  if (data.isCGMember && !data.cgNumber) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: 'Please select your CG number',
+      path: ['cgNumber'],
+    });
   }
-);
+  
+  // If not CG member, must select where they heard from
+  if (!data.isCGMember && !data.heardFrom) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: 'Please select how you heard about us',
+      path: ['heardFrom'],
+    });
+  }
+  
+  // If "Other" is selected, must provide details
+  if (!data.isCGMember && data.heardFrom === 'Other' && (!data.heardFromOther || data.heardFromOther.trim().length === 0)) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: 'Please specify where you heard about this event',
+      path: ['heardFromOther'],
+    });
+  }
+  
+  // If "Other" is provided, ensure it has at least 3 characters
+  if (!data.isCGMember && data.heardFrom === 'Other' && data.heardFromOther && data.heardFromOther.trim().length > 0 && data.heardFromOther.trim().length < 3) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: 'Please provide at least 3 characters',
+      path: ['heardFromOther'],
+    });
+  }
+});
 
 export type RegistrationFormData = z.infer<typeof registrationSchema>;
 
