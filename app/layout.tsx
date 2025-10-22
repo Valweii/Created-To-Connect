@@ -1,5 +1,28 @@
 import type { Metadata } from "next";
+import { Barlow_Condensed, Bebas_Neue, Inter } from 'next/font/google';
 import "./globals.css";
+
+// Optimized font loading with automatic self-hosting and preloading
+const barlowCondensed = Barlow_Condensed({
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-barlow-condensed',
+});
+
+const bebasNeue = Bebas_Neue({
+  weight: ['400'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-bebas-neue',
+});
+
+const inter = Inter({
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
 export const metadata: Metadata = {
   title: "Created 2 Connect - Youth Camp 2025",
@@ -12,8 +35,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">
+    <html lang="en" className={`${barlowCondensed.variable} ${bebasNeue.variable} ${inter.variable}`}>
+      <body className={`antialiased ${barlowCondensed.className}`}>
         {/* Mobile-only view */}
         <div className="block md:hidden">
           {children}

@@ -9,9 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        barlow: ['"Barlow Condensed"', 'sans-serif'],
-        bebas: ['"Bebas Neue"', 'cursive'],
-        inter: ['"Inter"', 'sans-serif'],
+        barlow: ['var(--font-barlow-condensed)', 'sans-serif'],
+        bebas: ['var(--font-bebas-neue)', 'cursive'],
+        inter: ['var(--font-inter)', 'sans-serif'],
       },
       colors: {
         electric: '#3939ff',
