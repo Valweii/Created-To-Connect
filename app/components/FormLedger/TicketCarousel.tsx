@@ -179,8 +179,11 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
                 <h1 className="font-bebas text-3xl text-midnight mb-2 leading-none">
                   YOU&apos;RE IN!
                 </h1>
-                <p className="font-inter text-sm text-midnight/70">
+                <p className="font-inter text-sm text-midnight/70 mb-2">
                   Welcome to <span className="font-bold text-electric">Created 2 Connect</span>
+                </p>
+                <p className="font-inter text-xs text-midnight/50">
+                  This ticket belongs to: <span className="font-semibold capitalize">{currentTicket.name}</span>
                 </p>
               </div>
 
@@ -222,7 +225,7 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
                 </div>
 
                 {/* QR Code */}
-                <div className="py-1">
+                <div className="py-4">
                   <div className="flex justify-center">
                     <motion.div
                       initial={{ opacity: 0, scale: 0.8 }}
@@ -242,16 +245,6 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
                     </p>
                   </div>
                 </div>
-              </div>
-
-              {/* Actions */}
-              <div className="mt-4 space-y-2">
-                <button
-                  onClick={onBackToHome}
-                  className="w-full px-4 py-2 border-2 border-midnight text-midnight font-bebas text-sm tracking-wider hover:bg-midnight hover:text-cream transition-all"
-                >
-                  BACK TO HOME
-                </button>
               </div>
             </div>
           </motion.div>

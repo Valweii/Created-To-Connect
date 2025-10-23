@@ -5,14 +5,22 @@ import ModernHero from './components/Hero/ModernHero';
 import SimpleModernLedger from './components/FormLedger/SimpleModernLedger';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 import TicketCarousel from './components/FormLedger/TicketCarousel';
+import StickyRegisterButton from './components/StickyRegisterButton/StickyRegisterButton';
 import { ticketStorage } from '../lib/ticketStorage';
 
 export default function Home() {
   const formRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const ticketCarouselRef = useRef<HTMLDivElement>(null);
+  
   const [isLoading, setIsLoading] = useState(true);
   const [hasExistingTickets, setHasExistingTickets] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [shouldAutoDownload, setShouldAutoDownload] = useState(false);
+  
+  // Sticky button states
+  const [showStickyButton, setShowStickyButton] = useState(false);
+  const [isCompactButton, setIsCompactButton] = useState(false);
 
   // Initialize ticket storage and check for expired tickets
   useEffect(() => {
@@ -27,6 +35,55 @@ export default function Home() {
     const existingTickets = ticketStorage.hasExistingTickets();
     setHasExistingTickets(existingTickets);
   }, []);
+
+  // Intersection Observer for sticky button behavior
+  useEffect(() => {
+    if (isLoading) return;
+
+    const heroObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // Show sticky button when hero section is out of view
+          // But not if user is on form page with no tickets
+          const shouldShow = !entry.isIntersecting;
+          setShowStickyButton(shouldShow);
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '-80px 0px 0px 0px', // Trigger before completely out of view
+      }
+    );
+
+    const ticketObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // Compact button when ticket carousel is in view
+          if (entry.isIntersecting && hasExistingTickets && !showForm) {
+            setIsCompactButton(true);
+          } else {
+            setIsCompactButton(false);
+          }
+        });
+      },
+      {
+        threshold: 0.2,
+      }
+    );
+
+    if (heroRef.current) {
+      heroObserver.observe(heroRef.current);
+    }
+
+    if (ticketCarouselRef.current) {
+      ticketObserver.observe(ticketCarouselRef.current);
+    }
+
+    return () => {
+      heroObserver.disconnect();
+      ticketObserver.disconnect();
+    };
+  }, [isLoading, hasExistingTickets, showForm]);
 
   const scrollToForm = () => {
     // Show form if we're currently showing tickets
@@ -73,6 +130,15 @@ export default function Home() {
     setShouldAutoDownload(false); // Reset auto-download flag
   };
 
+  const handleViewTickets = () => {
+    // Navigate from form to tickets view
+    setShowForm(false);
+    setShouldAutoDownload(false);
+    
+    // Scroll to top smoothly
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleRegistrationComplete = (shouldDownload?: boolean) => {
     setHasExistingTickets(true);
     setShowForm(false);
@@ -103,10 +169,20 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Sticky Register Button */}
+      <StickyRegisterButton
+        onRegisterClick={scrollToForm}
+        onViewTicketsClick={handleViewTickets}
+        hasExistingTickets={hasExistingTickets}
+        isVisible={showStickyButton && hasExistingTickets}
+        isCompact={isCompactButton}
+        showViewTickets={showForm && hasExistingTickets}
+      />
+
       {/* Main Content */}
       <main className={`relative ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-1000 ease-out`}>
         {/* Hero Section - Always visible */}
-        <section id="hero">
+        <section ref={heroRef} id="hero">
           <ModernHero 
             onRegisterClick={scrollToForm} 
             hasExistingTickets={hasExistingTickets}
@@ -115,11 +191,13 @@ export default function Home() {
 
         {/* Conditional Content Section */}
         {hasExistingTickets && !showForm ? (
-          <TicketCarousel 
-            onBackToHome={handleBackToHome} 
-            onRegisterAnother={scrollToForm}
-            shouldAutoDownload={shouldAutoDownload}
-          />
+          <div ref={ticketCarouselRef}>
+            <TicketCarousel 
+              onBackToHome={handleBackToHome} 
+              onRegisterAnother={scrollToForm}
+              shouldAutoDownload={shouldAutoDownload}
+            />
+          </div>
         ) : (
           <section ref={formRef} id="registration">
             <SimpleModernLedger onRegistrationComplete={handleRegistrationComplete} />
