@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface ModernHeroProps {
   onRegisterClick: () => void;
@@ -16,12 +16,7 @@ export default function ModernHero({
   hasExistingTickets = false,
   showViewTickets = false
 }: ModernHeroProps) {
-  const [mounted, setMounted] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const handleButtonClick = () => {
     // If showing view tickets button, navigate to tickets
@@ -46,8 +41,6 @@ export default function ModernHero({
   const handleConfirmNo = () => {
     setShowConfirmDialog(false);
   };
-
-  if (!mounted) return null;
 
   return (
     <div 

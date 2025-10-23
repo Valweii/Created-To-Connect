@@ -19,6 +19,15 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
   const [currentIndex, setCurrentIndex] = useState(0);
   const ticketRef = useRef<HTMLDivElement>(null);
 
+  // Helper function to format name to show only first and last name
+  const formatName = (fullName: string) => {
+    const nameParts = fullName.trim().split(' ');
+    if (nameParts.length <= 2) {
+      return fullName; // Return as is if 2 names or less
+    }
+    return `${nameParts[0]} ${nameParts[nameParts.length - 1]}`;
+  };
+
   const downloadTicket = useCallback(async () => {
     if (!ticketRef.current) {
       return;
@@ -187,7 +196,7 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
                   Welcome to <span className="font-bold text-electric">Created 2 Connect</span>
                 </p>
                 <p className="font-inter text-xs text-midnight/50">
-                  This ticket belongs to: <span className="font-semibold capitalize">{currentTicket.name}</span>
+                  This ticket belongs to: <span className="font-semibold capitalize">{formatName(currentTicket.name)}</span>
                 </p>
               </div>
 
