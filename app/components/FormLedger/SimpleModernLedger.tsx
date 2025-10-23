@@ -158,6 +158,10 @@ export default function SimpleModernLedger({ onRegistrationComplete }: SimpleMod
       <div 
         id="page-content" 
         className="min-h-screen relative overflow-hidden flex items-center"
+        style={{
+          height: '100vh',
+          minHeight: '100vh',
+        }}
       >
 
       <div className="absolute top-0 z-[-10]">
