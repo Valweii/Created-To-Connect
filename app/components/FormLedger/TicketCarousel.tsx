@@ -21,7 +21,6 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
 
   const downloadTicket = useCallback(async () => {
     if (!ticketRef.current) {
-      console.error('❌ No ticketRef found, cannot download');
       return;
     }
     
@@ -42,7 +41,7 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
       link.click();
       document.body.removeChild(link);
     } catch (error) {
-      console.error('❌ Error downloading ticket:', error);
+      // Silent error handling
     }
   }, [tickets, currentIndex]);
 
@@ -136,11 +135,13 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
             className="relative"
           >
             {/* Page Indicator Pill - Outside ticketRef so it won't be downloaded */}
-            <div className="absolute top-4 right-4 z-20">
-              <div className="bg-white border-2 border-midnight text-midnight px-3 py-1.5 rounded-full text-xs font-inter font-medium shadow-sm">
-                {currentIndex + 1} of {tickets.length}
+            {tickets.length > 1 && (
+              <div className="absolute top-4 right-4 z-20">
+                <div className="bg-white border-2 border-midnight text-midnight px-3 py-1.5 rounded-full text-xs font-inter font-medium shadow-sm">
+                  {currentIndex + 1} of {tickets.length}
+                </div>
               </div>
-            </div>
+            )}
 
             <div ref={ticketRef} className="bg-cream border-3 border-midnight neo-shadow p-4 w-full">
               {/* Success header */}

@@ -23,7 +23,7 @@ export async function POST(request: Request) {
       phone: data.phonenumber,
       cgMember: data.isCGMember,
       cgNumber: data.cgNumber,
-      heardFrom: data.heardFrom,
+      heardFrom: data.heardFrom === 'Other' ? data.heardFromOther : data.heardFrom,
       event: 'Created 2 Connect - Youth Camp 2025',
     });
     
@@ -45,20 +45,9 @@ export async function POST(request: Request) {
         phonenumber: data.phonenumber,
         is_cg_member: data.isCGMember,
         cg_number: data.isCGMember ? data.cgNumber : undefined,
-        heard_from: !data.isCGMember ? data.heardFrom : undefined,
-      });
-      
-      console.log('✅ Registration saved to Supabase:', ticketId);
-      console.log('📊 Data:', {
-        name: data.name,
-        instagram: instagramUsername,
-        phone: data.phonenumber,
-        isCG: data.isCGMember,
-        cgNumber: data.cgNumber,
-        heardFrom: data.heardFrom,
+        heard_from: !data.isCGMember ? (data.heardFrom === 'Other' ? data.heardFromOther : data.heardFrom) : undefined,
       });
     } catch (dbError) {
-      console.error('❌ Supabase save failed:', dbError);
       // Return error if DB save fails (since it's critical now)
       return NextResponse.json(
         { success: false, error: 'Database save failed. Please try again.' },
@@ -72,7 +61,6 @@ export async function POST(request: Request) {
       qrUrl,
     });
   } catch (error) {
-    console.error('Registration error:', error);
     return NextResponse.json(
       { success: false, error: 'Registration failed' },
       { status: 500 }

@@ -77,8 +77,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
           onLoadingComplete();
         }, 1500); // Increased delay for smoother transition
       })
-      .catch((error) => {
-        console.error('Error loading images:', error);
+      .catch(() => {
         // Continue anyway after a delay
         setTimeout(() => {
           setProgress(100);

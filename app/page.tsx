@@ -14,6 +14,14 @@ export default function Home() {
   const [showForm, setShowForm] = useState(false);
   const [shouldAutoDownload, setShouldAutoDownload] = useState(false);
 
+  // Initialize ticket storage and check for expired tickets
+  useEffect(() => {
+    // Trigger cleanup of expired tickets on app startup
+    ticketStorage.initialize().catch(() => {
+      // Silent error handling
+    });
+  }, []);
+
   // Check for existing tickets on mount
   useEffect(() => {
     const existingTickets = ticketStorage.hasExistingTickets();

@@ -92,7 +92,6 @@ export default function SubmitBlackHole({
   // Main animation sequence
   useEffect(() => {
     if (!isActive) {
-      console.log('🔄 Black hole deactivated, resetting...');
       setPhase('idle');
       setProgress(0);
       // Clear progress interval
@@ -109,9 +108,6 @@ export default function SubmitBlackHole({
       }
       return;
     }
-
-    console.log('🚀 Black hole activated, starting animation...');
-    console.log(`⏱️ Duration: ${actualDuration}ms (minimum: ${MIN_DURATION}ms)`);
 
     // Find and store page content element
     const pageContent = document.querySelector(pageContentSelector) as HTMLElement;
@@ -157,7 +153,6 @@ export default function SubmitBlackHole({
             clearInterval(progressIntervalRef.current);
             progressIntervalRef.current = null;
           }
-          console.log(`🎯 Black hole progress complete! (${elapsed}ms elapsed, ${actualDuration}ms required)`);
           onComplete?.();
         }
       };

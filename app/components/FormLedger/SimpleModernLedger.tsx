@@ -64,22 +64,18 @@ export default function SimpleModernLedger({ onRegistrationComplete }: SimpleMod
   const onSubmit = async (data: RegistrationFormData) => {
     // Prevent submission if not on final step
     if (currentStep < 2) {
-      console.log('⚠️ Not on final step, preventing submission');
       return;
     }
     
     // Prevent multiple submissions
     if (isSubmitting || showBlackHole) {
-      console.log('🚫 Submission already in progress, ignoring...');
       return;
     }
     
-    console.log('🚀 SUBMIT TRIGGERED!', data);
     setIsSubmitting(true);
     
     // Trigger black-hole animation immediately
     setShowBlackHole(true);
-    console.log('🌀 Black hole activated!');
     
     try {
       const response = await fetch('/api/register', {
@@ -108,9 +104,6 @@ export default function SimpleModernLedger({ onRegistrationComplete }: SimpleMod
             heardFromOther: data.heardFromOther,
           }
         });
-        
-        // Don't call onRegistrationComplete here - let black hole handle timing
-        console.log('✅ Registration successful, waiting for black hole to complete...');
       } else {
         // On error, revert black-hole and show error
         setShowBlackHole(false);
@@ -118,7 +111,6 @@ export default function SimpleModernLedger({ onRegistrationComplete }: SimpleMod
         alert('Registration failed. Please try again.');
       }
     } catch (error) {
-      console.error('Registration error:', error);
       setShowBlackHole(false);
       setIsSubmitting(false);
       alert('An error occurred. Please try again.');
@@ -126,7 +118,6 @@ export default function SimpleModernLedger({ onRegistrationComplete }: SimpleMod
   };
 
   const handleBlackHoleComplete = useCallback(() => {
-    console.log('🎉 Black hole animation completed, showing ticket...');
     setShowBlackHole(false);
     setIsSubmitting(false);
     onRegistrationComplete?.(true);
