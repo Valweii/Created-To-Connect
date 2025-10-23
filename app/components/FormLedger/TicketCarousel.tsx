@@ -122,7 +122,11 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
         dragConstraints={{ left: 0, right: 0 }}
         onDragEnd={handleDragEnd}
         dragElastic={0.1}
-        style={{ cursor: tickets.length > 1 ? 'grab' : 'default' }}
+        style={{ 
+          cursor: tickets.length > 1 ? 'grab' : 'default',
+          paddingTop: '5vh',
+          paddingBottom: '5vh'
+        }}
         whileDrag={{ cursor: 'grabbing' }}
       >
         <AnimatePresence mode="wait">
@@ -143,9 +147,9 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
               </div>
             )}
 
-            <div ref={ticketRef} className="bg-cream border-3 border-midnight neo-shadow p-4 w-full">
+            <div ref={ticketRef} className="bg-cream border-3 border-midnight neo-shadow w-full" style={{ padding: '3vh 1rem' }}>
               {/* Success header */}
-              <div className="text-center mb-4">
+              <div className="text-center">
                 <motion.div
                   initial={{ scale: 0, rotate: -180 }}
                   animate={{ scale: 1, rotate: 0 }}
@@ -188,12 +192,12 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
               </div>
 
               {/* Divider */}
-              <div className="border-t-2 border-dashed border-midnight/20 my-4" />
+              <div className="border-t-2 border-dashed border-midnight/20" style={{ margin: '1vh 0' }} />
 
               {/* Ticket details */}
-              <div className="space-y-3">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5vh' }}>
                 {/* WhatsApp Group Button */}
-                <div className="py-1">
+                <div style={{ padding: '0.5vh 0' }}>
                   <a
                     href="https://chat.whatsapp.com/EvtY191qEO7D8Po4TpEKlO?mode=wwt"
                     target="_blank"
@@ -217,29 +221,30 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
                   </a>
                 </div>
 
-                <div className="py-1">
-                  <div className="bg-sunshine/20 border-2 border-sunshine p-3">
+                <div style={{ padding: '0.5vh 0' }}>
+                  <div className="bg-sunshine/20 border-2 border-sunshine" style={{ padding: '1.5vh' }}>
                     <p className="text-xs text-midnight/60 font-inter uppercase tracking-wider mb-1">Your Ticket ID</p>
                     <p className="text-lg font-bebas text-midnight tracking-wide">{currentTicket.ticketId}</p>
                   </div>
                 </div>
 
                 {/* QR Code */}
-                <div className="py-4">
+                <div style={{ padding: '0vh 0' }}>
                   <div className="flex justify-center">
                     <motion.div
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.5 }}
-                      className="bg-midnight p-3 neo-shadow"
+                      className="bg-midnight"
+                      style={{ padding: '1.5vh' }}
                     >
                       <Image src={currentTicket.qrUrl} alt="Ticket QR Code" width={160} height={160} />
                     </motion.div>
                   </div>
                 </div>
 
-                <div className="py-1">
-                  <div className="bg-flame/10 border-2 border-flame p-2">
+                <div style={{ padding: '0.5vh 0' }}>
+                  <div className="bg-flame/10 border-2 border-flame" style={{ padding: '1vh' }}>
                     <p className="text-center font-inter text-midnight text-xs">
                       <span className="font-bold">Save this QR code</span> for event check-in!
                     </p>
@@ -252,7 +257,7 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
 
         {/* Carousel Indicators - positioned below the ticket */}
         {tickets.length > 1 && (
-          <div className="flex justify-center mt-4">
+          <div className="flex justify-center" style={{ marginTop: '2vh' }}>
             <div className="bg-midnight/20 rounded-full px-3 py-1 flex gap-1">
               {tickets.map((_, index) => (
                 <button
