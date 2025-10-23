@@ -135,8 +135,19 @@ export default function Home() {
     setShowForm(false);
     setShouldAutoDownload(false);
     
-    // Scroll to top smoothly
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Scroll to ticket carousel after state update
+    setTimeout(() => {
+      if (ticketCarouselRef.current) {
+        ticketCarouselRef.current.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start',
+          inline: 'nearest'
+        });
+      } else {
+        // Fallback to scrolling to top if ref not available
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }, 100);
   };
 
   const handleRegistrationComplete = (shouldDownload?: boolean) => {
