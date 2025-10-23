@@ -184,8 +184,10 @@ export default function Home() {
         {/* Hero Section - Always visible */}
         <section ref={heroRef} id="hero">
           <ModernHero 
-            onRegisterClick={scrollToForm} 
+            onRegisterClick={scrollToForm}
+            onViewTicketsClick={handleViewTickets}
             hasExistingTickets={hasExistingTickets}
+            showViewTickets={showForm && hasExistingTickets}
           />
         </section>
 

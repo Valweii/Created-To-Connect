@@ -5,10 +5,17 @@ import { useEffect, useState } from 'react';
 
 interface ModernHeroProps {
   onRegisterClick: () => void;
+  onViewTicketsClick?: () => void;
   hasExistingTickets?: boolean;
+  showViewTickets?: boolean; // When true, shows "VIEW TICKETS" instead of "REGISTER"
 }
 
-export default function ModernHero({ onRegisterClick, hasExistingTickets = false }: ModernHeroProps) {
+export default function ModernHero({ 
+  onRegisterClick, 
+  onViewTicketsClick,
+  hasExistingTickets = false,
+  showViewTickets = false
+}: ModernHeroProps) {
   const [mounted, setMounted] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
@@ -16,7 +23,14 @@ export default function ModernHero({ onRegisterClick, hasExistingTickets = false
     setMounted(true);
   }, []);
 
-  const handleRegisterClick = () => {
+  const handleButtonClick = () => {
+    // If showing view tickets button, navigate to tickets
+    if (showViewTickets && onViewTicketsClick) {
+      onViewTicketsClick();
+      return;
+    }
+    
+    // Otherwise, handle registration
     if (hasExistingTickets) {
       setShowConfirmDialog(true);
     } else {
@@ -371,10 +385,10 @@ export default function ModernHero({ onRegisterClick, hasExistingTickets = false
           </motion.div>
         </div>
 
-        {/* Register Button - Sticky to bottom */}
+        {/* Register/View Tickets Button - Sticky to bottom */}
         <div className="absolute bottom-[7rem] left-0 right-0 z-10 flex justify-center pt-4">
           <motion.button
-            onClick={handleRegisterClick}
+            onClick={handleButtonClick}
             className="group relative w-full max-w-xs py-2 bg-sunshine text-midnight font-bebas text-sm tracking-wider neo-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200 overflow-hidden"
             animate={{ 
               scale: [1, 1.03, 1]
@@ -392,7 +406,7 @@ export default function ModernHero({ onRegisterClick, hasExistingTickets = false
             }}
           >
             <span className="relative z-10 flex items-center justify-center gap-1">
-              REGISTER
+              {showViewTickets ? 'VIEW TICKETS' : 'REGISTER'}
               <motion.span 
                 className="inline-block"
                 animate={{ x: [0, 3, 0] }}
