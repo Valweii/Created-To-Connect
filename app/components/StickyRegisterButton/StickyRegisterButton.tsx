@@ -55,11 +55,18 @@ export default function StickyRegisterButton({
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -100, opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed top-[3rem] left-0 right-0 z-50 flex justify-center px-4"
+            className="fixed left-0 right-0 z-50 flex justify-center px-4 sticky-button-container"
+            style={{
+              top: 'max(3rem, env(safe-area-inset-top, 3rem))', // iOS safe area support
+              WebkitTransform: 'translate3d(0,0,0)', // Force hardware acceleration
+              transform: 'translate3d(0,0,0)',
+              backfaceVisibility: 'hidden',
+              WebkitBackfaceVisibility: 'hidden'
+            }}
           >
             <motion.button
               onClick={handleButtonClick}
-              className="group relative bg-sunshine text-midnight font-bebas tracking-wider overflow-hidden"
+              className="group relative bg-sunshine text-midnight font-bebas tracking-wider overflow-hidden sticky-button"
               animate={{ 
                 width: isCompact ? '110px' : '100%',
                 maxWidth: isCompact ? '110px' : '384px',
@@ -86,8 +93,12 @@ export default function StickyRegisterButton({
               }}
               whileTap={{ scale: 0.98 }}
               style={{
+                WebkitTransform: 'translateZ(0)',
                 transform: 'translateZ(0)',
-                backfaceVisibility: 'hidden'
+                backfaceVisibility: 'hidden',
+                WebkitBackfaceVisibility: 'hidden',
+                WebkitTapHighlightColor: 'transparent', // Remove iOS tap highlight
+                touchAction: 'manipulation' // Improve touch responsiveness
               }}
             >
               <motion.span 

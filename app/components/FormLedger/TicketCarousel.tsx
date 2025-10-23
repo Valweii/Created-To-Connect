@@ -103,7 +103,7 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
   const currentTicket = tickets[currentIndex];
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-cover bg-center bg-no-repeat" style={{ 
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-cover bg-center bg-no-repeat ios-min-vh-fix" style={{ 
       height: '100vh',
       minHeight: '100vh',
     }}>

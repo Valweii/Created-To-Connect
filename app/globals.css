@@ -108,6 +108,45 @@ body::-webkit-scrollbar {
 }
 
 
+/* iOS Safari sticky button fixes */
+@supports (-webkit-touch-callout: none) {
+  .sticky-button-container {
+    position: fixed !important;
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: transform;
+  }
+  
+  .sticky-button {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+/* Prevent iOS Safari from hiding fixed elements */
+@supports (-webkit-touch-callout: none) {
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* iOS Safari viewport height fixes */
+@supports (-webkit-touch-callout: none) {
+  .ios-vh-fix {
+    height: 100vh;
+    height: -webkit-fill-available;
+  }
+  
+  .ios-min-vh-fix {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+}
+
 /* Reduced motion fallback */
 @media (prefers-reduced-motion: reduce) {
   *,

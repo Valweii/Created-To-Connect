@@ -52,6 +52,7 @@ export default function Home() {
       {
         threshold: 0.1,
         rootMargin: '-80px 0px 0px 0px', // Trigger before completely out of view
+        root: null, // Use viewport as root for better iOS support
       }
     );
 
@@ -68,18 +69,22 @@ export default function Home() {
       },
       {
         threshold: 0.2,
+        root: null, // Use viewport as root for better iOS support
       }
     );
 
-    if (heroRef.current) {
-      heroObserver.observe(heroRef.current);
-    }
-
-    if (ticketCarouselRef.current) {
-      ticketObserver.observe(ticketCarouselRef.current);
-    }
+    // Add a small delay to ensure elements are mounted for better iOS support
+    const timeoutId = setTimeout(() => {
+      if (heroRef.current) {
+        heroObserver.observe(heroRef.current);
+      }
+      if (ticketCarouselRef.current) {
+        ticketObserver.observe(ticketCarouselRef.current);
+      }
+    }, 100);
 
     return () => {
+      clearTimeout(timeoutId);
       heroObserver.disconnect();
       ticketObserver.disconnect();
     };
