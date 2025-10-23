@@ -55,7 +55,7 @@ export default function StickyRegisterButton({
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -100, opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4"
+            className="fixed top-[3rem] left-0 right-0 z-50 flex justify-center px-4"
           >
             <motion.button
               onClick={handleButtonClick}
