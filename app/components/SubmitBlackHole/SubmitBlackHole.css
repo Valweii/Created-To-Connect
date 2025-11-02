@@ -45,6 +45,21 @@
   overflow: hidden;
 }
 
+/* Grayscale background image using pseudo-element */
+.submit-blackhole-waiting::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.4;
+  background-image: url('/assets/coach-photos.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  z-index: 0;
+}
+
 /* Message overlay */
 .submit-blackhole-message-container {
   position: relative;

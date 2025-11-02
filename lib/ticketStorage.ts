@@ -1,3 +1,5 @@
+import { getRegistrationByTicketId } from './supabase';
+
 export interface SavedTicket {
   ticketId: string;
   qrUrl: string;
@@ -130,8 +132,69 @@ export const ticketStorage = {
     return tickets.find(ticket => ticket.ticketId === ticketId) || null;
   },
 
+  // Verify all cached tickets against Supabase and remove invalid ones
+  verifyAndCleanupTickets: async (): Promise<void> => {
+    try {
+      // Skip if tickets are expired (cleanup will handle it)
+      if (isTicketExpired()) {
+        return;
+      }
+
+      // Get tickets directly from localStorage to avoid expiry check logic
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (!stored) {
+        return;
+      }
+
+      let cachedTickets: SavedTicket[];
+      try {
+        cachedTickets = JSON.parse(stored);
+      } catch {
+        // If parse fails, clear corrupted data
+        localStorage.removeItem(STORAGE_KEY);
+        return;
+      }
+
+      // If no tickets, nothing to verify
+      if (!Array.isArray(cachedTickets) || cachedTickets.length === 0) {
+        return;
+      }
+
+      // Verify each ticket against Supabase
+      const validTickets: SavedTicket[] = [];
+      
+      await Promise.all(
+        cachedTickets.map(async (ticket) => {
+          try {
+            const registration = await getRegistrationByTicketId(ticket.ticketId);
+            // Only keep tickets that exist in Supabase
+            if (registration) {
+              validTickets.push(ticket);
+            }
+          } catch (error) {
+            // If verification fails, remove the ticket for safety
+            // Silent error handling
+          }
+        })
+      );
+
+      // Update localStorage with only valid tickets
+      if (validTickets.length !== cachedTickets.length) {
+        if (validTickets.length === 0) {
+          localStorage.removeItem(STORAGE_KEY);
+        } else {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(validTickets));
+        }
+      }
+    } catch (error) {
+      // Silent error handling
+    }
+  },
+
   // Initialize and check for expired tickets (call this on app startup)
   initialize: async (): Promise<void> => {
     await cleanupExpiredTickets();
+    // Verify tickets against Supabase after expiry check
+    await ticketStorage.verifyAndCleanupTickets();
   }
 };
