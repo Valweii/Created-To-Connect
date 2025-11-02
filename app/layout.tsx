@@ -25,8 +25,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Created 2 Connect - Youth Camp 2025",
-  description: "Friendship & Community - Join us for an unforgettable youth camp experience",
+  title: "Created 2(To) Connect",
+  description: "Created 2(To) Connect - KKR Coach Sky - 20 November 2025 - Athalia Dominsky",
+  icons: {
+    icon: '/assets/aog.jpg',
+    apple: '/assets/aog.jpg',
+  },
 };
 
 export default function RootLayout({
