@@ -23,6 +23,11 @@ export default function ModernConfirmation({ ticketId, qrUrl, onRegisterAnother 
     }
     
     try {
+      // Fix alignment issues with html2canvas
+      const style = document.createElement('style');
+      document.head.appendChild(style);
+      style.sheet?.insertRule('body > div:last-child img { display: inline-block; }');
+      
       const canvas = await html2canvas(ticketRef.current, {
         backgroundColor: '#F5F5DC', // cream color
         logging: false,

@@ -157,14 +157,14 @@ export default function SimpleModernLedger({ onRegistrationComplete }: SimpleMod
 
       <div 
         id="page-content" 
-        className="min-h-screen relative overflow-hidden flex items-center"
+        className="min-h-screen flex items-center justify-center relative overflow-hidden bg-cover bg-center bg-no-repeat ios-min-vh-fix"
         style={{
           height: '100vh',
           minHeight: '100vh',
         }}
       >
 
-      <div className="absolute top-0 z-[-10]">
+      <div className="absolute top-0 z-[-10] max-w-[500px]">
             <img
               src="/assets/connect bawah.webp"
               alt="CG"
@@ -172,7 +172,7 @@ export default function SimpleModernLedger({ onRegistrationComplete }: SimpleMod
             />
       </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto w-full">
+        <div className="relative z-10 mx-auto w-full">
           {/* Step indicator */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
