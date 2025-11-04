@@ -160,20 +160,35 @@ export const ticketStorage = {
         return;
       }
 
-      // Verify each ticket against Supabase
+      // Verify each ticket against Supabase with timeout
       const validTickets: SavedTicket[] = [];
+      
+      // Helper function to add timeout to promise
+      const withTimeout = <T>(promise: Promise<T>, timeoutMs: number): Promise<T> => {
+        return Promise.race([
+          promise,
+          new Promise<T>((_, reject) => 
+            setTimeout(() => reject(new Error('Verification timeout')), timeoutMs)
+          )
+        ]);
+      };
       
       await Promise.all(
         cachedTickets.map(async (ticket) => {
           try {
-            const registration = await getRegistrationByTicketId(ticket.ticketId);
+            // Add 5 second timeout per ticket verification
+            const registration = await withTimeout(
+              getRegistrationByTicketId(ticket.ticketId),
+              5000
+            );
             // Only keep tickets that exist in Supabase
             if (registration) {
               validTickets.push(ticket);
             }
           } catch (error) {
-            // If verification fails, remove the ticket for safety
-            // Silent error handling
+            // If verification fails or times out, keep the ticket (fail-safe)
+            // This prevents removing valid tickets due to network issues
+            validTickets.push(ticket);
           }
         })
       );
@@ -193,8 +208,16 @@ export const ticketStorage = {
 
   // Initialize and check for expired tickets (call this on app startup)
   initialize: async (): Promise<void> => {
-    await cleanupExpiredTickets();
-    // Verify tickets against Supabase after expiry check
-    await ticketStorage.verifyAndCleanupTickets();
+    try {
+      await cleanupExpiredTickets();
+      // Verify tickets against Supabase after expiry check with timeout
+      const verificationPromise = ticketStorage.verifyAndCleanupTickets();
+      const timeoutPromise = new Promise<void>((resolve) => 
+        setTimeout(() => resolve(), 10000) // 10 second overall timeout
+      );
+      await Promise.race([verificationPromise, timeoutPromise]);
+    } catch (error) {
+      // Silent error handling - continue even if verification fails
+    }
   }
 };

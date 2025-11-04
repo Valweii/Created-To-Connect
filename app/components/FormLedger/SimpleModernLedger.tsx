@@ -10,6 +10,7 @@ import StepCGInfo from './StepCGInfo';
 import ModernConfirmation from './ModernConfirmation';
 import SubmitBlackHole from '../SubmitBlackHole/SubmitBlackHole';
 import { ticketStorage } from '../../../lib/ticketStorage';
+import { ensureCoachPhotosLoaded } from '../../../lib/imagePreloader';
 
 interface SimpleModernLedgerProps {
   onRegistrationComplete?: (shouldAutoDownload?: boolean) => void;
@@ -74,19 +75,37 @@ export default function SimpleModernLedger({ onRegistrationComplete }: SimpleMod
     
     setIsSubmitting(true);
     
-    // Trigger black-hole animation immediately
+    // Ensure coach-photos.jpg is loaded before showing blackhole
+    try {
+      await ensureCoachPhotosLoaded();
+    } catch (error) {
+      // Continue anyway - image might still load
+    }
+    
+    // Trigger black-hole animation after ensuring image is loaded
     setShowBlackHole(true);
     
     try {
-      const response = await fetch('/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+      // Create AbortController for timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
       
-      const result = await response.json();
-      
-      if (response.ok) {
+      try {
+        const response = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+          signal: controller.signal,
+        });
+        
+        clearTimeout(timeoutId);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const result = await response.json();
+        
         // Store the result, black hole will handle the timing
         setTicketData(result);
         
@@ -104,18 +123,60 @@ export default function SimpleModernLedger({ onRegistrationComplete }: SimpleMod
             heardFromOther: data.heardFromOther,
           }
         });
-      } else {
-        // On error, revert black-hole and show error
-        setShowBlackHole(false);
-        setIsSubmitting(false);
-        alert('Registration failed. Please try again.');
+      } catch (fetchError: any) {
+        clearTimeout(timeoutId);
+        
+        if (fetchError.name === 'AbortError') {
+          throw new Error('Request timed out. Please check your internet connection and try again.');
+        }
+        throw fetchError;
       }
-    } catch (error) {
+    } catch (error: any) {
       setShowBlackHole(false);
       setIsSubmitting(false);
-      alert('An error occurred. Please try again.');
+      const errorMessage = error.message || 'An error occurred. Please try again.';
+      alert(errorMessage);
     }
   };
+
+  // Function to check if ticket data is ready (for blackhole progress bar)
+  const checkTicketReady = useCallback(async (): Promise<boolean> => {
+    if (!ticketData) {
+      return false;
+    }
+    
+    // Check if ticket is saved in localStorage
+    const savedTickets = ticketStorage.getAllTickets();
+    const ticketExists = savedTickets.some(t => t.ticketId === ticketData.ticketId);
+    
+    if (!ticketExists) {
+      return false;
+    }
+    
+    // Check if QR code (data URL) is valid by trying to load it
+    if (ticketData.qrUrl && ticketData.qrUrl.startsWith('data:')) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        const timeout = setTimeout(() => {
+          resolve(false); // Timeout - consider not ready
+        }, 2000);
+        
+        img.onload = () => {
+          clearTimeout(timeout);
+          resolve(true);
+        };
+        
+        img.onerror = () => {
+          clearTimeout(timeout);
+          resolve(false);
+        };
+        
+        img.src = ticketData.qrUrl;
+      });
+    }
+    
+    return true;
+  }, [ticketData]);
 
   const handleBlackHoleComplete = useCallback(() => {
     setShowBlackHole(false);
@@ -153,6 +214,7 @@ export default function SimpleModernLedger({ onRegistrationComplete }: SimpleMod
         duration={4000}
         onComplete={handleBlackHoleComplete}
         onCancel={handleBlackHoleCancel}
+        waitForReady={checkTicketReady}
       />
 
       <div 

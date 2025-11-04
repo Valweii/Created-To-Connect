@@ -2,11 +2,9 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, PanInfo } from 'framer-motion';
-import Image from 'next/image';
 import { ticketStorage, SavedTicket } from '../../../lib/ticketStorage';
 import ModernConfirmation from './ModernConfirmation';
 import html2canvas from 'html2canvas';
-import { img } from 'framer-motion/client';
 
 interface TicketCarouselProps {
   onBackToHome: () => void;
@@ -18,6 +16,9 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
   const [tickets, setTickets] = useState<SavedTicket[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const ticketRef = useRef<HTMLDivElement>(null);
+  const [qrCodeLoaded, setQrCodeLoaded] = useState(false);
+  const [qrCodeError, setQrCodeError] = useState(false);
+  const [backgroundImageLoaded, setBackgroundImageLoaded] = useState(false);
 
   // Helper function to format name to show only first and last name
   const formatName = (fullName: string) => {
@@ -33,13 +34,24 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
       return;
     }
     
+    // Wait for QR code to load before downloading
+    if (!qrCodeLoaded && !qrCodeError) {
+      // Wait up to 5 seconds for QR code to load
+      let waitTime = 0;
+      while (!qrCodeLoaded && !qrCodeError && waitTime < 5000) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+        waitTime += 100;
+      }
+    }
+    
     try {
       // Fix alignment issues with html2canvas
       const style = document.createElement('style');
       document.head.appendChild(style);
       style.sheet?.insertRule('body > div:last-child img { display: inline-block; }');
       
-      const canvas = await html2canvas(ticketRef.current, {
+      // Add timeout for html2canvas
+      const canvasPromise = html2canvas(ticketRef.current, {
         backgroundColor: '#F5F5DC', // cream color
         logging: false,
         useCORS: true,
@@ -48,6 +60,12 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
         height: ticketRef.current.scrollHeight,
       } as any);
       
+      const timeoutPromise = new Promise<never>((_, reject) => 
+        setTimeout(() => reject(new Error('Download timeout')), 15000)
+      );
+      
+      const canvas = await Promise.race([canvasPromise, timeoutPromise]);
+      
       const link = document.createElement('a');
       link.href = canvas.toDataURL('image/png');
       link.download = `ticket-${tickets[currentIndex].ticketId}.png`;
@@ -55,18 +73,79 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
       link.click();
       document.body.removeChild(link);
     } catch (error) {
-      // Silent error handling
+      // Show error message to user
+      alert('Failed to download ticket. Please try again or check your internet connection.');
     }
-  }, [tickets, currentIndex]);
+  }, [tickets, currentIndex, qrCodeLoaded, qrCodeError]);
 
-  useEffect(() => {
+  // Load tickets function
+  const loadTickets = useCallback(() => {
     const savedTickets = ticketStorage.getAllTickets();
     // Sort tickets by registration time (newest first)
     const sortedTickets = savedTickets.sort((a, b) => {
       return b.timestamp - a.timestamp; // Descending order (newest first)
     });
     setTickets(sortedTickets);
+    // Reset QR code loading state when tickets change
+    setQrCodeLoaded(false);
+    setQrCodeError(false);
   }, []);
+
+  // Load tickets on mount
+  useEffect(() => {
+    loadTickets();
+  }, [loadTickets]);
+
+  // Refresh tickets when shouldAutoDownload changes (new registration just completed)
+  useEffect(() => {
+    if (shouldAutoDownload) {
+      // Wait a bit for ticket to be saved, then refresh
+      const refreshTimer = setTimeout(() => {
+        loadTickets();
+      }, 100);
+      
+      // Also refresh after a longer delay to catch any async saves
+      const delayedRefreshTimer = setTimeout(() => {
+        loadTickets();
+      }, 500);
+      
+      return () => {
+        clearTimeout(refreshTimer);
+        clearTimeout(delayedRefreshTimer);
+      };
+    }
+  }, [shouldAutoDownload, loadTickets]);
+
+  // Refresh tickets when component becomes visible (using IntersectionObserver)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Refresh tickets when component becomes visible
+            loadTickets();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    // Observe the main container element
+    const container = document.querySelector('[data-ticket-carousel-container]');
+    if (container) {
+      observer.observe(container);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [loadTickets]);
+
+  // Reset QR code loading state when current ticket changes
+  useEffect(() => {
+    setQrCodeLoaded(false);
+    setQrCodeError(false);
+  }, [currentIndex]);
 
   // Auto-download only if user just registered a new ticket
   const hasDownloadedRef = useRef(false);
@@ -76,7 +155,8 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
       shouldAutoDownload &&
       tickets.length > 0 &&
       currentIndex === 0 &&
-      !hasDownloadedRef.current
+      !hasDownloadedRef.current &&
+      qrCodeLoaded // Wait for QR code to load before auto-downloading
     ) {
       hasDownloadedRef.current = true; // ✅ Prevent future auto-downloads
       const timer = setTimeout(() => {
@@ -84,7 +164,7 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
       }, 2000);
       return () => clearTimeout(timer);
     }
-  }, [shouldAutoDownload, tickets.length, currentIndex, downloadTicket]);
+  }, [shouldAutoDownload, tickets.length, currentIndex, downloadTicket, qrCodeLoaded]);
   const handleDragEnd = (event: any, info: PanInfo) => {
     const threshold = 50;
     
@@ -117,15 +197,22 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
   const currentTicket = tickets[currentIndex];
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-cover bg-center bg-no-repeat ios-min-vh-fix" style={{ 
-      height: '100vh',
-      minHeight: '100vh',
-    }}>
+    <div 
+      data-ticket-carousel-container
+      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-cover bg-center bg-no-repeat ios-min-vh-fix" 
+      style={{ 
+        height: '100vh',
+        minHeight: '100vh',
+      }}
+    >
       <div className="absolute top-0 z-[-10] max-w-[500px]">
             <img
               src="/assets/connect bawah.webp"
               alt="CG"
               decoding="async"
+              onLoad={() => setBackgroundImageLoaded(true)}
+              onError={() => setBackgroundImageLoaded(true)} // Continue even if image fails
+              style={{ opacity: backgroundImageLoaded ? 1 : 0, transition: 'opacity 0.3s' }}
             />
       </div>
 
@@ -252,7 +339,42 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
                       className="bg-midnight"
                       style={{ padding: '1.5vh' }}
                     >
-                      <Image src={currentTicket.qrUrl} alt="Ticket QR Code" width={160} height={160} />
+                      <div className="relative w-[160px] h-[160px]">
+                        {qrCodeError ? (
+                          <div className="w-full h-full flex items-center justify-center bg-midnight/50">
+                            <p className="text-cream text-xs text-center px-2">
+                              QR Code failed to load
+                            </p>
+                          </div>
+                        ) : (
+                          <>
+                            {!qrCodeLoaded && (
+                              <div className="absolute inset-0 flex items-center justify-center bg-midnight/50 z-10">
+                                <div className="w-8 h-8 border-2 border-cream border-t-transparent rounded-full animate-spin"></div>
+                              </div>
+                            )}
+                            <img 
+                              src={currentTicket.qrUrl} 
+                              alt="Ticket QR Code" 
+                              width={160} 
+                              height={160}
+                              onLoad={() => setQrCodeLoaded(true)}
+                              onError={() => {
+                                setQrCodeError(true);
+                                setQrCodeLoaded(true); // Stop loading state
+                              }}
+                              style={{ 
+                                opacity: qrCodeLoaded ? 1 : 0,
+                                transition: 'opacity 0.3s',
+                                width: '160px',
+                                height: '160px',
+                                objectFit: 'contain'
+                              }}
+                              loading={currentIndex === 0 ? 'eager' : 'lazy'} // Prioritize first ticket
+                            />
+                          </>
+                        )}
+                      </div>
                     </motion.div>
                   </div>
                 </div>

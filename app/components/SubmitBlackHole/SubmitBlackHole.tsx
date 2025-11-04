@@ -52,6 +52,7 @@ interface SubmitBlackHoleProps {
   message?: string;
   pageContentSelector?: string; // CSS selector for page content to animate
   duration?: number; // Duration in milliseconds for the progress bar
+  waitForReady?: () => Promise<boolean>; // Optional function to wait for data to be ready
 }
 
 // Animation timing constants (tune these for different feel)
@@ -67,6 +68,7 @@ export default function SubmitBlackHole({
   message = "We'll be waiting for you",
   pageContentSelector = 'body > main, body > div', // Target main content
   duration = DEFAULT_DURATION,
+  waitForReady,
 }: SubmitBlackHoleProps) {
   // Ensure minimum duration of 2 seconds for "We'll be waiting for you" message
   const actualDuration = Math.max(duration, MIN_DURATION);
@@ -76,6 +78,7 @@ export default function SubmitBlackHole({
   const pageContentRef = useRef<HTMLElement | null>(null);
   const prefersReducedMotion = useRef(false);
   const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const readyCheckIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Detect prefers-reduced-motion
   useEffect(() => {
@@ -98,6 +101,11 @@ export default function SubmitBlackHole({
       if (progressIntervalRef.current) {
         clearInterval(progressIntervalRef.current);
         progressIntervalRef.current = null;
+      }
+      // Clear ready check interval
+      if (readyCheckIntervalRef.current) {
+        clearInterval(readyCheckIntervalRef.current);
+        readyCheckIntervalRef.current = null;
       }
       // Remove transform from page content
       if (pageContentRef.current) {
@@ -135,23 +143,87 @@ export default function SubmitBlackHole({
       element.style.opacity = '0';
     }
     
-    const suckTimer = setTimeout(() => {
+    const suckTimer = setTimeout(async () => {
       // Phase 2: Waiting with progress bar
       setPhase('waiting');
       
+      // Wait for data to be ready if provided
+      let isReady = true;
+      if (waitForReady) {
+        try {
+          // Wait up to 10 seconds for data to be ready
+          const readyPromise = waitForReady();
+          const timeoutPromise = new Promise<boolean>((resolve) => 
+            setTimeout(() => resolve(false), 10000)
+          );
+          isReady = await Promise.race([readyPromise, timeoutPromise]);
+        } catch (error) {
+          // If check fails, proceed anyway
+          isReady = true;
+        }
+      }
+      
       // Start progress bar animation
       const startTime = Date.now();
+      let dataReady = isReady;
+      
+      // If not ready yet, keep checking
+      if (!isReady && waitForReady) {
+        const checkReady = async () => {
+          try {
+            dataReady = await waitForReady();
+          } catch (error) {
+            dataReady = true; // Proceed on error
+          }
+        };
+        checkReady();
+        // Also check periodically
+        readyCheckIntervalRef.current = setInterval(async () => {
+          if (!dataReady) {
+            try {
+              dataReady = await waitForReady();
+            } catch (error) {
+              dataReady = true;
+            }
+          } else {
+            if (readyCheckIntervalRef.current) {
+              clearInterval(readyCheckIntervalRef.current);
+              readyCheckIntervalRef.current = null;
+            }
+          }
+        }, 100);
+      }
+      
       const updateProgress = () => {
         const elapsed = Date.now() - startTime;
-        const progressPercent = Math.min((elapsed / actualDuration) * 100, 100);
+        const baseProgress = Math.min((elapsed / actualDuration) * 100, 100);
+        
+        // If data is ready, allow progress to reach 100%
+        // Otherwise, cap progress at 90% until ready
+        const progressPercent = dataReady ? baseProgress : Math.min(baseProgress, 90);
         setProgress(progressPercent);
         
-        // Only complete when we've actually reached the full duration
-        if (elapsed >= actualDuration) {
-          // Clear the interval to prevent multiple calls
+        // Only complete when we've reached full duration AND data is ready
+        if (elapsed >= actualDuration && dataReady) {
+          // Clear the intervals to prevent multiple calls
           if (progressIntervalRef.current) {
             clearInterval(progressIntervalRef.current);
             progressIntervalRef.current = null;
+          }
+          if (readyCheckIntervalRef.current) {
+            clearInterval(readyCheckIntervalRef.current);
+            readyCheckIntervalRef.current = null;
+          }
+          onComplete?.();
+        } else if (elapsed >= actualDuration + 5000 && !dataReady) {
+          // If we've waited 5 seconds past duration and still not ready, proceed anyway
+          if (progressIntervalRef.current) {
+            clearInterval(progressIntervalRef.current);
+            progressIntervalRef.current = null;
+          }
+          if (readyCheckIntervalRef.current) {
+            clearInterval(readyCheckIntervalRef.current);
+            readyCheckIntervalRef.current = null;
           }
           onComplete?.();
         }
@@ -167,8 +239,12 @@ export default function SubmitBlackHole({
         clearInterval(progressIntervalRef.current);
         progressIntervalRef.current = null;
       }
+      if (readyCheckIntervalRef.current) {
+        clearInterval(readyCheckIntervalRef.current);
+        readyCheckIntervalRef.current = null;
+      }
     };
-  }, [isActive, pageContentSelector, actualDuration, onComplete]);
+  }, [isActive, pageContentSelector, actualDuration, onComplete, waitForReady]);
 
   // Escape key handler
   const handleEscape = useCallback((e: KeyboardEvent) => {

@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { preloadImage } from '../../../lib/imagePreloader';
 
 interface LoadingScreenProps {
   onLoadingComplete: () => void;
@@ -52,19 +53,41 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
       '/assets/SHAPE OREN.webp',
     ];
 
+    // Preload coach-photos.jpg separately (critical for blackhole) using the preloader utility
+    const coachPhotosSrc = '/assets/coach-photos.jpg';
+    preloadImage(coachPhotosSrc).catch(() => {
+      // Continue even if it fails
+    });
+
     let loadedCount = 0;
     const totalImages = images.length;
 
     const loadImage = (src: string) => {
       return new Promise((resolve, reject) => {
         const img = new Image();
+        const timeout = setTimeout(() => {
+          // If image fails to load after 10 seconds, continue anyway
+          loadedCount++;
+          const calculatedProgress = (loadedCount / totalImages) * 100;
+          setProgress(calculatedProgress);
+          resolve(img);
+        }, 10000); // 10 second timeout per image
+        
         img.onload = () => {
+          clearTimeout(timeout);
           loadedCount++;
           const calculatedProgress = (loadedCount / totalImages) * 100;
           setProgress(calculatedProgress);
           resolve(img);
         };
-        img.onerror = reject;
+        img.onerror = () => {
+          clearTimeout(timeout);
+          // Continue even if image fails to load
+          loadedCount++;
+          const calculatedProgress = (loadedCount / totalImages) * 100;
+          setProgress(calculatedProgress);
+          resolve(img);
+        };
         img.src = src;
       });
     };
