@@ -45,13 +45,7 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
     }
     
     try {
-      // Fix alignment issues with html2canvas
-      const style = document.createElement('style');
-      document.head.appendChild(style);
-      style.sheet?.insertRule('body > div:last-child img { display: inline-block; }');
-      
-      // Add timeout for html2canvas
-      const canvasPromise = html2canvas(ticketRef.current, {
+      const canvas = await html2canvas(ticketRef.current, {
         backgroundColor: '#F5F5DC', // cream color
         logging: false,
         useCORS: true,
@@ -197,15 +191,11 @@ export default function TicketCarousel({ onBackToHome, onRegisterAnother, should
   const currentTicket = tickets[currentIndex];
 
   return (
-    <div 
-      data-ticket-carousel-container
-      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-cover bg-center bg-no-repeat ios-min-vh-fix" 
-      style={{ 
-        height: '100vh',
-        minHeight: '100vh',
-      }}
-    >
-      <div className="absolute top-0 z-[-10] max-w-[500px]">
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-cover bg-center bg-no-repeat ios-min-vh-fix" style={{ 
+      height: '100vh',
+      minHeight: '100vh',
+    }}>
+      <div className="absolute top-0 z-[-10]">
             <img
               src="/assets/connect bawah.webp"
               alt="CG"
